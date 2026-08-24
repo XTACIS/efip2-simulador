@@ -723,8 +723,42 @@ body { overscroll-behavior: contain; }
 </div>
 
 <footer>
-  Simulador de estudio para EFIP II · Uso libre educativo · <a href="#" onclick="alert('Hecho para estudiantes de la Licenciatura en Informática que van a rendir EFIP II. ¡Buena suerte!'); return false;">Sobre este simulador</a>
+  <div style="margin-bottom: 12px;">
+    Simulador de estudio para EFIP II · Uso libre educativo · <a href="#" onclick="alert('Hecho para estudiantes de la Licenciatura en Informática que van a rendir EFIP II. ¡Buena suerte!'); return false;">Sobre este simulador</a>
+  </div>
+  <div style="display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 10px;">
+    <span>¿Te sirvió?</span>
+    <a href="https://cafecito.app/xtacis" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; background: linear-gradient(135deg, #6f4e37, #a67c52); color: white; text-decoration: none; border-radius: 20px; font-size: 13px; font-weight: 600; transition: transform .15s;">
+      ☕ Invitame un cafecito
+    </a>
+  </div>
 </footer>
+
+<!-- Botón flotante de Cafecito -->
+<a id="cafecito-float" href="https://cafecito.app/xtacis" target="_blank" rel="noopener"
+   style="position: fixed; bottom: 20px; right: 20px; background: linear-gradient(135deg, #6f4e37, #a67c52); color: white; padding: 12px 16px; border-radius: 30px; text-decoration: none; font-weight: bold; font-size: 14px; box-shadow: 0 6px 20px rgba(0,0,0,.35); z-index: 100; display: flex; align-items: center; gap: 8px; transition: transform .2s;"
+   onmouseover="this.style.transform='scale(1.08)'"
+   onmouseout="this.style.transform='scale(1)'"
+   title="Si te sirvió el simulador, invitame un cafecito ☕">
+  <span style="font-size: 20px;">☕</span>
+  <span class="cafecito-text">Cafecito</span>
+</a>
+<style>
+  /* En móvil, más compacto */
+  @media (max-width: 500px) {
+    #cafecito-float { padding: 10px 12px; bottom: 15px; right: 15px; font-size: 12px; }
+    #cafecito-float .cafecito-text { display: none; }
+  }
+  /* Animación sutil cada tanto para llamar atención */
+  @keyframes cafeShake {
+    0%, 90%, 100% { transform: rotate(0); }
+    92% { transform: rotate(-10deg); }
+    94% { transform: rotate(10deg); }
+    96% { transform: rotate(-8deg); }
+    98% { transform: rotate(8deg); }
+  }
+  #cafecito-float:hover { animation: cafeShake 0.5s; }
+</style>
 
 </div>
 
