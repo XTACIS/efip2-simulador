@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<meta name="theme-color" content="#0f172a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<title>Simulador EFIP II — Licenciatura en Informática</title>
+<style>
+:root {
+  --bg-1: #0f172a;
+  --bg-2: #1e293b;
+  --bg-3: #334155;
+  --accent: #22d3ee;
+  --accent-2: #10b981;
+  --error: #ef4444;
+  --warn: #f59e0b;
+  --text: #f1f5f9;
+  --text-dim: #94a3b8;
+  --card: #1e293b;
+  --border: #334155;
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: linear-gradient(135deg, var(--bg-1) 0%, #1a1f3a 100%);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 20px;
+  line-height: 1.6;
+}
+.app { max-width: 900px; margin: 0 auto; }
+header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 30px 20px;
+  background: var(--card);
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+h1 {
+  font-size: 28px;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.subtitle { color: var(--text-dim); font-size: 14px; margin-bottom: 20px; }
+
+/* Selector de categoría */
+.categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.cat-btn {
+  padding: 16px 12px;
+  background: var(--bg-2);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  color: var(--text);
+  cursor: pointer;
+  transition: all .2s;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.cat-btn:hover { border-color: var(--accent); transform: translateY(-2px); }
+.cat-btn .cat-emoji { font-size: 22px; }
+.cat-btn .cat-count {
+  margin-left: auto;
+  background: var(--bg-3);
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+/* Barra de progreso */
+.progress-bar {
+  height: 8px;
+  background: var(--bg-3);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  width: 0%;
+  transition: width .3s;
+}
+.stats-bar {
+  display: flex;
+  justify-content: space-around;
+  padding: 15px;
+  background: var(--card);
+  border-radius: 12px;
+  margin-bottom: 20px;
+  border: 1px solid var(--border);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.stat { text-align: center; min-width: 70px; }
+.stat-value { font-size: 22px; font-weight: bold; }
+.stat-label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: .5px; }
+.stat.correct .stat-value { color: var(--accent-2); }
+.stat.wrong .stat-value { color: var(--error); }
+.stat.review .stat-value { color: var(--warn); }
+
+/* Pregunta */
+.question-card {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 30px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  margin-bottom: 20px;
+}
+.q-category {
+  display: inline-block;
+  padding: 4px 12px;
+  background: var(--bg-3);
+  border-radius: 12px;
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+.q-review-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  background: #7c2d12;
+  color: #fdba74;
+  border-radius: 12px;
+  font-size: 12px;
+  margin-left: 8px;
+  margin-bottom: 15px;
+}
+.q-text { font-size: 18px; margin-bottom: 20px; font-weight: 500; }
+.q-image {
+  margin: 20px 0;
+  text-align: center;
+  padding: 15px;
+  background: var(--bg-1);
+  border-radius: 10px;
+}
+.q-image svg { max-width: 100%; height: auto; }
+
+.options { display: flex; flex-direction: column; gap: 10px; }
+.option {
+  padding: 15px 20px;
+  background: var(--bg-2);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all .15s;
+  color: var(--text);
+  text-align: left;
+  font-size: 15px;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.option:hover:not(:disabled) { border-color: var(--accent); background: var(--bg-3); }
+.option:disabled { cursor: default; opacity: .6; }
+.option-letter {
+  min-width: 30px;
+  min-height: 30px;
+  background: var(--bg-3);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 13px;
+}
+.option.correct {
+  background: rgba(16,185,129,.15);
+  border-color: var(--accent-2);
+  opacity: 1;
+}
+.option.correct .option-letter { background: var(--accent-2); color: white; }
+.option.wrong {
+  background: rgba(239,68,68,.15);
+  border-color: var(--error);
+  opacity: 1;
+}
+.option.wrong .option-letter { background: var(--error); color: white; }
+
+/* Explicación */
+.explanation {
+  margin-top: 20px;
+  padding: 20px;
+  background: var(--bg-1);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  display: none;
+}
+.explanation.visible { display: block; animation: fadeIn .3s; }
+.explanation.wrong-answer { border-left-color: var(--warn); }
+.explanation-title {
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: var(--accent);
+}
+.explanation.wrong-answer .explanation-title { color: var(--warn); }
+.explanation-body { color: var(--text-dim); }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Botones */
+.actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: space-between; }
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+  transition: all .15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-primary { background: var(--accent); color: var(--bg-1); }
+.btn-primary:hover { background: #67e8f9; transform: translateY(-1px); }
+.btn-secondary { background: var(--bg-3); color: var(--text); }
+.btn-secondary:hover { background: #475569; }
+.btn:disabled { opacity: .4; cursor: not-allowed; transform: none; }
+
+/* Pantalla final */
+.results {
+  text-align: center;
+  padding: 40px 30px;
+  background: var(--card);
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+.results-emoji { font-size: 72px; margin-bottom: 15px; }
+.results-title { font-size: 32px; margin-bottom: 10px; }
+.results-score {
+  font-size: 48px;
+  font-weight: bold;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 20px 0;
+}
+.results-message { color: var(--text-dim); margin-bottom: 30px; font-size: 16px; }
+
+/* Screen switching */
+.screen { display: none; }
+.screen.active { display: block; animation: fadeIn .3s; }
+
+/* Info banner (spaced repetition) */
+.banner {
+  padding: 12px 16px;
+  background: rgba(245,158,11,.15);
+  border: 1px solid var(--warn);
+  border-radius: 10px;
+  color: var(--warn);
+  margin-bottom: 15px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.banner.hidden { display: none; }
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  color: var(--text-dim);
+  font-size: 12px;
+  margin-top: 30px;
+}
+footer a { color: var(--accent); text-decoration: none; }
+
+/* Touch targets grandes por defecto */
+button, .option, .cat-btn { min-height: 48px; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+
+/* Tablet */
+@media (max-width: 768px) {
+  body { padding: 12px; }
+  header { padding: 20px 15px; }
+  h1 { font-size: 24px; }
+  .subtitle { font-size: 13px; }
+  .categories { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .cat-btn { padding: 14px 10px; font-size: 13px; }
+  .question-card { padding: 22px 18px; }
+  .q-text { font-size: 17px; }
+  .btn { padding: 12px 20px; font-size: 14px; }
+  .stat-value { font-size: 20px; }
+  .stat-label { font-size: 10px; }
+}
+
+/* Móvil */
+@media (max-width: 500px) {
+  body { padding: 8px; font-size: 15px; }
+  header { padding: 18px 12px; margin-bottom: 15px; border-radius: 12px; }
+  h1 { font-size: 20px; }
+  .subtitle { font-size: 12px; margin-bottom: 15px; }
+
+  .categories { grid-template-columns: 1fr; gap: 8px; margin-bottom: 15px; }
+  .cat-btn {
+    padding: 14px 12px;
+    font-size: 14px;
+    min-height: 54px;
+  }
+  .cat-btn .cat-emoji { font-size: 20px; }
+  .cat-btn .cat-count { font-size: 11px; }
+
+  .stats-bar {
+    padding: 12px 8px;
+    gap: 4px;
+    border-radius: 10px;
+  }
+  .stat { min-width: 55px; padding: 0 4px; }
+  .stat-value { font-size: 18px; }
+  .stat-label { font-size: 9px; letter-spacing: .3px; }
+
+  .question-card {
+    padding: 18px 15px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+  }
+  .q-category { font-size: 11px; padding: 3px 10px; }
+  .q-review-badge { font-size: 11px; padding: 3px 10px; }
+  .q-text {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 18px;
+    font-weight: 500;
+  }
+  .q-image { padding: 10px; margin: 15px 0; }
+  .q-image svg { max-width: 100%; height: auto; }
+
+  .options { gap: 8px; }
+  .option {
+    padding: 14px 12px;
+    font-size: 14px;
+    line-height: 1.4;
+    min-height: 54px;
+    gap: 10px;
+    border-radius: 10px;
+  }
+  .option-letter {
+    min-width: 28px;
+    min-height: 28px;
+    font-size: 12px;
+  }
+
+  .explanation {
+    padding: 14px 12px;
+    margin-top: 15px;
+    font-size: 13px;
+  }
+  .explanation-title { font-size: 14px; }
+  .explanation-body { font-size: 13px; line-height: 1.5; }
+
+  .actions {
+    flex-direction: column-reverse;
+    gap: 8px;
+    margin-top: 15px;
+  }
+  .btn {
+    width: 100%;
+    padding: 14px 20px;
+    font-size: 15px;
+    justify-content: center;
+    min-height: 48px;
+  }
+
+  .progress-bar { height: 6px; margin-bottom: 12px; }
+
+  .banner {
+    padding: 10px 12px;
+    font-size: 12px;
+    margin-bottom: 12px;
+  }
+
+  .results { padding: 30px 20px; }
+  .results-emoji { font-size: 56px; }
+  .results-title { font-size: 22px; }
+  .results-score { font-size: 40px; margin: 15px 0; }
+  .results-message { font-size: 14px; margin-bottom: 25px; }
+
+  footer { padding: 15px 10px; font-size: 11px; }
+}
+
+/* Móvil muy chico (iPhone SE etc.) */
+@media (max-width: 360px) {
+  h1 { font-size: 18px; }
+  .q-text { font-size: 15px; }
+  .option { padding: 12px 10px; font-size: 13px; }
+  .stat-value { font-size: 16px; }
+  .cat-btn { padding: 12px 10px; font-size: 13px; }
+}
+
+/* Landscape móvil */
+@media (max-height: 500px) and (orientation: landscape) {
+  header { padding: 12px; margin-bottom: 10px; }
+  h1 { font-size: 18px; margin-bottom: 4px; }
+  .subtitle { margin-bottom: 10px; }
+  .question-card { padding: 15px; }
+}
+
+/* Modo oscuro forzado + evitar zoom en inputs iOS */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select, textarea, input { font-size: 16px; }
+}
+
+/* Scroll suave en móvil */
+html { scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
+body { overscroll-behavior: contain; }
+</style>
+</head>
+<body>
+<div class="app">
+
+<header>
+  <h1>Simulador EFIP II</h1>
+  <div class="subtitle">Licenciatura en Informática · Universidad Siglo 21 · 60+ preguntas</div>
+</header>
+
+<!-- Pantalla: Selección -->
+<div id="screen-menu" class="screen active">
+  <div class="stats-bar">
+    <div class="stat"><div class="stat-value" id="menu-total">0</div><div class="stat-label">preguntas</div></div>
+    <div class="stat correct"><div class="stat-value" id="menu-correct">0</div><div class="stat-label">acertadas</div></div>
+    <div class="stat wrong"><div class="stat-value" id="menu-wrong">0</div><div class="stat-label">falladas</div></div>
+    <div class="stat review"><div class="stat-value" id="menu-review">0</div><div class="stat-label">para reforzar</div></div>
+  </div>
+
+  <div style="margin: 20px 0 12px; color: var(--text-dim); font-size: 13px; text-transform: uppercase; letter-spacing: 1px;">
+    Elegí modo de estudio
+  </div>
+
+  <div class="categories" id="categories"></div>
+
+  <div style="display: flex; gap: 12px; margin-top: 15px; flex-wrap: wrap;">
+    <button class="btn btn-primary" onclick="startMode('mix')" style="flex: 1; min-width: 200px;">
+      🎯 Todas mezcladas (60+)
+    </button>
+    <button class="btn btn-secondary" id="btn-review" onclick="startMode('review')" style="flex: 1; min-width: 200px; display: none;">
+      🔁 Solo reforzar errores
+    </button>
+    <button class="btn btn-secondary" onclick="resetProgress()" title="Borrar progreso">
+      ↺ Reiniciar
+    </button>
+  </div>
+</div>
+
+<!-- Pantalla: Quiz -->
+<div id="screen-quiz" class="screen">
+  <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+  <div class="stats-bar">
+    <div class="stat"><div class="stat-value" id="q-current">0</div><div class="stat-label">pregunta</div></div>
+    <div class="stat correct"><div class="stat-value" id="q-correct">0</div><div class="stat-label">bien</div></div>
+    <div class="stat wrong"><div class="stat-value" id="q-wrong">0</div><div class="stat-label">mal</div></div>
+    <div class="stat review"><div class="stat-value" id="q-remaining">0</div><div class="stat-label">restan</div></div>
+  </div>
+
+  <div id="banner-review" class="banner hidden">
+    <span>🔁</span>
+    <span>Modo refuerzo activo: estás repasando las que fallaste antes.</span>
+  </div>
+
+  <div class="question-card">
+    <div>
+      <span class="q-category" id="q-category">CATEGORÍA</span>
+      <span class="q-review-badge" id="q-review-badge" style="display:none;">🔁 Refuerzo</span>
+    </div>
+    <div class="q-text" id="q-text"></div>
+    <div id="q-image" class="q-image" style="display:none;"></div>
+    <div class="options" id="q-options"></div>
+    <div class="explanation" id="explanation">
+      <div class="explanation-title" id="expl-title"></div>
+      <div class="explanation-body" id="expl-body"></div>
+    </div>
+    <div class="actions" style="margin-top: 20px;">
+      <button class="btn btn-secondary" onclick="goMenu()">← Menú</button>
+      <button class="btn btn-primary" id="btn-next" onclick="nextQuestion()" disabled>Siguiente →</button>
+    </div>
+  </div>
+</div>
+
+<!-- Pantalla: Resultados -->
+<div id="screen-results" class="screen">
+  <div class="results">
+    <div class="results-emoji" id="results-emoji">🎓</div>
+    <div class="results-title" id="results-title">Sesión terminada</div>
+    <div class="results-score"><span id="results-score">0</span>%</div>
+    <div class="results-message" id="results-message"></div>
+    <div style="display:flex; gap:12px; justify-content:center; flex-wrap: wrap;">
+      <button class="btn btn-primary" onclick="goMenu()">Volver al menú</button>
+      <button class="btn btn-secondary" id="btn-review-now" onclick="startMode('review')" style="display:none;">
+        🔁 Reforzar los que fallé
+      </button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Simulador de estudio para EFIP II · Uso libre educativo · <a href="#" onclick="alert('Hecho para estudiantes de la Licenciatura en Informática que van a rendir EFIP II. ¡Buena suerte!'); return false;">Sobre este simulador</a>
+</footer>
+
+</div>
+
+<script>
+// ============================================
+// BASE DE PREGUNTAS
+// ============================================
+const QUESTIONS = [
+  // ========== INGENIERÍA DE SOFTWARE ==========
+  { cat: 'is', q: '¿Qué modelo de proceso de desarrollo contempla explícitamente el análisis de riesgos en cada iteración?',
+    opts: ['Cascada', 'Iterativo', 'Espiral', 'Prototipo'], correct: 2,
+    expl: 'El modelo en Espiral (propuesto por Boehm) es el único que contempla análisis de riesgos como parte formal de cada ciclo. Combina desarrollo iterativo con evaluación de riesgos en cada vuelta.' },
+
+  { cat: 'is', q: '¿Cuál NO es una fase del proceso de Ingeniería de Requerimientos?',
+    opts: ['Elicitación', 'Análisis', 'Despliegue', 'Especificación'], correct: 2,
+    expl: 'Las 5 fases son: Elicitación (relevar), Análisis (priorizar), Especificación (documentar), Validación (confirmar) y Gestión (controlar cambios). El "despliegue" es una fase del desarrollo, no de la Ingeniería de Requerimientos.' },
+
+  { cat: 'is', q: '¿Qué documento formal define el estándar IEEE 830?',
+    opts: ['Diagrama de clases', 'Especificación de Requerimientos de Software (ERS)', 'Manual de usuario', 'Plan de proyecto'], correct: 1,
+    expl: 'IEEE 830 es el estándar formal para la Especificación de Requerimientos de Software (ERS). Documenta detalladamente los aspectos del software antes de comenzar el proyecto.' },
+
+  { cat: 'is', q: 'De los siguientes, ¿cuál es un requisito NO funcional?',
+    opts: ['El sistema debe permitir dar de alta usuarios', 'El tiempo de respuesta no debe superar 3 segundos', 'El sistema debe cargar patentes', 'El sistema debe consultar saldo'], correct: 1,
+    expl: 'Los requisitos NO funcionales hacen referencia a restricciones (tiempo de respuesta, seguridad, plataforma). Los funcionales describen QUÉ hace el sistema. El tiempo de respuesta es una restricción de performance = NO funcional.' },
+
+  { cat: 'is', q: '¿Qué es el SCRUM Master?',
+    opts: ['El líder autoritario del equipo', 'Un facilitador que remueve impedimentos y ayuda al equipo', 'El dueño del producto', 'El programador senior'], correct: 1,
+    expl: 'Los profesores insisten: el SCRUM Master NO es un líder, es un FACILITADOR. Se encarga de mentoring, formación, coaching y de facilitar reuniones y eventos.' },
+
+  { cat: 'is', q: '¿Qué contiene el Product Backlog?',
+    opts: ['Solo las tareas del sprint actual', 'Documentación del sistema', 'La lista priorizada de TODAS las funcionalidades del producto', 'Los bugs detectados'], correct: 2,
+    expl: 'El Product Backlog es una lista de tareas ordenada de todo lo que podría ser necesario en el producto. Es la fuente de requisitos globales, gestionada por el Product Owner.' },
+
+  { cat: 'is', q: '¿Cuál es la duración típica de un Sprint en SCRUM?',
+    opts: ['1 día', 'Entre 2 y 4 semanas', '3 meses', '6 meses'], correct: 1,
+    expl: 'El Sprint es un bloque de tiempo entre 14 y 28 días (2-4 semanas). Cada Sprint puede considerarse un mini-proyecto con horizonte no mayor a un mes.' },
+
+  { cat: 'is', q: '¿Cuáles son los 3 roles en SCRUM?',
+    opts: ['Gerente, Analista, Programador', 'Product Owner, Scrum Master, Development Team', 'Cliente, Vendedor, Desarrollador', 'Arquitecto, Tester, Documentador'], correct: 1,
+    expl: 'Product Owner (define y prioriza el backlog), Scrum Master (facilitador) y Development Team (equipo de profesionales que desarrollan el incremento).' },
+
+  { cat: 'is', q: '¿Cuál es el nivel MÁS ALTO del Modelo de Madurez de Capacidades (CMM)?',
+    opts: ['Inicial', 'Definido', 'Gestionado', 'Optimizado'], correct: 3,
+    expl: 'Los 5 niveles CMM: 1) Inicial 2) Repetible 3) Definido 4) Gestionado 5) Optimizado. En el nivel Optimizado la organización se enfoca en mejora continua e innovación.' },
+
+  { cat: 'is', q: '¿Qué significa la sigla ETL en procesamiento de datos?',
+    opts: ['Extract, Test, Load', 'Extract, Transform, Load', 'External Transfer Layer', 'Enterprise Task Logic'], correct: 1,
+    expl: 'ETL = Extract (extraer), Transform (transformar) y Load (cargar). Paradigma clásico para homogeneizar datos de fuentes diversas antes de cargarlos en un sistema destino.' },
+
+  { cat: 'is', q: '¿Cuáles son los 4 eventos formales de SCRUM?',
+    opts: ['Planificación anual, semanal, diaria y final', 'Sprint Planning, Daily Scrum, Sprint Review y Sprint Retrospective', 'Análisis, Diseño, Codificación y Pruebas', 'Inicio, Ejecución, Control y Cierre'], correct: 1,
+    expl: '1) Sprint Planning (planificar) 2) Daily Scrum (diarios de 15 min) 3) Sprint Review (mostrar incremento) 4) Sprint Retrospective (mejora del proceso).' },
+
+  // ========== GESTIÓN DE PROYECTOS ==========
+  { cat: 'gp', q: '¿Cuáles son las TRES restricciones fundamentales de un proyecto (triple restricción)?',
+    opts: ['Tiempo, calidad, personas', 'Alcance, tiempo, costo', 'Recursos, riesgos, cliente', 'Objetivos, entregables, hitos'], correct: 1,
+    expl: 'La TRIPLE RESTRICCIÓN es: ALCANCE (qué se hace), TIEMPO (cuándo), COSTO (recursos, dinero, RRHH). Modificar uno afecta los otros dos.',
+    img: 'triangle' },
+
+  { cat: 'gp', q: '¿Cuál es la diferencia entre esfuerzo y duración?',
+    opts: ['Son sinónimos', 'Esfuerzo es cantidad de trabajo (horas/hombre); duración es el tiempo real en calendario según recursos disponibles', 'Esfuerzo se mide en dinero; duración en horas', 'Esfuerzo es del cliente; duración del equipo'], correct: 1,
+    expl: 'Una tarea puede requerir 40 horas de ESFUERZO, pero si trabaja una sola persona 4 hs/día, la DURACIÓN es 10 días. En el Gantt usamos duración, no esfuerzo.' },
+
+  { cat: 'gp', q: '¿Qué tipo de dependencia es la MÁS COMÚN en un cronograma?',
+    opts: ['Comienzo a Comienzo (SS)', 'Fin a Fin (FF)', 'Fin a Comienzo (FS)', 'Comienzo a Fin (SF)'], correct: 2,
+    expl: 'Fin a Comienzo (FS): una tarea no puede comenzar hasta que otra termine. Ej: no podés probar el sistema hasta haber terminado la integración.' },
+
+  { cat: 'gp', q: '¿Qué es un hito en un cronograma?',
+    opts: ['Una tarea de larga duración', 'Un evento significativo sin duración (marca un punto de control)', 'Un retraso planificado', 'Un recurso limitado'], correct: 1,
+    expl: 'Los hitos marcan puntos clave: entregables, aprobaciones, cierres de fase. No tienen duración, son eventos puntuales.' },
+
+  { cat: 'gp', q: '¿Cuáles son las etapas del equipo de trabajo según Tuckman?',
+    opts: ['Inicio, medio, fin', 'Formación, Tormenta, Normalización, Alto rendimiento, Despedida', 'Planificación, ejecución, cierre', 'Análisis, diseño, prueba'], correct: 1,
+    expl: '5 etapas del ciclo de vida del equipo: 1) Formación 2) Tormenta (conflictos) 3) Normalización 4) Alto rendimiento 5) Despedida.' },
+
+  { cat: 'gp', q: '¿Qué método de estimación se usa muy temprano en un proyecto cuando aún hay poca información?',
+    opts: ['Orden de magnitud (rough estimate)', 'Presupuestaria', 'Definitivo', 'Bottom-up'], correct: 0,
+    expl: 'El orden de magnitud se hace al inicio con poca info (rango amplio ±50%). Después: Presupuestaria (más precisa), Definitivo (con detalle) y Bottom-up (descomponiendo tareas).' },
+
+  { cat: 'gp', q: '¿Qué es un stakeholder?',
+    opts: ['Solo el cliente que paga', 'Solo los desarrolladores', 'Cualquier individuo u organización involucrada o afectada por los resultados del proyecto', 'Un tipo de contrato'], correct: 2,
+    expl: 'Stakeholders son TODOS los interesados: cliente, usuarios, gobierno, proveedores, equipo interno. Con ellos el administrador de proyecto debe negociar recursos y expectativas.' },
+
+  { cat: 'gp', q: '¿Cuál NO es un tipo de contrato en gestión de abastecimiento?',
+    opts: ['Precio fijo', 'Costo reembolsable', 'Con incentivos', 'De confianza mutua'], correct: 3,
+    expl: 'Los 4 tipos son: precio fijo, costo reembolsable, con incentivos, tiempo y materiales. "De confianza mutua" NO es un tipo de contrato formal.' },
+
+  { cat: 'gp', q: '¿Cuál NO es un estilo de liderazgo del director de proyecto?',
+    opts: ['Facilitador', 'Democrático', 'Autocrático', 'Colaborativo Ágil'], correct: 3,
+    expl: 'Los 5 estilos: Facilitador, Entrenador, Democrático, Autocrático, Burocrático. "Colaborativo Ágil" no está en la clasificación clásica.' },
+
+  // ========== RIESGOS ==========
+  { cat: 'ri', q: '¿Cómo se calcula el Grado de Exposición al riesgo?',
+    opts: ['Probabilidad + Impacto', 'Probabilidad × Impacto', 'Probabilidad / Impacto', 'Impacto - Probabilidad'], correct: 1,
+    expl: 'Grado de Exposición = PROBABILIDAD × IMPACTO. Ej: Prob alta (5) × Impacto alto (5) = 25 → riesgo crítico.',
+    img: 'riskmatrix' },
+
+  { cat: 'ri', q: '¿Cuál es la diferencia entre riesgo y falla?',
+    opts: ['Son lo mismo', 'Riesgo es un problema POTENCIAL (aún no ocurrió); falla es real (YA ocurrió)', 'Falla es potencial; riesgo es real', 'Los dos ya ocurrieron'], correct: 1,
+    expl: 'Riesgo = posibilidad futura. Falla o contingencia = evento real que ya sucedió. Por eso se dice "gestión de riesgos" (antes) y "plan de contingencia" (durante/después).' },
+
+  { cat: 'ri', q: '¿Qué estrategia de riesgo consiste en subcontratar el problema a un tercero?',
+    opts: ['Mitigar', 'Anular', 'Transferir', 'Aceptar'], correct: 2,
+    expl: 'Las 4 estrategias: ANULAR (eliminar la causa), MITIGAR (reducir prob/impacto), ACEPTAR (asumir), TRANSFERIR (delegar a un tercero como una aseguradora o subcontratista).' },
+
+  { cat: 'ri', q: '¿Cuál es la diferencia entre mitigación y contingencia?',
+    opts: ['Son sinónimos', 'Mitigación reduce la PROBABILIDAD; contingencia reduce el IMPACTO si el riesgo se materializa', 'Mitigación es después del evento; contingencia antes', 'Solo se puede usar una a la vez'], correct: 1,
+    expl: 'MITIGACIÓN: baja la probabilidad de que ocurra. CONTINGENCIA: prepara respuesta para minimizar el impacto CUANDO ocurra. Ambas son complementarias.' },
+
+  { cat: 'ri', q: '¿Qué es un riesgo intrínseco?',
+    opts: ['Un riesgo controlable', 'Un riesgo de bajo impacto', 'Un riesgo TOTALMENTE IMPREVISTO (ej: incendio, terremoto)', 'Un riesgo aceptable'], correct: 2,
+    expl: 'El riesgo intrínseco es imposible de anticipar (fuerza mayor). Por eso los planes de contingencia contemplan seguros y respaldos frente a estos casos.' },
+
+  { cat: 'ri', q: '¿Cuál NO es un método para identificar riesgos?',
+    opts: ['AMFE (Análisis de Modo de Falla y sus Efectos)', 'FODA (Fortalezas, Oportunidades, Debilidades, Amenazas)', 'PESTEL (Político, Económico, Social, Tecnológico, Ecológico, Legal)', 'GANTT (Diagrama de barras)'], correct: 3,
+    expl: 'AMFE, FODA y PESTEL son métodos de identificación de riesgos. GANTT es una herramienta para representar cronogramas, no para identificar riesgos.' },
+
+  { cat: 'ri', q: 'Un riesgo POSITIVO se denomina...',
+    opts: ['Amenaza', 'Oportunidad', 'Contingencia', 'Falla'], correct: 1,
+    expl: 'Un riesgo puede ser negativo (amenaza) o positivo (OPORTUNIDAD). No se debe ignorar ninguno de los dos.' },
+
+  // ========== AUDITORÍA ==========
+  { cat: 'au', q: '¿Cuántas fases tiene el proceso de auditoría informática?',
+    opts: ['3 fases', '5 fases (Planificación, Relevamiento, Evaluación, Informe, Seguimiento)', '7 fases', '10 fases'], correct: 1,
+    expl: 'Las 5 fases del proceso de auditoría son: 1) Planificación 2) Relevamiento de información 3) Evaluación y análisis 4) Informe 5) Seguimiento (opcional).',
+    img: 'auditphases' },
+
+  { cat: 'au', q: '¿Cuál es la diferencia entre AUDITOR y PERITO informático?',
+    opts: ['Son lo mismo', 'El auditor hace evaluación técnica de sistemas; el perito actúa en un contexto judicial asesorando al juez', 'El perito es interno; el auditor externo', 'El perito hace informes; el auditor no'], correct: 1,
+    expl: 'AUDITOR: evalúa técnicamente sistemas y procesos, emite recomendaciones. PERITO: es un perito judicial que asesora al juez en temas informáticos dentro de una causa legal.' },
+
+  { cat: 'au', q: '¿Qué framework internacional se usa como marco integrado de control interno?',
+    opts: ['ITIL', 'COSO', 'PMBOK', 'Scrum'], correct: 1,
+    expl: 'COSO es el marco de referencia para evaluar y mejorar los sistemas de control interno. Incluye ambiente de control, evaluación de riesgos, actividades de control, información y monitoreo.' },
+
+  { cat: 'au', q: '¿Qué norma ISO se aplica para gestión de SEGURIDAD DE LA INFORMACIÓN?',
+    opts: ['ISO 9001', 'ISO 27001', 'ISO 31000', 'ISO 14001'], correct: 1,
+    expl: 'ISO 27001: seguridad de la información. Otros: ISO 9001 (calidad), ISO 31000 (gestión de riesgos), ISO 14001 (medio ambiente).' },
+
+  { cat: 'au', q: '¿Qué tipo de riesgo en auditoría queda FUERA DEL CONTROL del auditor?',
+    opts: ['Riesgo inherente', 'Riesgo de control', 'Riesgo de detección', 'Riesgo operativo'], correct: 0,
+    expl: 'RIESGO INHERENTE: existe por la naturaleza de la actividad, sin depender de controles. Está fuera del alcance del auditor. Ej: naturaleza de operaciones muy complejas propensa a error.' },
+
+  { cat: 'au', q: '¿Cuál NO es un tipo de control interno?',
+    opts: ['Preventivo', 'Detectivo', 'Correctivo', 'Descriptivo'], correct: 3,
+    expl: 'Los 3 tipos son: PREVENTIVOS (evitan la acción no deseada), DETECTIVOS (dan a conocer cuando ocurrió) y CORRECTIVOS (facilitan volver a la normalidad). "Descriptivo" no es un tipo de control.' },
+
+  { cat: 'au', q: 'La AUDITORÍA INTERNA es principalmente...',
+    opts: ['Correctiva y externa', 'Preventiva: busca encontrar problemas antes que se vuelvan graves', 'Solo automatizada', 'Solo financiera'], correct: 1,
+    expl: 'La auditoría INTERNA es preventiva (busca detectar pequeños problemas antes que se vuelvan graves). La EXTERNA suele ser correctiva (busca problemas ya graves) y aporta objetividad externa.' },
+
+  { cat: 'au', q: '¿Cuál es el soporte fundamental para un HALLAZGO de auditoría?',
+    opts: ['Una opinión personal', 'Una suposición del auditor', 'Una EVIDENCIA verificable', 'Un contrato'], correct: 2,
+    expl: 'Las EVIDENCIAS son el soporte de todo hallazgo. Se recolectan por técnicas: ocular, verbal, física, documental o analítica. Un hallazgo sin evidencia no es válido.' },
+
+  { cat: 'au', q: '¿Qué técnica de recolección de evidencia consiste en "indagación testimonial y declaraciones"?',
+    opts: ['Ocular (observación directa)', 'Verbal (entrevistas, declaraciones)', 'Física (examinar activos)', 'Documental (revisar registros)'], correct: 1,
+    expl: 'VERBAL: obtener información mediante indagación, testimoniales, declaraciones y entrevistas con usuarios/responsables.' },
+
+  { cat: 'au', q: '¿Cuál es la función principal del CONTROL INTERNO?',
+    opts: ['Auditar los estados financieros', 'Prevenir y evitar la ocurrencia de riesgos', 'Reemplazar a la auditoría externa', 'Contratar personal'], correct: 1,
+    expl: 'El control interno PREVIENE y EVITA que ocurran riesgos. La auditoría, en cambio, EVALÚA cómo funciona ese control.' },
+
+  { cat: 'au', q: '¿Cuáles son las TRES etapas del proceso de auditoría (a alto nivel)?',
+    opts: ['Análisis, Diseño, Codificación', 'Planificación, Ejecución/Trabajo de campo, Conclusión', 'Diseño, Prueba, Despliegue', 'Compra, Uso, Descarte'], correct: 1,
+    expl: '1) PLANIFICACIÓN (diagnóstico preliminar, plan de auditoría) 2) EJECUCIÓN/TRABAJO DE CAMPO (aplicar procedimientos, recolectar evidencias) 3) CONCLUSIÓN (informe con hallazgos y recomendaciones).' },
+
+  // ========== ESTIMACIÓN ==========
+  { cat: 'es', q: '¿En qué se basa el modelo COCOMO II?',
+    opts: ['Solo en el número de personas del equipo', 'En el TAMAÑO del software y factores de costo/escala', 'En la experiencia subjetiva del gerente', 'En la duración planificada'], correct: 1,
+    expl: 'COCOMO II (Constructive Cost Model) estima costos según tamaño (LOC o puntos de función) y factores de costo/escala. Tiene 3 submodelos: básico, intermedio y detallado.' },
+
+  { cat: 'es', q: '¿Qué mide el método de PUNTOS DE FUNCIÓN?',
+    opts: ['Líneas de código escritas', 'La funcionalidad del sistema desde el punto de vista del USUARIO', 'El tiempo de ejecución', 'La cantidad de bugs'], correct: 1,
+    expl: 'PUNTOS DE FUNCIÓN (PF) mide la funcionalidad desde la mirada del usuario. Considera: entradas externas, salidas externas, consultas externas, archivos lógicos internos y archivos de interfaz externos.' },
+
+  { cat: 'es', q: '¿Qué significa CPTC en el Análisis de Valor Ganado (AVG)?',
+    opts: ['Costo Promedio Total Contratado', 'Costo Presupuestado del Trabajo CALENDARIZADO (trabajo planeado)', 'Cantidad de Personas Trabajando Concurrentemente', 'Control Preventivo del Tiempo Calculado'], correct: 1,
+    expl: 'CPTC = trabajo PLANEADO. CPTR = trabajo REALIZADO. PAC = Presupuesto Al Concluir (suma de todos los CPTC). Comparando CPTC vs CPTR se ve si el proyecto va según lo planificado.' },
+
+  { cat: 'es', q: '¿Cuál es la fórmula del VME (Valor Monetario Esperado)?',
+    opts: ['Costo × Tiempo', 'Probabilidad × Impacto en costos ($)', 'Riesgo × Recursos', 'Alcance / Presupuesto'], correct: 1,
+    expl: 'VME cuantifica el riesgo en pesos: se calcula el grado de exposición (Prob × Impacto) y se convierte a valor monetario. Permite priorizar riesgos y estimar reserva de contingencia.' },
+
+  { cat: 'es', q: '¿Cuál es la principal VENTAJA de la estimación Analógica?',
+    opts: ['Es la más exacta', 'Es rápida y económica (compara con proyectos similares anteriores)', 'Requiere gran cantidad de datos', 'Solo sirve para proyectos grandes'], correct: 1,
+    expl: 'Estimación ANALÓGICA: se compara con proyectos similares anteriores. Ventaja: rápida y económica. Desventaja: menos exacta que otros métodos como COCOMO o Puntos de Función.' },
+
+  { cat: 'es', q: '¿Qué es una MÉTRICA en ingeniería de software?',
+    opts: ['Un tipo de gráfico', 'Una medida cuantitativa del grado en que un sistema o proceso posee un atributo específico', 'Un requisito funcional', 'Una fase del ciclo de vida'], correct: 1,
+    expl: 'Métricas: medidas cuantitativas. Sirven para predicciones. Tipos: DIRECTAS (líneas de código, velocidad) e INDIRECTAS (funcionalidad, calidad, mantenibilidad).' },
+
+  // ========== CALIDAD Y TESTING ==========
+  { cat: 'ca', q: '¿Cuál es la diferencia entre VERIFICACIÓN y VALIDACIÓN?',
+    opts: ['Son sinónimos', 'Verificación: "¿construimos el producto correctamente?" / Validación: "¿construimos el producto correcto?"', 'Validación es antes; verificación después', 'Solo se hace una de las dos'], correct: 1,
+    expl: 'VERIFICACIÓN evalúa sintaxis, diseño, precisión técnica (¿lo hicimos bien?). VALIDACIÓN evalúa cumplimiento de requisitos del usuario (¿es lo que quería?). Ambas son necesarias.' },
+
+  { cat: 'ca', q: '¿Qué tipo de prueba evalúa componentes INDIVIDUALES aislados?',
+    opts: ['Prueba de Sistema', 'Prueba de Integración', 'Prueba de Unidad', 'Prueba de Validación'], correct: 2,
+    expl: 'PRUEBA DE UNIDAD: prueba individual de clases, objetos o componentes. Verifica que cada parte funcione aisladamente. Le siguen Integración, Validación y Sistema.' },
+
+  { cat: 'ca', q: '¿Qué mide una MÉTRICA DINÁMICA de producto?',
+    opts: ['El tamaño del código en líneas', 'La eficiencia y fiabilidad DURANTE LA EJECUCIÓN', 'La complejidad estática', 'La cantidad de documentación'], correct: 1,
+    expl: 'MÉTRICAS DINÁMICAS: se recopilan al ejecutar el sistema (tiempo de respuesta, uso de memoria). MÉTRICAS ESTÁTICAS: se obtienen sin ejecutar (tamaño del código, complejidad ciclomática).' },
+
+  { cat: 'ca', q: '¿Qué norma ISO se usa para GESTIÓN DE CALIDAD?',
+    opts: ['ISO 9001', 'ISO 27001', 'ISO 31000', 'ISO 14001'], correct: 0,
+    expl: 'ISO 9001: gestión de calidad (estándar genérico aplicable a cualquier organización). ISO 9001:2000 define elementos del sistema de administración de calidad.' },
+
+  { cat: 'ca', q: 'En el modelo CMM, ¿en qué nivel una organización usa MÉTRICAS SIGNIFICATIVAS para toma de decisiones?',
+    opts: ['Inicial (nivel 1)', 'Repetible (nivel 2)', 'Definido (nivel 3)', 'Gestionado (nivel 4)'], correct: 3,
+    expl: 'Nivel 4 - GESTIONADO: uso intensivo de métricas significativas de calidad y productividad para toma de decisiones y gestión de riesgo. Software de alta calidad.' },
+
+  // ========== LEGAL ==========
+  { cat: 'le', q: '¿Qué ley argentina regula la PROTECCIÓN DE DATOS PERSONALES?',
+    opts: ['Ley 24.240 (Defensa del Consumidor)', 'Ley 25.326', 'Ley 26.522 (Servicios de Comunicación)', 'Ley 27.078 (Digital)'], correct: 1,
+    expl: 'Ley 25.326: Protección de Datos Personales. Se sustenta en el HÁBEAS DATA incorporado en la Constitución Nacional.' },
+
+  { cat: 'le', q: '¿Qué es el HÁBEAS DATA?',
+    opts: ['Un tipo de contrato informático', 'Un derecho constitucional que garantiza la protección de datos personales', 'Una norma ISO', 'Un delito informático'], correct: 1,
+    expl: 'HÁBEAS DATA: derecho constitucional que permite a cualquier persona conocer qué datos suyos están almacenados, cómo se usan y solicitar corrección o eliminación.' },
+
+  { cat: 'le', q: '¿Cuál NO es un DATO SENSIBLE según la Ley 25.326?',
+    opts: ['Religión', 'Ideología política', 'Pertenencia racial o étnica', 'Nombre completo'], correct: 3,
+    expl: 'Datos sensibles: religión, ideología política, pertenencia racial, orientación sexual, salud. El nombre es un dato personal común, NO sensible.' },
+
+  { cat: 'le', q: '¿Qué es un DELITO INFORMÁTICO?',
+    opts: ['Un bug de programación', 'Una acción CONSCIENTE Y VOLUNTARIA que provoca perjuicio a una persona mediante actividades informáticas', 'Una falla del sistema', 'Un error del usuario final'], correct: 1,
+    expl: 'Delito informático: acto intencional que causa daño usando medios informáticos (hackeo, robo de datos, fraude). El derecho informático regula esto.' },
+
+  // ========== SEGURIDAD ==========
+  { cat: 'se', q: '¿Qué es una DMZ?',
+    opts: ['Un tipo de firewall', 'Zona DesMilitarizada: red aislada dentro de la organización donde se ubican los servidores expuestos', 'Un algoritmo de cifrado', 'Un protocolo de red'], correct: 1,
+    expl: 'DMZ (DesMilitarized Zone): segmento de red que separa los servidores públicos (web, mail) de la red interna. Las conexiones de la DMZ a la red LOCAL NO están permitidas.' },
+
+  { cat: 'se', q: '¿Cuál es la función principal de un FIREWALL?',
+    opts: ['Almacenar datos', 'Bloquear accesos no autorizados a una red privada y filtrar ataques', 'Ejecutar código maligno', 'Compilar programas'], correct: 1,
+    expl: 'FIREWALL: se ubica entre internet y la red interna. Bloquea accesos no autorizados, filtra tráfico, registra actividad. Protege la seguridad y privacidad.' },
+
+  { cat: 'se', q: 'La AUDITORÍA DE SEGURIDAD FÍSICA se enfoca en...',
+    opts: ['Contraseñas y permisos', 'Protecciones físicas (equipos, cableado, acceso al edificio, salidas de emergencia)', 'Firewalls y DMZ', 'Bases de datos'], correct: 1,
+    expl: 'Seguridad FÍSICA: control de accesos físicos, riesgos de incendio/corte de luz, sustracción de equipos, protección del cableado y planes de evacuación.' },
+
+  { cat: 'se', q: 'La AUDITORÍA DE SEGURIDAD LÓGICA se enfoca en...',
+    opts: ['Instalaciones edilicias', 'Contraseñas, permisos, perfiles de usuarios, mecanismos de conexión y firewalls', 'Cableado estructurado', 'Servidores físicos'], correct: 1,
+    expl: 'Seguridad LÓGICA: niveles de acceso a datos, autenticación, contraseñas, permisos, perfiles, transferencia de archivos, firewalls, DMZ, controles de páginas web.' },
+
+  { cat: 'se', q: '¿Qué método de autenticación usa reconocimiento facial o huella digital?',
+    opts: ['Contraseña', 'Biométrico', 'Token OTP', 'PIN'], correct: 1,
+    expl: 'BIOMÉTRICO: identifica al usuario por características físicas únicas (huella, iris, cara, voz). Junto con contraseña y criptografía, es una técnica clave de autenticación.' },
+
+  { cat: 'se', q: '¿Cuáles son los 3 pilares de la SEGURIDAD DE LA INFORMACIÓN?',
+    opts: ['Velocidad, precisión, costo', 'Confidencialidad, Integridad, Disponibilidad (CID)', 'Software, hardware, red', 'Personas, procesos, tecnología'], correct: 1,
+    expl: 'La tríada CID: CONFIDENCIALIDAD (solo autorizados acceden), INTEGRIDAD (los datos no se alteran), DISPONIBILIDAD (acceso cuando se necesita).' },
+
+  // ========== CASO SOFTFACTOR21 ==========
+  { cat: 'cs', q: 'Alfredo, Gerente de Desarrollo de SoftFactor21, tiene un equipo de:',
+    opts: ['7 personas', '12 personas', '4 personas', '3 personas'], correct: 1,
+    expl: 'Alfredo tiene 12 personas en desarrollo. Reporta a él Micaela (7 programadores) y Raúl (3 personas en testing).' },
+
+  { cat: 'cs', q: '¿Cuántas personas tiene el equipo de TESTING OFFICE de Raúl?',
+    opts: ['7', '3', '4', '12'], correct: 1,
+    expl: 'Raúl lidera testing office con 3 personas. Aún no cuentan con herramientas de testing automatizado, aunque aplican técnicas de diseño de casos de prueba.' },
+
+  { cat: 'cs', q: '¿Por qué se recomienda el modelo ITERATIVO E INCREMENTAL para el sistema de estacionamiento?',
+    opts: ['Porque es más barato', 'Porque permite entregas por etapas, mejoras continuas y retroalimentación de stakeholders, clave para un sistema SaaS', 'Porque es siempre más rápido', 'Porque no requiere pruebas'], correct: 1,
+    expl: 'El modelo iterativo/incremental es clave para SaaS porque permite escalabilidad, incorporar mejoras y adaptarse a requisitos que evolucionan. El modelo en cascada NO conviene porque dificulta cambios tardíos.' },
+
+  { cat: 'cs', q: '¿Qué componentes tiene el sistema de estacionamiento medido propuesto?',
+    opts: ['Solo una app móvil', 'App móvil para el ciudadano + aplicación web para el municipio + aplicación para los kioscos de carga', 'Solo una página web', 'Solo hardware'], correct: 1,
+    expl: 'Es un ecosistema de 3 componentes: app móvil (ciudadano), web (municipio) y app para kioscos de carga. Por eso es complejo y requiere planificación cuidadosa.' },
+
+  { cat: 'cs', q: 'La estrategia SaaS que propone Laura implica...',
+    opts: ['Vender el software una sola vez y olvidarse', 'Proveerlo como SERVICIO con soporte y mantenimiento continuo, extensible a otros municipios', 'Regalarlo como código abierto puro', 'Externalizar todo el desarrollo'], correct: 1,
+    expl: 'SaaS (Software as a Service): el municipio no compra el software, paga por usarlo. SoftFactor21 provee soporte y mantenimiento, y la plataforma crece al ritmo de nuevos clientes.' },
+
+  { cat: 'cs', q: '¿Qué tipo de organizaciones son clientes actuales de la unidad Soluciones Tecnológicas?',
+    opts: ['Solo empresas privadas', 'Mixtas (privadas y públicas)', 'Solo organizaciones PÚBLICAS (municipios, ministerios)', 'Solo multinacionales'], correct: 2,
+    expl: 'Actualmente todos los clientes son PÚBLICOS: municipios, ministerios provinciales. Es una decisión estratégica que surgió por la confianza de organizaciones públicas.' },
+
+  { cat: 'cs', q: 'Cuando el municipio pide servicio de auditoría informática, ¿como qué son contratados los profesionales de SoftFactor21?',
+    opts: ['Como peritos judiciales', 'Como AUDITORES INFORMÁTICOS (evaluación técnica, no contexto judicial)', 'Como consultores comerciales', 'Como programadores'], correct: 1,
+    expl: 'Son AUDITORES INFORMÁTICOS: hacen evaluación técnica de sistemas del municipio (catastro, contaduría, servicios públicos). No es contexto judicial, así que NO son peritos.' },
+
+  { cat: 'cs', q: 'Según Juan Pablo, la clave del crecimiento en SoftFactor21 está en...',
+    opts: ['Solo usar software propietario', 'Solo usar software libre', 'Combinar código abierto (open source) con software propietario, mitigando riesgos y reduciendo costos', 'Contratar más gerentes'], correct: 2,
+    expl: 'Juan Pablo: "Si copiamos modelos de ecosistemas, la clave del crecimiento está en combinar código abierto u open source con software propietario (mitigando riesgos y reduciendo costos)."' }
+];
+
+// Categorías con metadatos
+const CATEGORIES = {
+  'is': { name: 'Ingeniería de Software', emoji: '🔵', color: '#3b82f6' },
+  'gp': { name: 'Gestión de Proyectos', emoji: '🟠', color: '#f97316' },
+  'ri': { name: 'Riesgos', emoji: '🔴', color: '#ef4444' },
+  'au': { name: 'Auditoría', emoji: '🟢', color: '#10b981' },
+  'es': { name: 'Estimación', emoji: '🟣', color: '#a855f7' },
+  'ca': { name: 'Calidad y Testing', emoji: '🟡', color: '#eab308' },
+  'le': { name: 'Legal', emoji: '⚫', color: '#64748b' },
+  'se': { name: 'Seguridad', emoji: '🌐', color: '#06b6d4' },
+  'cs': { name: 'Caso SoftFactor21', emoji: '📚', color: '#ec4899' }
+};
+
+// Imágenes SVG inline
+const IMAGES = {
+  triangle: `<svg viewBox="0 0 400 220" style="max-width:300px;">
+    <defs><linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22d3ee"/><stop offset="100%" stop-color="#10b981"/></linearGradient></defs>
+    <polygon points="200,30 60,190 340,190" fill="none" stroke="url(#g1)" stroke-width="3"/>
+    <text x="200" y="20" text-anchor="middle" fill="#f1f5f9" font-size="16" font-weight="bold">ALCANCE</text>
+    <text x="40" y="210" text-anchor="middle" fill="#f1f5f9" font-size="16" font-weight="bold">TIEMPO</text>
+    <text x="360" y="210" text-anchor="middle" fill="#f1f5f9" font-size="16" font-weight="bold">COSTO</text>
+    <text x="200" y="130" text-anchor="middle" fill="#94a3b8" font-size="13">Triple restricción</text>
+  </svg>`,
+
+  riskmatrix: `<svg viewBox="0 0 400 240" style="max-width:400px;">
+    <text x="200" y="20" text-anchor="middle" fill="#f1f5f9" font-size="14" font-weight="bold">Matriz de riesgo (Prob × Impacto)</text>
+    <g transform="translate(80,40)">
+      ${[[1,'#10b981'],[2,'#10b981'],[3,'#eab308'],[4,'#f97316'],[5,'#ef4444']].map((_,y) =>
+        [[1,'#10b981'],[2,'#10b981'],[3,'#eab308'],[4,'#f97316'],[5,'#ef4444']].map((__,x) => {
+          const val = (5-y) * (x+1);
+          let color = '#10b981';
+          if (val > 5) color = '#eab308';
+          if (val > 10) color = '#f97316';
+          if (val > 16) color = '#ef4444';
+          return `<rect x="${x*50}" y="${y*32}" width="48" height="30" fill="${color}" opacity=".7"/>
+                  <text x="${x*50+24}" y="${y*32+20}" text-anchor="middle" fill="white" font-size="12" font-weight="bold">${val}</text>`;
+        }).join('')
+      ).join('')}
+    </g>
+    <text x="200" y="220" text-anchor="middle" fill="#94a3b8" font-size="11">Verde: aceptable · Amarillo: moderado · Naranja: importante · Rojo: crítico</text>
+    <text x="20" y="130" text-anchor="middle" fill="#94a3b8" font-size="11" transform="rotate(-90 20 130)">Impacto ↑</text>
+    <text x="200" y="215" text-anchor="middle" fill="#94a3b8" font-size="11">Probabilidad →</text>
+  </svg>`,
+
+  auditphases: `<svg viewBox="0 0 500 100" style="max-width:100%;">
+    ${['Planificación', 'Relevamiento', 'Evaluación', 'Informe', 'Seguimiento'].map((phase, i) => `
+      <g transform="translate(${i*100},30)">
+        <rect x="5" y="0" width="90" height="40" rx="8" fill="#22d3ee" opacity="${0.4 + i*0.12}"/>
+        <text x="50" y="24" text-anchor="middle" fill="white" font-size="11" font-weight="bold">${i+1}. ${phase}</text>
+        ${i < 4 ? '<polygon points="95,20 105,15 105,25" fill="#22d3ee"/>' : ''}
+      </g>
+    `).join('')}
+    <text x="250" y="20" text-anchor="middle" fill="#f1f5f9" font-size="14" font-weight="bold">5 fases del proceso de auditoría</text>
+  </svg>`
+};
+
+// ============================================
+// ESTADO
+// ============================================
+let state = {
+  currentQueue: [],
+  currentIndex: 0,
+  answered: false,
+  selectedIndex: -1,
+  mode: 'mix',
+  reviewPool: [], // Preguntas mal contestadas
+  stats: {
+    total: QUESTIONS.length,
+    correct: 0,
+    wrong: 0,
+    sessionCorrect: 0,
+    sessionWrong: 0,
+    sessionTotal: 0
+  },
+  wrongInSession: [] // Para poder reforzar al terminar
+};
+
+// ============================================
+// INICIALIZACIÓN
+// ============================================
+function init() {
+  renderCategories();
+  updateMenuStats();
+}
+
+function renderCategories() {
+  const container = document.getElementById('categories');
+  container.innerHTML = '';
+  Object.entries(CATEGORIES).forEach(([key, info]) => {
+    const count = QUESTIONS.filter(q => q.cat === key).length;
+    const btn = document.createElement('button');
+    btn.className = 'cat-btn';
+    btn.onclick = () => startMode(key);
+    btn.innerHTML = `
+      <span class="cat-emoji">${info.emoji}</span>
+      <span>${info.name}</span>
+      <span class="cat-count">${count}</span>
+    `;
+    container.appendChild(btn);
+  });
+}
+
+function updateMenuStats() {
+  document.getElementById('menu-total').textContent = QUESTIONS.length;
+  document.getElementById('menu-correct').textContent = state.stats.correct;
+  document.getElementById('menu-wrong').textContent = state.stats.wrong;
+  document.getElementById('menu-review').textContent = state.reviewPool.length;
+  document.getElementById('btn-review').style.display = state.reviewPool.length > 0 ? 'inline-flex' : 'none';
+}
+
+// ============================================
+// SISTEMA DE PREGUNTAS
+// ============================================
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function startMode(mode) {
+  state.mode = mode;
+  state.currentIndex = 0;
+  state.wrongInSession = [];
+  state.stats.sessionCorrect = 0;
+  state.stats.sessionWrong = 0;
+
+  if (mode === 'mix') {
+    state.currentQueue = shuffle([...Array(QUESTIONS.length).keys()]);
+  } else if (mode === 'review') {
+    state.currentQueue = shuffle([...state.reviewPool]);
+  } else {
+    // categoría específica
+    state.currentQueue = shuffle(
+      QUESTIONS.map((q, i) => q.cat === mode ? i : -1).filter(i => i >= 0)
+    );
+  }
+
+  state.stats.sessionTotal = state.currentQueue.length;
+
+  if (state.currentQueue.length === 0) {
+    alert('No hay preguntas para este modo. Elegí otro.');
+    return;
+  }
+
+  showScreen('quiz');
+  document.getElementById('banner-review').classList.toggle('hidden', mode !== 'review');
+  loadQuestion();
+}
+
+function loadQuestion() {
+  state.answered = false;
+  state.selectedIndex = -1;
+
+  const qIndex = state.currentQueue[state.currentIndex];
+  const q = QUESTIONS[qIndex];
+  const catInfo = CATEGORIES[q.cat];
+
+  document.getElementById('q-category').textContent = catInfo.emoji + ' ' + catInfo.name;
+  document.getElementById('q-category').style.color = catInfo.color;
+  document.getElementById('q-review-badge').style.display = state.mode === 'review' ? 'inline-block' : 'none';
+  document.getElementById('q-text').textContent = q.q;
+
+  const imgContainer = document.getElementById('q-image');
+  if (q.img && IMAGES[q.img]) {
+    imgContainer.innerHTML = IMAGES[q.img];
+    imgContainer.style.display = 'block';
+  } else {
+    imgContainer.style.display = 'none';
+  }
+
+  // Mezclar opciones para que la respuesta correcta no siempre esté en el mismo lugar
+  const shuffledOpts = q.opts.map((opt, i) => ({ text: opt, originalIdx: i }));
+  const shuffled = shuffle(shuffledOpts);
+
+  const optsContainer = document.getElementById('q-options');
+  optsContainer.innerHTML = '';
+  const letters = ['A', 'B', 'C', 'D', 'E'];
+
+  shuffled.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option';
+    btn.dataset.originalIdx = opt.originalIdx;
+    btn.dataset.displayIdx = i;
+    btn.onclick = () => selectOption(i, opt.originalIdx, q.correct, qIndex);
+    btn.innerHTML = `<span class="option-letter">${letters[i]}</span><span>${opt.text}</span>`;
+    optsContainer.appendChild(btn);
+  });
+
+  document.getElementById('explanation').classList.remove('visible', 'wrong-answer');
+  document.getElementById('btn-next').disabled = true;
+
+  updateQuizStats();
+}
+
+function selectOption(displayIdx, originalIdx, correctIdx, qIndex) {
+  if (state.answered) return;
+  state.answered = true;
+  state.selectedIndex = originalIdx;
+
+  const isCorrect = originalIdx === correctIdx;
+  const options = document.querySelectorAll('.option');
+
+  options.forEach(opt => {
+    opt.disabled = true;
+    const origIdx = parseInt(opt.dataset.originalIdx);
+    if (origIdx === correctIdx) opt.classList.add('correct');
+    if (origIdx === originalIdx && !isCorrect) opt.classList.add('wrong');
+  });
+
+  const expl = document.getElementById('explanation');
+  const explTitle = document.getElementById('expl-title');
+  const explBody = document.getElementById('expl-body');
+  const q = QUESTIONS[qIndex];
+
+  if (isCorrect) {
+    state.stats.correct++;
+    state.stats.sessionCorrect++;
+    explTitle.textContent = '✓ ¡Correcto!';
+    expl.classList.remove('wrong-answer');
+    // Si estaba en pool de refuerzo y la acertó, la sacamos
+    const poolIdx = state.reviewPool.indexOf(qIndex);
+    if (poolIdx >= 0) state.reviewPool.splice(poolIdx, 1);
+  } else {
+    state.stats.wrong++;
+    state.stats.sessionWrong++;
+    explTitle.textContent = '✗ Incorrecto — repasá:';
+    expl.classList.add('wrong-answer');
+    // Agregar al pool si no está
+    if (!state.reviewPool.includes(qIndex)) state.reviewPool.push(qIndex);
+    if (!state.wrongInSession.includes(qIndex)) state.wrongInSession.push(qIndex);
+  }
+
+  explBody.textContent = q.expl;
+  expl.classList.add('visible');
+  document.getElementById('btn-next').disabled = false;
+
+  updateQuizStats();
+}
+
+function nextQuestion() {
+  state.currentIndex++;
+  if (state.currentIndex >= state.currentQueue.length) {
+    // Si es modo mix o categoría y hay preguntas mal en esta sesión, ofrecer reforzar
+    showResults();
+  } else {
+    loadQuestion();
+  }
+}
+
+function updateQuizStats() {
+  document.getElementById('q-current').textContent = state.currentIndex + 1;
+  document.getElementById('q-correct').textContent = state.stats.sessionCorrect;
+  document.getElementById('q-wrong').textContent = state.stats.sessionWrong;
+  document.getElementById('q-remaining').textContent = state.currentQueue.length - state.currentIndex - 1;
+
+  const pct = ((state.currentIndex + (state.answered ? 1 : 0)) / state.currentQueue.length) * 100;
+  document.getElementById('progress-fill').style.width = pct + '%';
+}
+
+function showResults() {
+  const total = state.stats.sessionTotal;
+  const correct = state.stats.sessionCorrect;
+  const pct = Math.round((correct / total) * 100);
+
+  document.getElementById('results-score').textContent = pct;
+  document.getElementById('results-title').textContent =
+    state.mode === 'review' ? '🔁 Sesión de refuerzo terminada' : '🎓 Sesión completada';
+
+  let emoji = '🎓', msg = '';
+  if (pct >= 90) { emoji = '🏆'; msg = '¡Excelente! Dominás el tema. Ya estás listo/a para el examen.'; }
+  else if (pct >= 75) { emoji = '💪'; msg = 'Muy bien. Repasá los pocos que fallaste y estás en muy buen nivel.'; }
+  else if (pct >= 60) { emoji = '📖'; msg = 'Buen intento. Usá el modo refuerzo para consolidar lo que te falta.'; }
+  else if (pct >= 40) { emoji = '🤔'; msg = 'Hay que seguir estudiando. Reforzá los conceptos y volvé a intentarlo.'; }
+  else { emoji = '📚'; msg = 'Necesitás más repaso. Revisá el material antes de volver a probar.'; }
+
+  document.getElementById('results-emoji').textContent = emoji;
+  document.getElementById('results-message').textContent = `Acertaste ${correct} de ${total} preguntas. ${msg}`;
+
+  document.getElementById('btn-review-now').style.display =
+    state.wrongInSession.length > 0 ? 'inline-flex' : 'none';
+
+  showScreen('results');
+  updateMenuStats();
+}
+
+function goMenu() {
+  showScreen('menu');
+  updateMenuStats();
+}
+
+function resetProgress() {
+  if (confirm('¿Seguro que querés borrar todo tu progreso?')) {
+    state.stats.correct = 0;
+    state.stats.wrong = 0;
+    state.reviewPool = [];
+    updateMenuStats();
+  }
+}
+
+function showScreen(name) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + name).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Iniciar
+init();
+</script>
+</body>
+</html>
