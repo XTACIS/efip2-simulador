@@ -1316,6 +1316,138 @@ const QUESTIONS = [
     ],
     expl: 'Datos SENSIBLES (Ley 25.326): religión, ideología política, pertenencia racial/étnica, orientación sexual, datos de salud. Requieren protección REFORZADA. Los datos comunes (nombre, DNI, dirección) NO son sensibles pero también están protegidos. El HÁBEAS DATA es el derecho constitucional que permite acceder, rectificar y eliminar datos personales.' },
 
+  // ==================== PIRÁMIDE DE MASLOW ====================
+  { cat: 'gp',
+    variants: [
+      { q: 'Según la Pirámide de Maslow, ¿cuál es la necesidad de MENOR nivel (base)?',
+        opts: ['Autorrealización', 'Fisiológicas (comer, dormir)', 'Seguridad', 'Estima'], correct: 1 },
+      { q: 'Según la Pirámide de Maslow, ¿cuál es la necesidad de MAYOR nivel (cima)?',
+        opts: ['Fisiológicas', 'Seguridad', 'Autorrealización', 'Sociales'], correct: 2 },
+      { q: 'En la Pirámide de Maslow, ¿qué nivel abarca amistad, afecto e intimidad?',
+        opts: ['Fisiológicas', 'Seguridad', 'Sociales', 'Estima'], correct: 2 },
+      { q: 'En la Pirámide de Maslow, ¿qué nivel incluye el reconocimiento, respeto y confianza?',
+        opts: ['Sociales', 'Estima/reconocimiento', 'Autorrealización', 'Seguridad'], correct: 1 },
+      { q: 'En la Pirámide de Maslow, ¿qué nivel cubre seguridad física, empleo, recursos y salud?',
+        opts: ['Fisiológicas', 'Seguridad', 'Sociales', 'Estima'], correct: 1 },
+      { q: '¿Cuántos niveles tiene la Pirámide de Maslow?',
+        opts: ['3', '4', '5', '7'], correct: 2 }
+    ],
+    expl: 'Los 5 niveles de Maslow (de base a cima): 1) FISIOLÓGICAS (comer, dormir) 2) SEGURIDAD (empleo, salud, recursos) 3) SOCIALES (amistad, afecto) 4) ESTIMA (reconocimiento, respeto) 5) AUTORREALIZACIÓN (potencial máximo). Se debe cubrir un nivel para aspirar al siguiente.' },
+
+  // ==================== ETAPAS DEL EQUIPO (TUCKMAN) ====================
+  { cat: 'gp',
+    variants: [
+      { q: '¿Cuál es la PRIMERA etapa del ciclo de un equipo de trabajo según Tuckman?',
+        opts: ['Tormenta', 'Formación', 'Normalización', 'Alto rendimiento'], correct: 1 },
+      { q: 'En Tuckman, ¿en qué etapa aparecen conflictos, discusiones sobre roles y liderazgo?',
+        opts: ['Formación', 'Tormenta', 'Normalización', 'Despedida'], correct: 1 },
+      { q: 'En Tuckman, ¿qué etapa sigue a la Tormenta, cuando se acuerdan reglas y roles?',
+        opts: ['Formación', 'Alto rendimiento', 'Normalización', 'Despedida'], correct: 2 },
+      { q: 'En Tuckman, ¿en qué etapa el equipo funciona con máxima eficiencia y sinergia?',
+        opts: ['Formación', 'Normalización', 'Alto rendimiento', 'Despedida'], correct: 2 },
+      { q: 'En Tuckman, ¿qué etapa se produce cuando termina el proyecto y el equipo se disuelve?',
+        opts: ['Formación', 'Alto rendimiento', 'Despedida', 'Tormenta'], correct: 2 },
+      { q: '¿Cuántas etapas tiene el ciclo de un equipo según Tuckman?',
+        opts: ['3', '4', '5', '7'], correct: 2 }
+    ],
+    expl: 'Ciclo de Tuckman: 1) FORMACIÓN (nos conocemos) 2) TORMENTA (conflictos, roles) 3) NORMALIZACIÓN (reglas claras) 4) ALTO RENDIMIENTO (equipo eficaz) 5) DESPEDIDA (disolución al terminar).' },
+
+  // ==================== TIPOS DE CONTRATOS ====================
+  { cat: 'gp',
+    variants: [
+      { q: '¿Qué tipo de contrato conviene cuando el alcance, tiempo y costo están perfectamente definidos?',
+        opts: ['Precio fijo', 'Costo reembolsable', 'Tiempo y materiales', 'Con incentivos'], correct: 0 },
+      { q: '¿Qué tipo de contrato paga los costos reales incurridos más un margen (usado en proyectos I+D con mucha incertidumbre)?',
+        opts: ['Precio fijo', 'Costo reembolsable', 'Tiempo y materiales', 'Con incentivos'], correct: 1 },
+      { q: '¿Qué tipo de contrato paga por hora/día trabajado + costo de materiales (típico en freelance y consultoría)?',
+        opts: ['Precio fijo', 'Costo reembolsable', 'Tiempo y materiales', 'Con incentivos'], correct: 2 },
+      { q: '¿Qué tipo de contrato incluye bonos si se supera el desempeño esperado (ej: entregar antes)?',
+        opts: ['Precio fijo', 'Costo reembolsable', 'Tiempo y materiales', 'Con incentivos'], correct: 3 },
+      { q: 'Un contrato es un ACUERDO VINCULANTE que...',
+        opts: ['Es una promesa verbal', 'Obliga legalmente, define derechos y obligaciones, documenta términos', 'Solo aplica a proveedores externos', 'Es opcional entre partes'], correct: 1 }
+    ],
+    expl: 'Los 4 tipos de contrato: PRECIO FIJO (alcance/tiempo/costo claros), COSTO REEMBOLSABLE (costos reales + margen, alta incertidumbre), TIEMPO Y MATERIALES (por horas + materiales), CON INCENTIVOS (bonos por desempeño superior).' },
+
+  // ==================== ESTILOS DE LIDERAZGO ====================
+  { cat: 'gp',
+    variants: [
+      { q: '¿Cuál NO es un estilo de liderazgo del director de proyecto?',
+        opts: ['Facilitador', 'Democrático', 'Autocrático', 'Autónomo'], correct: 3 },
+      { q: 'Un líder que TOMA DECISIONES SOLO sin consultar al equipo, con jerarquía marcada, es de estilo:',
+        opts: ['Democrático', 'Autocrático', 'Facilitador', 'Entrenador'], correct: 1 },
+      { q: 'Un líder que CONSULTA al equipo y decide en conjunto es de estilo:',
+        opts: ['Autocrático', 'Democrático', 'Burocrático', 'Facilitador'], correct: 1 },
+      { q: 'Un líder que SE APEGA ESTRICTAMENTE a reglas, procedimientos y jerarquías es de estilo:',
+        opts: ['Democrático', 'Facilitador', 'Burocrático', 'Entrenador'], correct: 2 },
+      { q: 'Un líder que se enfoca en DESARROLLAR habilidades y mentorear al equipo es de estilo:',
+        opts: ['Facilitador', 'Entrenador', 'Autocrático', 'Burocrático'], correct: 1 }
+    ],
+    expl: 'Los 5 estilos: FACILITADOR (remueve obstáculos), ENTRENADOR (mentorea), DEMOCRÁTICO (decisiones en conjunto), AUTOCRÁTICO (autoridad centralizada), BUROCRÁTICO (apego a procedimientos).' },
+
+  // ==================== AVG - Valor Ganado ====================
+  { cat: 'es',
+    variants: [
+      { q: 'En el Análisis del Valor Ganado, ¿qué significa CPTC?',
+        opts: ['Costo Prorrateado del Tiempo Calendarizado', 'Costo Presupuestado del Trabajo Calendarizado (planeado)', 'Cuenta Personal del Trabajador', 'Control Preventivo Total del Cronograma'], correct: 1 },
+      { q: 'En AVG, ¿qué significa CPTR?',
+        opts: ['Costo Presupuestado del Trabajo Realizado', 'Costo Programado del Trabajo Rechazado', 'Cronograma Personal del Trabajo Real', 'Control Preventivo del Trabajo'], correct: 0 },
+      { q: 'En AVG, ¿qué significa PAC?',
+        opts: ['Pago Anticipado del Cliente', 'Presupuesto Al Concluir (suma total de todos los CPTC)', 'Plan de Aceptación del Cronograma', 'Proyecto Aprobado y Contratado'], correct: 1 },
+      { q: 'Si CPTR > CPTC en un proyecto, significa que:',
+        opts: ['Vamos ATRASADOS (menos trabajo del planeado)', 'Vamos ADELANTADOS (más trabajo del planeado)', 'El proyecto está en pausa', 'El presupuesto se agotó'], correct: 1 },
+      { q: '¿Qué requisitos previos son necesarios para usar AVG?',
+        opts: ['Solo un cronograma', 'Solo un presupuesto', 'Lista de tareas + Cronograma + Presupuesto definido', 'Ninguno, es intuitivo'], correct: 2 }
+    ],
+    expl: 'AVG (Análisis del Valor Ganado): CPTC = trabajo PLANIFICADO. CPTR = trabajo REALIZADO. PAC = suma de todos los CPTC (presupuesto total). Comparar CPTR vs CPTC indica si vamos según lo planeado. Requiere lista de tareas + cronograma + presupuesto.' },
+
+  // ==================== VERIFICACIÓN vs VALIDACIÓN ====================
+  { cat: 'ca',
+    variants: [
+      { q: 'La pregunta clave de la VERIFICACIÓN es:',
+        opts: ['¿Estamos construyendo el producto CORRECTAMENTE?', '¿Estamos construyendo el producto CORRECTO?', '¿El cliente está contento?', '¿El proyecto es rentable?'], correct: 0 },
+      { q: 'La pregunta clave de la VALIDACIÓN es:',
+        opts: ['¿Estamos construyendo el producto CORRECTAMENTE?', '¿Estamos construyendo el producto CORRECTO?', '¿El cronograma se cumple?', '¿Hay bugs?'], correct: 1 },
+      { q: 'La VERIFICACIÓN evalúa principalmente:',
+        opts: ['Cumplimiento de requisitos del usuario', 'Sintaxis, diseño, precisión técnica del código', 'Satisfacción del cliente', 'Documentación del proyecto'], correct: 1 },
+      { q: 'La VALIDACIÓN evalúa principalmente:',
+        opts: ['Sintaxis y diseño interno', 'Cumplimiento de requisitos del USUARIO', 'Rendimiento del hardware', 'Cronograma'], correct: 1 },
+      { q: '¿Cuándo se realiza principalmente la VERIFICACIÓN?',
+        opts: ['Al final del proyecto', 'En fase inicial y durante el desarrollo', 'Solo en producción', 'Nunca es necesaria'], correct: 1 }
+    ],
+    expl: 'VERIFICACIÓN: ¿lo estamos haciendo BIEN? Evalúa sintaxis, diseño, precisión técnica. Se hace en fase inicial. VALIDACIÓN: ¿es lo que el cliente PIDIÓ? Evalúa cumplimiento de requisitos del usuario. Se hace en fase final.' },
+
+  // ==================== AUDITORÍAS ESPECIALIZADAS ====================
+  { cat: 'au',
+    variants: [
+      { q: '¿Qué tipo de auditoría revisa quién accedió a los datos, cuándo, desde qué dispositivo?',
+        opts: ['Auditoría de BBDD', 'Auditoría de Redes', 'Auditoría Ofimática', 'Auditoría Física'], correct: 0 },
+      { q: '¿Qué tipo de auditoría evalúa infraestructura tecnológica usando modelos OSI y TCP/IP?',
+        opts: ['Auditoría de BBDD', 'Auditoría de Redes y Telecomunicaciones', 'Auditoría Ofimática', 'Auditoría Financiera'], correct: 1 },
+      { q: '¿Qué tipo de auditoría verifica que aplicaciones instaladas cumplan los objetivos para los que fueron creadas?',
+        opts: ['Auditoría de BBDD', 'Auditoría de las Aplicaciones Instaladas', 'Auditoría de Redes', 'Auditoría Ofimática'], correct: 1 },
+      { q: '¿Qué tipo de auditoría controla inventario, licencias, respaldos y protección contra virus a nivel oficina?',
+        opts: ['Auditoría de BBDD', 'Auditoría de Redes', 'Auditoría Ofimática', 'Auditoría Financiera'], correct: 2 },
+      { q: 'En una auditoría de seguridad física, ¿qué se evalúa principalmente?',
+        opts: ['Contraseñas y permisos', 'Protecciones físicas: equipos, cableado, acceso al edificio, salidas de emergencia', 'Cumplimiento de normas ISO', 'Estados contables'], correct: 1 },
+      { q: 'En una auditoría de seguridad lógica, ¿qué se evalúa principalmente?',
+        opts: ['Instalaciones edilicias', 'Contraseñas, permisos, perfiles, mecanismos de conexión, firewalls', 'Cableado estructurado', 'Equipos de aire acondicionado'], correct: 1 }
+    ],
+    expl: 'Especialidades de auditoría: DE BBDD (accesos, integridad de datos), DE REDES (infraestructura, OSI/TCP-IP), DE APLICACIONES (cumplen objetivos), OFIMÁTICA (inventario, licencias), SEGURIDAD FÍSICA (equipos, edificio), SEGURIDAD LÓGICA (contraseñas, firewalls).' },
+
+  // ==================== METODOLOGÍA CUALITATIVA vs CUANTITATIVA ====================
+  { cat: 'ca',
+    variants: [
+      { q: 'La metodología CUANTITATIVA se caracteriza por:',
+        opts: ['Ser inductiva y flexible', 'Basarse en medición numérica y estadística para probar hipótesis', 'No usar datos', 'Ser exclusivamente observacional'], correct: 1 },
+      { q: 'La metodología CUALITATIVA se caracteriza por:',
+        opts: ['Ser secuencial y probatoria', 'Producir datos descriptivos (palabras, conductas), es inductiva y flexible', 'Usar métodos estadísticos', 'Medir magnitudes'], correct: 1 },
+      { q: 'Una investigación CUANTITATIVA usa principalmente:',
+        opts: ['Entrevistas abiertas', 'Encuestas con opciones cerradas y análisis estadístico', 'Observación participante', 'Diarios de campo'], correct: 1 },
+      { q: 'Una investigación CUALITATIVA usa principalmente:',
+        opts: ['Encuestas con escalas', 'Entrevistas en profundidad, observación, análisis de contenido', 'Regresiones lineales', 'Análisis estadístico'], correct: 1 }
+    ],
+    expl: 'CUANTITATIVA: numérica, deductiva, prueba hipótesis, secuencial. CUALITATIVA: descriptiva, inductiva, flexible, entiende fenómenos en profundidad. Se pueden combinar (metodología MIXTA).' },
+
   { cat: 'is',
     variants: [
       { q: '¿Qué modelo de proceso es SECUENCIAL y solo funciona bien con requisitos estables?',
@@ -1377,7 +1509,21 @@ const TOPICS = [
       <p>Enfatizan desarrollo rápido, poca documentación, equipos pequeños. Ejemplos: <b>SCRUM, Kanban, XP, Crystal</b>.</p>
     `,
     svg: 'modelos',
-    youtubeSearch: 'modelos de proceso de software ciclo de vida'
+    youtubeSearch: 'modelos de proceso de software ciclo de vida',
+    examples: [
+      { icon: '🏗️', title: 'Cascada — Sistema bancario legacy', text: 'Un banco desarrolla un módulo contable donde las regulaciones son fijas y no van a cambiar. Cascada es perfecto: analizás → diseñás → programás → probás → mantenés.' },
+      { icon: '🎨', title: 'Prototipo — Nueva app móvil', text: 'Antes de invertir en desarrollo completo, se construye una versión clickeable con pantallas básicas para validar la idea con usuarios reales.' },
+      { icon: '🔁', title: 'Iterativo — Sistema ERP', text: 'Se entrega un ERP completo con funcionalidad básica en la iteración 1, y en cada iteración siguiente se refinan módulos (ventas, stock, contabilidad).' },
+      { icon: '➕', title: 'Incremental — App de fitness', text: 'V1: registrar entrenamientos. V2: agregar seguimiento de nutrición. V3: agregar rutinas personalizadas. Cada versión suma funcionalidad completa.' },
+      { icon: '🌀', title: 'Espiral — Sistema aeroespacial', text: 'Cada ciclo evalúa riesgos técnicos (nueva tecnología, integración). Se prototipa, se valida y solo se avanza si el riesgo está controlado.' },
+      { icon: '⚡', title: 'Ágil (SCRUM) — Startup fintech', text: 'Sprints de 2 semanas, entregas continuas al mercado, ajustes constantes según feedback de usuarios reales.' }
+    ],
+    miniquiz: {
+      q: 'Un proyecto tiene requisitos que van cambiando constantemente por feedback del cliente. ¿Qué modelo NO es apropiado?',
+      opts: ['SCRUM', 'Cascada', 'Iterativo'],
+      correct: 1,
+      expl: '¡Correcto! Cascada es rígido, no admite cambios una vez iniciado. Los modelos evolutivos (iterativo, ágil) sí se adaptan.'
+    }
   },
   {
     id: 'scrum',
@@ -1446,7 +1592,20 @@ const TOPICS = [
       <p><b>Un requisito es una sentencia completa sobre QUÉ hace el sistema, sin referirse a CÓMO lo hace.</b></p>
     `,
     svg: 'reqfases',
-    youtubeSearch: 'ingeniería de requerimientos software'
+    youtubeSearch: 'ingeniería de requerimientos software',
+    examples: [
+      { icon: '💬', title: 'Elicitación — Entrevista al operador administrativo', text: '"Contame cómo hoy actualizás las listas de precios: ¿cuántos proveedores?, ¿en qué formato llegan?, ¿cuánto tiempo tardás?". Objetivo: descubrir necesidades reales.' },
+      { icon: '⚖️', title: 'Análisis — Técnica MoSCoW', text: 'Must (imprescindible): importar Excel. Should: importar PDF. Could: dashboard estadístico. Won\'t (por ahora): integración con SAP.' },
+      { icon: '📝', title: 'Especificación — Ejemplo IEEE 830', text: '"RF01: El sistema debe permitir cargar un archivo Excel de hasta 50MB. RNF01: El tiempo de procesamiento no debe superar 30 segundos para archivos de 10.000 filas."' },
+      { icon: '✅', title: 'Validación — Reunión con stakeholders', text: 'Se convoca al cliente + operador + jefe de sistemas para revisar la ERS. Se detecta que falta un requisito sobre notificaciones. Se corrige antes de codificar.' },
+      { icon: '🔄', title: 'Gestión — Control de cambios', text: 'El cliente pide una funcionalidad nueva a mitad del sprint. Se evalúa impacto (tiempo, costo), se documenta y se aprueba formalmente antes de implementar.' }
+    ],
+    miniquiz: {
+      q: '"El sistema debe estar disponible 24/7 con 99,9% de uptime". ¿Qué tipo de requisito es?',
+      opts: ['Funcional (describe qué hace)', 'No funcional (restricción de calidad/performance)', 'No es un requisito, es un objetivo'],
+      correct: 1,
+      expl: '¡Correcto! Es NO funcional: es una restricción sobre disponibilidad (calidad de servicio), no describe qué hace el sistema.'
+    }
   },
   {
     id: 'proyectos',
@@ -1477,7 +1636,20 @@ const TOPICS = [
       <p>Cualquier persona u organización involucrada o afectada por el proyecto. Con ellos el PM negocia recursos, requerimientos, expectativas.</p>
     `,
     svg: 'triangle',
-    youtubeSearch: 'gestión de proyectos triple restricción'
+    youtubeSearch: 'gestión de proyectos triple restricción',
+    examples: [
+      { icon: '📐', title: 'Triple restricción — Presupuesto cerrado', text: 'Cliente pide más alcance sin aumentar presupuesto ni plazo. El PM tiene que sacrificar CALIDAD o negociar la triple restricción. No podés ganar en las 3 al mismo tiempo.' },
+      { icon: '👥', title: 'Stakeholders — Sistema de estacionamiento', text: 'Municipio (contrata), ciudadanos (usan la app), inspectores (controlan), kiosqueros (venden crédito), gobierno provincial (regula). Todos con expectativas distintas.' },
+      { icon: '🔄', title: 'Proyecto vs Proceso', text: 'PROYECTO: desarrollar un sistema nuevo de expedientes (temporal, único). PROCESO: la atención diaria al ciudadano en ventanilla (repetitivo, continuo).' },
+      { icon: '📊', title: 'Etapas Tuckman en acción', text: '1) Formación: el equipo se conoce. 2) Tormenta: aparecen conflictos ("¿quién decide?"). 3) Normalización: acuerdan reglas. 4) Alto rendimiento: funcionan como orquesta. 5) Despedida: proyecto termina.' },
+      { icon: '⚠️', title: 'Por qué fracasa un proyecto', text: 'Alcance mal definido (55% de proyectos fallan por esto), tiempo subestimado, mala comunicación, falta de compromiso del sponsor.' }
+    ],
+    miniquiz: {
+      q: 'Tu equipo está discutiendo mucho, con roles no claros y algunos conflictos. Según Tuckman, ¿en qué etapa están?',
+      opts: ['Formación', 'Tormenta', 'Normalización', 'Alto rendimiento'],
+      correct: 1,
+      expl: '¡Exacto! Tormenta es la etapa de conflictos donde se definen roles y liderazgos. Con buena gestión pasan a Normalización.'
+    }
   },
   {
     id: 'riesgos',
@@ -1562,7 +1734,20 @@ const TOPICS = [
       <p>Convierte el grado de exposición al riesgo a valor monetario para priorizar y estimar la reserva de contingencia. Se recomienda aplicar tempranamente.</p>
     `,
     svg: 'estimacion',
-    youtubeSearch: 'estimación de software COCOMO puntos función'
+    youtubeSearch: 'estimación de software COCOMO puntos función',
+    examples: [
+      { icon: '🎯', title: 'Orden de magnitud — Reunión inicial', text: '"¿Cuánto sale un CRM?" Respuesta rápida: entre USD 30K y 80K (rango amplio, ±50%). Sirve para decidir si el proyecto es viable.' },
+      { icon: '📏', title: 'Puntos de Función — Sistema de reservas', text: 'Entradas externas: formulario de reserva (5 PF). Salidas: mail de confirmación (4 PF). Consultas: buscar disponibilidad (3 PF). Total: 12 PF × factor complejidad × costo/PF.' },
+      { icon: '⚖️', title: 'Analógica — Comparación con proyectos previos', text: '"El año pasado hicimos un sistema similar de RRHH que costó USD 45K. Este es 30% más chico, así que estimamos USD 32K." Rápido pero impreciso.' },
+      { icon: '📊', title: 'AVG en acción — Semana 8 de un proyecto de 20', text: 'CPTC (planeado): 40% completo. CPTR (real): 30% completo. Diagnóstico: proyecto ATRASADO. Acción: refuerzo del equipo o negociar alcance.' },
+      { icon: '💰', title: 'VME — Priorización de riesgos', text: 'Riesgo A: Prob 20% × Impacto USD 100K = VME USD 20K. Riesgo B: Prob 5% × Impacto USD 500K = VME USD 25K. B es más peligroso pese a menor probabilidad.' }
+    ],
+    miniquiz: {
+      q: 'En un proyecto, CPTC=100 (planeado) y CPTR=80 (realizado a la misma fecha). ¿Qué significa?',
+      opts: ['Vamos adelantados', 'Estamos según lo planeado', 'Vamos atrasados (menos avance del previsto)'],
+      correct: 2,
+      expl: '¡Correcto! CPTR < CPTC significa que se realizó menos trabajo del planificado → ATRASO.'
+    }
   },
   {
     id: 'testing',
@@ -1600,7 +1785,21 @@ const TOPICS = [
       </ol>
     `,
     svg: 'testing',
-    youtubeSearch: 'testing de software tipos de pruebas'
+    youtubeSearch: 'testing de software tipos de pruebas',
+    examples: [
+      { icon: '🧪', title: 'Prueba de UNIDAD — Función de cálculo', text: 'Testeás una función que calcula el IVA aislada: `calcularIVA(100) === 21`. No se conecta a base de datos ni a otras funciones.' },
+      { icon: '🔌', title: 'Prueba de INTEGRACIÓN — Login con BBDD', text: 'Ya no aislás: probás que el módulo Login se conecta correctamente con el módulo Usuarios y con la base de datos. Se verifican las E/S entre componentes.' },
+      { icon: '✅', title: 'Prueba de VALIDACIÓN — Historia de usuario', text: 'HU-001: "Como usuario quiero recuperar mi contraseña". Se testea end-to-end: pedir → recibir mail → cambiar → loguear. Confirma que el requisito se cumple.' },
+      { icon: '🌐', title: 'Prueba de SISTEMA — E-commerce en producción', text: 'Se prueba el sistema COMPLETO integrado con hardware, BBDD, red, pasarela de pago, con datos reales y 500 usuarios simulados.' },
+      { icon: '📊', title: 'Verificación vs Validación — Ejemplo simple', text: 'VERIFICACIÓN: revisar el código y que compile sin errores (¿lo hicimos bien?). VALIDACIÓN: mostrarle el sistema al cliente y que diga "sí, eso pedí" (¿es lo correcto?).' },
+      { icon: '📈', title: 'CMM en un banco', text: 'Un banco chico está en nivel INICIAL (cada equipo trabaja como puede). Después de 2 años implementando prácticas de gestión, pasa a REPETIBLE. En 5 años más llega a DEFINIDO con procedimientos estandarizados.' }
+    ],
+    miniquiz: {
+      q: 'Testeás que la función sumar(2,3) devuelve 5, aisladamente. ¿Qué tipo de prueba es?',
+      opts: ['Unidad', 'Integración', 'Sistema', 'Validación'],
+      correct: 0,
+      expl: '¡Correcto! Es prueba de UNIDAD: componente individual, aislado, verificando su comportamiento.'
+    }
   },
   {
     id: 'auditoria',
@@ -1708,7 +1907,20 @@ const TOPICS = [
       </ul>
     `,
     svg: 'seguridad',
-    youtubeSearch: 'seguridad informática CID firewall DMZ'
+    youtubeSearch: 'seguridad informática CID firewall DMZ',
+    examples: [
+      { icon: '🔐', title: 'CID en un banco', text: 'CONFIDENCIALIDAD: solo autorizados ven saldos. INTEGRIDAD: nadie puede alterar transacciones. DISPONIBILIDAD: el sistema debe estar operativo 24/7. Faltar cualquiera compromete al banco.' },
+      { icon: '🛡️', title: 'DMZ + Firewall — Arquitectura típica', text: 'Internet → Firewall → DMZ (donde están el servidor web, mail, DNS) → Firewall interno → Red LAN (donde están las BBDD sensibles). Doble barrera.' },
+      { icon: '👆', title: '3 métodos de autenticación', text: '1) Algo que SABÉS: contraseña. 2) Algo que TENÉS: token físico o app OTP. 3) Algo que SOS: huella dactilar, iris. La combinación de 2 o más = doble factor (2FA).' },
+      { icon: '🏢', title: 'Seguridad física vs lógica', text: 'FÍSICA: puerta con tarjeta magnética al data center, cámaras, biometría, salida de emergencia. LÓGICA: contraseñas, permisos por rol, firewall, cifrado.' },
+      { icon: '⚠️', title: 'Tipos de riesgos', text: 'OPERATIVOS: fraude interno, daños materiales. ORGANIZACIONALES: mercado, crédito. TECNOLÓGICOS: fuga de datos, virus, desastre natural, incumplimiento regulatorio.' }
+    ],
+    miniquiz: {
+      q: 'Un ataque cambia los saldos de la cuenta de varios clientes sin ser detectado. ¿Qué pilar de CID se vulneró?',
+      opts: ['Confidencialidad', 'Integridad', 'Disponibilidad'],
+      correct: 1,
+      expl: '¡Correcto! INTEGRIDAD: los datos fueron alterados sin autorización. Los saldos ya no son confiables.'
+    }
   },
   {
     id: 'legal',
@@ -1751,7 +1963,20 @@ const TOPICS = [
       <p>Durante toda la gestión hay <b>comunicación constante, monitoreo y revisión</b>.</p>
     `,
     svg: null,
-    youtubeSearch: 'ley 25326 protección datos personales Argentina'
+    youtubeSearch: 'ley 25326 protección datos personales Argentina',
+    examples: [
+      { icon: '📧', title: 'Violación típica — Spam sin consentimiento', text: 'Recibís correos publicitarios de una empresa a la que nunca le diste tu email. Esa empresa está VIOLANDO la Ley 25.326. Podés denunciar ante la Dirección Nacional de Datos Personales.' },
+      { icon: '📞', title: 'Violación típica — Llamados promocionales', text: 'Te llama una tarjeta ofreciendo un préstamo. Nunca fuiste cliente. La empresa que compartió tu número violó la ley. Existe el Registro "No Llame" para inscribirse y bloquear.' },
+      { icon: '🏥', title: 'Datos sensibles — Historia clínica', text: 'Un hospital comparte tu diagnóstico con una empresa de seguros SIN tu consentimiento expreso. Grave violación: los datos de salud son SENSIBLES y requieren autorización explícita.' },
+      { icon: '⚖️', title: 'Hábeas data en acción', text: 'Vas a Veraz y encontrás una deuda que no reconocés. Presentás un hábeas data: la empresa tiene 5 días para rectificarla o probarla. Es tu derecho constitucional.' },
+      { icon: '🔓', title: 'Delito informático — Ejemplo', text: 'Un empleado despedido usa sus credenciales para robar la base de clientes de la empresa. Es un DELITO INFORMÁTICO (acceso indebido + apropiación de información), penado por ley.' }
+    ],
+    miniquiz: {
+      q: 'Un sitio web guarda datos de tu orientación religiosa sin tu consentimiento explícito. ¿Qué violación cometió?',
+      opts: ['Ninguna, es un dato común', 'Violación de datos sensibles (Ley 25.326)', 'Solo un problema técnico'],
+      correct: 1,
+      expl: '¡Correcto! La religión es un DATO SENSIBLE. Requiere consentimiento EXPRESO y protección reforzada.'
+    }
   }
 ];
 
