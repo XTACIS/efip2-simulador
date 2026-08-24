@@ -496,13 +496,25 @@ body { overscroll-behavior: contain; }
     <div id="learn-image" class="q-image" style="display:none;"></div>
 
     <div id="learn-video-container" style="margin: 25px 0;">
-      <div style="font-weight: bold; margin-bottom: 12px; color: var(--accent);">🎥 Videos recomendados</div>
-      <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 10px; background: var(--bg-1);">
-        <iframe id="learn-video" src="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; border-radius: 10px;" allowfullscreen loading="lazy"></iframe>
+      <div style="font-weight: bold; margin-bottom: 12px; color: var(--accent);">🎥 Videos sobre este tema</div>
+
+      <div style="background: linear-gradient(135deg, #b91c1c 0%, #dc2626 100%); border-radius: 12px; padding: 20px; text-align: center;">
+        <svg width="60" height="42" viewBox="0 0 24 17" fill="white" style="margin-bottom: 10px;">
+          <path d="M23.5 2.6c-.3-1-1.1-1.8-2.1-2.1C19.6 0 12 0 12 0s-7.6 0-9.4.5c-1 .3-1.8 1.1-2.1 2.1C0 4.4 0 8.3 0 8.3s0 3.9.5 5.7c.3 1 1.1 1.8 2.1 2.1 1.8.5 9.4.5 9.4.5s7.6 0 9.4-.5c1-.3 1.8-1.1 2.1-2.1.5-1.8.5-5.7.5-5.7s0-3.9-.5-5.7zM9.5 11.9V4.7l6.3 3.6-6.3 3.6z"/>
+        </svg>
+        <div style="color: white; font-size: 16px; margin-bottom: 15px; font-weight: 500;">
+          Videos educativos seleccionados
+        </div>
+        <a id="learn-video-link" href="#" target="_blank" rel="noopener"
+           style="display: inline-block; padding: 12px 24px; background: white; color: #dc2626; text-decoration: none; font-weight: bold; border-radius: 8px; transition: transform .15s;">
+          ▶ Ver en YouTube
+        </a>
+        <div style="color: rgba(255,255,255,.8); margin-top: 12px; font-size: 12px;">
+          Se abre en una pestaña nueva con búsqueda automática
+        </div>
       </div>
-      <a id="learn-video-link" href="#" target="_blank" rel="noopener" style="display: inline-block; margin-top: 10px; color: var(--accent); text-decoration: none; font-size: 14px;">
-        🔍 Ver más videos sobre este tema en YouTube →
-      </a>
+
+      <div id="learn-alt-searches" style="margin-top: 15px; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;"></div>
     </div>
 
     <div class="actions" style="margin-top: 25px;">
@@ -1679,13 +1691,22 @@ function showTopic(topicId) {
     imgContainer.style.display = 'none';
   }
 
-  // Video: usar búsqueda embebida de YouTube
+  // Búsquedas de YouTube (evitamos el embed roto por listType=search)
   const searchQuery = encodeURIComponent(currentTopic.youtubeSearch);
-  const videoIframe = document.getElementById('learn-video');
-  const videoLink = document.getElementById('learn-video-link');
-  // YouTube embed con búsqueda (playlist automática)
-  videoIframe.src = `https://www.youtube.com/embed?listType=search&list=${searchQuery}`;
-  videoLink.href = `https://www.youtube.com/results?search_query=${searchQuery}`;
+  document.getElementById('learn-video-link').href = `https://www.youtube.com/results?search_query=${searchQuery}`;
+
+  // Búsquedas alternativas: variaciones útiles para el tema
+  const altSearches = [
+    { label: '🎓 Curso completo', q: currentTopic.youtubeSearch + ' curso completo español' },
+    { label: '⚡ En 10 minutos', q: currentTopic.youtubeSearch + ' explicado en 10 minutos' },
+    { label: '📚 Ejemplo práctico', q: currentTopic.youtubeSearch + ' ejemplo practico' }
+  ];
+  const altContainer = document.getElementById('learn-alt-searches');
+  altContainer.innerHTML = altSearches.map(s =>
+    `<a href="https://www.youtube.com/results?search_query=${encodeURIComponent(s.q)}" target="_blank" rel="noopener"
+       style="padding: 6px 12px; background: var(--bg-2); border: 1px solid var(--border); border-radius: 20px; color: var(--text); text-decoration: none; font-size: 12px; transition: all .15s;"
+       onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">${s.label}</a>`
+  ).join('');
 
   // Botón práctica: mostrar cantidad de preguntas del tema
   const qCount = QUESTIONS.filter(q => currentTopic.cats.includes(q.cat)).length;
@@ -1715,17 +1736,6 @@ function practiceCurrentTopic() {
   document.getElementById('banner-review').classList.add('hidden');
   loadQuestion();
 }
-
-// Pausar video al salir del modo aprender
-const _origShowScreen = showScreen;
-showScreen = function(name) {
-  // Si estamos saliendo del modo aprender, pausar el video
-  if (name !== 'learn') {
-    const iframe = document.getElementById('learn-video');
-    if (iframe && iframe.src) iframe.src = iframe.src; // recarga para pausar
-  }
-  _origShowScreen(name);
-};
 
 // Iniciar
 init();
