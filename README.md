@@ -2,52 +2,74 @@
 
 Simulador interactivo de estudio para el Examen Final Integrador Práctico II (EFIP II) de la Licenciatura en Informática de la Universidad Siglo 21.
 
-**60+ preguntas** de opción múltiple cubriendo todos los dominios del examen, con sistema de refuerzo automático de errores.
+## Probalo online
 
-## Probalo ya
+**https://xtacis.github.io/efip2-simulador/**
 
-Abrí el archivo `index.html` en cualquier navegador (PC o celular). No requiere instalación, servidor ni conexión a internet.
+O descargá el archivo `index.html` y abrilo en cualquier navegador (PC o celular). No requiere servidor ni conexión (excepto para los videos de YouTube).
 
-Si el repo tiene GitHub Pages activado: **https://<usuario>.github.io/<nombre-del-repo>/**
+## Modos de uso
+
+### 📖 Aprender por tema
+10 temas con explicación teórica, diagrama SVG y videos de YouTube embebidos:
+
+1. Modelos de Proceso de Software
+2. SCRUM y Metodologías Ágiles
+3. Ingeniería de Requerimientos
+4. Gestión de Proyectos
+5. Gestión de Riesgos
+6. Estimación de Software
+7. Testing y Calidad
+8. Auditoría Informática
+9. Seguridad Informática
+10. Legal y Normativas
+
+Desde cada tema podés ir directo a practicar preguntas de ese tema.
+
+### 🎯 Quiz por dominio o mezclado
+67+ preguntas de opción múltiple con feedback inmediato y explicación detallada al responder.
+
+### 🔁 Refuerzo automático
+Las preguntas que respondés mal se guardan en un pool de refuerzo y vuelven a aparecer hasta que las aciertes.
 
 ## Características
 
-- **60+ preguntas** organizadas en 9 dominios temáticos
-- **Refuerzo automático**: las preguntas que respondés mal vuelven a aparecer hasta que las aciertes
-- **Feedback inmediato**: explicación detallada de cada respuesta
-- **Imágenes SVG** para conceptos clave (triple restricción, matriz de riesgo, fases de auditoría)
 - **Responsive**: funciona en PC, tablet y celular
 - **Sin dependencias**: un solo archivo HTML autosuficiente
-- **Modo por dominio** o **mix aleatorio** de todas las preguntas
-- **Estadísticas** de aciertos, errores y progreso
+- **Sin backend**: 100% cliente, funciona offline (excepto videos)
+- **Diagramas SVG inline**: matriz de riesgo, triple restricción, fases de auditoría, ciclo SCRUM, pirámide de testing, y más
+- **Videos YouTube embebidos**: búsqueda automática por tema
+- **Feedback inmediato**: cada respuesta viene con explicación
+- **Estadísticas de sesión**: aciertos, errores, progreso visual
 
 ## Dominios cubiertos
 
-- Ingeniería de Software (modelos de proceso, SCRUM, requisitos)
-- Gestión de Proyectos (triple restricción, cronogramas, roles)
-- Análisis de Riesgos (grado de exposición, estrategias)
-- Auditoría Informática (5 fases, tipos, marcos)
-- Estimación (COCOMO, Puntos de Función, AVG, VME)
-- Calidad y Testing (ISO 9001, CMM, tipos de pruebas)
-- Legal (Ley 25.326, hábeas data)
-- Seguridad (física, lógica, DMZ, firewall)
-- Caso SoftFactor21 (preguntas específicas del caso 2025)
+| Dominio | Preguntas |
+|---------|-----------|
+| Ingeniería de Software | 11 |
+| Gestión de Proyectos | 9 |
+| Análisis de Riesgos | 7 |
+| Auditoría Informática | 11 |
+| Estimación | 6 |
+| Calidad y Testing | 5 |
+| Seguridad | 6 |
+| Legal | 4 |
+| Caso SoftFactor21 | 8 |
 
 ## Cómo usar
 
-1. Abrí `index.html` en tu navegador.
-2. Elegí un dominio o "Todas mezcladas".
-3. Respondé cada pregunta y leé la explicación.
-4. Las que respondas mal quedan guardadas para reforzar.
-5. Al terminar podés activar "Solo reforzar errores" para consolidar lo que te falta.
+1. Abrí `index.html` en tu navegador (o entrá al link online).
+2. Elegí **"📖 Aprender por tema"** para ver teoría + video + practicar.
+3. O elegí una **categoría** o **"🎯 Todas mezcladas"** para ir directo al quiz.
+4. Las preguntas que fallás quedan en el **pool de refuerzo** para volver a intentarlas.
 
 ## Uso libre educativo
 
-Podés usarlo, compartirlo y modificarlo libremente. Está pensado para estudiantes que van a rendir el EFIP II. Si te sirvió, compartilo con tus compañeros.
+Podés usarlo, compartirlo y modificarlo libremente. Está pensado para estudiantes de la Licenciatura en Informática. Si te sirvió, compartilo con tus compañeros.
 
 ## Contribuir
 
-Si detectás errores en alguna respuesta o querés proponer más preguntas, abrí un issue o un pull request.
+Si detectás errores en alguna respuesta o querés proponer más preguntas o temas, abrí un issue o un pull request.
 
 ## Licencia
 
