@@ -763,9 +763,22 @@ const QUESTIONS = [
     opts: ['Cascada', 'Iterativo', 'Espiral', 'Prototipo'], correct: 2,
     expl: 'El modelo en Espiral (propuesto por Boehm) es el único que contempla análisis de riesgos como parte formal de cada ciclo. Combina desarrollo iterativo con evaluación de riesgos en cada vuelta.' },
 
-  { cat: 'is', q: '¿Cuál NO es una fase del proceso de Ingeniería de Requerimientos?',
-    opts: ['Elicitación', 'Análisis', 'Despliegue', 'Especificación'], correct: 2,
-    expl: 'Las 5 fases son: Elicitación (relevar), Análisis (priorizar), Especificación (documentar), Validación (confirmar) y Gestión (controlar cambios). El "despliegue" es una fase del desarrollo, no de la Ingeniería de Requerimientos.' },
+  { cat: 'is',
+    variants: [
+      { q: '¿Cuál NO es una fase del proceso de Ingeniería de Requerimientos?',
+        opts: ['Elicitación', 'Análisis', 'Despliegue', 'Especificación'], correct: 2 },
+      { q: '¿Qué fase de la Ingeniería de Requerimientos consiste en RELEVAR NECESIDADES mediante entrevistas, encuestas u observación?',
+        opts: ['Elicitación', 'Análisis', 'Especificación', 'Validación'], correct: 0 },
+      { q: '¿Qué fase de la Ingeniería de Requerimientos consiste en PRIORIZAR y resolver CONFLICTOS entre requisitos?',
+        opts: ['Elicitación', 'Análisis', 'Especificación', 'Gestión'], correct: 1 },
+      { q: '¿Qué fase de la Ingeniería de Requerimientos consiste en DOCUMENTAR los requisitos de forma clara y sin ambigüedades?',
+        opts: ['Análisis', 'Especificación', 'Validación', 'Gestión'], correct: 1 },
+      { q: '¿Qué fase de la Ingeniería de Requerimientos consiste en CONFIRMAR con el cliente que los requisitos son completos, precisos y viables?',
+        opts: ['Elicitación', 'Especificación', 'Validación', 'Gestión'], correct: 2 },
+      { q: '¿Qué fase de la Ingeniería de Requerimientos consiste en CONTROLAR CAMBIOS y asegurar su correcta implementación?',
+        opts: ['Elicitación', 'Especificación', 'Validación', 'Gestión'], correct: 3 }
+    ],
+    expl: 'Las 5 fases: 1) ELICITACIÓN (relevar) 2) ANÁLISIS (priorizar, resolver conflictos con MoSCoW) 3) ESPECIFICACIÓN (documentar según IEEE 830) 4) VALIDACIÓN (confirmar con cliente) 5) GESTIÓN (controlar cambios).' },
 
   { cat: 'is', q: '¿Qué documento formal define el estándar IEEE 830?',
     opts: ['Diagrama de clases', 'Especificación de Requerimientos de Software (ERS)', 'Manual de usuario', 'Plan de proyecto'], correct: 1,
@@ -787,13 +800,39 @@ const QUESTIONS = [
     opts: ['1 día', 'Entre 2 y 4 semanas', '3 meses', '6 meses'], correct: 1,
     expl: 'El Sprint es un bloque de tiempo entre 14 y 28 días (2-4 semanas). Cada Sprint puede considerarse un mini-proyecto con horizonte no mayor a un mes.' },
 
-  { cat: 'is', q: '¿Cuáles son los 3 roles en SCRUM?',
-    opts: ['Gerente, Analista, Programador', 'Product Owner, Scrum Master, Development Team', 'Cliente, Vendedor, Desarrollador', 'Arquitecto, Tester, Documentador'], correct: 1,
-    expl: 'Product Owner (define y prioriza el backlog), Scrum Master (facilitador) y Development Team (equipo de profesionales que desarrollan el incremento).' },
+  { cat: 'is',
+    variants: [
+      { q: '¿Cuáles son los 3 roles en SCRUM?',
+        opts: ['Gerente, Analista, Programador', 'Product Owner, Scrum Master, Development Team', 'Cliente, Vendedor, Desarrollador', 'Arquitecto, Tester, Documentador'], correct: 1 },
+      { q: 'En SCRUM, ¿quién es el DUEÑO del Product Backlog y prioriza las funcionalidades?',
+        opts: ['Scrum Master', 'Product Owner', 'Development Team', 'Cliente externo'], correct: 1 },
+      { q: 'En SCRUM, ¿quién es el FACILITADOR que remueve impedimentos y ayuda al equipo? (NO es líder)',
+        opts: ['Product Owner', 'Scrum Master', 'Development Team', 'Gerente'], correct: 1 },
+      { q: 'En SCRUM, ¿quién construye el INCREMENTO del producto?',
+        opts: ['Product Owner', 'Scrum Master', 'Development Team', 'Stakeholders'], correct: 2 },
+      { q: '¿Es correcto decir que el Scrum Master es el LÍDER autoritario del equipo?',
+        opts: ['Sí, es el jefe', 'No, es un facilitador que se encarga de mentoring y coaching', 'Sí, define qué se hace', 'Solo cuando hay conflictos'], correct: 1 }
+    ],
+    expl: 'Los 3 roles: PRODUCT OWNER (dueño del backlog, voz del cliente), SCRUM MASTER (¡facilitador, NO líder! remueve impedimentos, hace mentoring/coaching) y DEVELOPMENT TEAM (profesionales que desarrollan el incremento).' },
 
-  { cat: 'is', q: '¿Cuál es el nivel MÁS ALTO del Modelo de Madurez de Capacidades (CMM)?',
-    opts: ['Inicial', 'Definido', 'Gestionado', 'Optimizado'], correct: 3,
-    expl: 'Los 5 niveles CMM: 1) Inicial 2) Repetible 3) Definido 4) Gestionado 5) Optimizado. En el nivel Optimizado la organización se enfoca en mejora continua e innovación.' },
+  { cat: 'is',
+    variants: [
+      { q: '¿Cuál es el nivel MÁS ALTO del Modelo de Madurez de Capacidades (CMM)?',
+        opts: ['Inicial', 'Definido', 'Gestionado', 'Optimizado'], correct: 3 },
+      { q: '¿Cuál es el nivel MÁS BAJO del CMM, donde el éxito depende del esfuerzo personal y hay retrasos/sobrecostes?',
+        opts: ['Inicial', 'Repetible', 'Definido', 'Gestionado'], correct: 0 },
+      { q: 'En el CMM, ¿qué nivel se caracteriza por tener prácticas de gestión de proyectos, métricas y aseguramiento de calidad razonable?',
+        opts: ['Inicial', 'Repetible', 'Definido', 'Gestionado'], correct: 1 },
+      { q: 'En el CMM, ¿qué nivel dispone de correctos procedimientos, técnicas detalladas y métricas más avanzadas?',
+        opts: ['Repetible', 'Definido', 'Gestionado', 'Optimizado'], correct: 1 },
+      { q: 'En el CMM, ¿qué nivel se caracteriza por usar métricas significativas para toma de decisiones y gestión de riesgo? (Software de alta calidad)',
+        opts: ['Definido', 'Gestionado', 'Optimizado', 'Repetible'], correct: 1 },
+      { q: 'En el CMM, ¿qué nivel enfatiza la MEJORA CONTINUA de los procesos y la gestión de la innovación?',
+        opts: ['Gestionado', 'Optimizado', 'Definido', 'Repetible'], correct: 1 },
+      { q: '¿Cuántos niveles tiene el Modelo de Madurez de Capacidades (CMM)?',
+        opts: ['3', '4', '5', '7'], correct: 2 }
+    ],
+    expl: 'Los 5 niveles CMM: 1) INICIAL (procesos inestables, éxito por esfuerzo personal) 2) REPETIBLE (prácticas de gestión, métricas y aseguramiento razonable) 3) DEFINIDO (procedimientos correctos, técnicas detalladas) 4) GESTIONADO (métricas significativas para decisiones, alta calidad) 5) OPTIMIZADO (mejora continua e innovación).' },
 
   { cat: 'is', q: '¿Qué significa la sigla ETL en procesamiento de datos?',
     opts: ['Extract, Test, Load', 'Extract, Transform, Load', 'External Transfer Layer', 'Enterprise Task Logic'], correct: 1,
@@ -851,9 +890,20 @@ const QUESTIONS = [
     opts: ['Son lo mismo', 'Riesgo es un problema POTENCIAL (aún no ocurrió); falla es real (YA ocurrió)', 'Falla es potencial; riesgo es real', 'Los dos ya ocurrieron'], correct: 1,
     expl: 'Riesgo = posibilidad futura. Falla o contingencia = evento real que ya sucedió. Por eso se dice "gestión de riesgos" (antes) y "plan de contingencia" (durante/después).' },
 
-  { cat: 'ri', q: '¿Qué estrategia de riesgo consiste en subcontratar el problema a un tercero?',
-    opts: ['Mitigar', 'Anular', 'Transferir', 'Aceptar'], correct: 2,
-    expl: 'Las 4 estrategias: ANULAR (eliminar la causa), MITIGAR (reducir prob/impacto), ACEPTAR (asumir), TRANSFERIR (delegar a un tercero como una aseguradora o subcontratista).' },
+  { cat: 'ri',
+    variants: [
+      { q: '¿Qué estrategia de riesgo consiste en SUBCONTRATAR el problema a un tercero (ej: contratar un seguro)?',
+        opts: ['Mitigar', 'Anular', 'Transferir', 'Aceptar'], correct: 2 },
+      { q: '¿Qué estrategia de riesgo consiste en ELIMINAR TOTALMENTE la causa del riesgo?',
+        opts: ['Anular', 'Mitigar', 'Aceptar', 'Transferir'], correct: 0 },
+      { q: '¿Qué estrategia de riesgo consiste en REDUCIR el impacto o probabilidad de ocurrencia?',
+        opts: ['Anular', 'Mitigar', 'Aceptar', 'Transferir'], correct: 1 },
+      { q: '¿Qué estrategia de riesgo consiste en ASUMIR las consecuencias y proveer contramedidas?',
+        opts: ['Anular', 'Mitigar', 'Aceptar', 'Transferir'], correct: 2 },
+      { q: '¿Cuántas estrategias principales hay para enfrentar un riesgo?',
+        opts: ['2', '3', '4', '5'], correct: 2 }
+    ],
+    expl: 'Las 4 estrategias: ANULAR (eliminar la causa), MITIGAR (reducir prob/impacto), ACEPTAR (asumir), TRANSFERIR (delegar a un tercero: aseguradora, subcontrato).' },
 
   { cat: 'ri', q: '¿Cuál es la diferencia entre mitigación y contingencia?',
     opts: ['Son sinónimos', 'Mitigación reduce la PROBABILIDAD; contingencia reduce el IMPACTO si el riesgo se materializa', 'Mitigación es después del evento; contingencia antes', 'Solo se puede usar una a la vez'], correct: 1,
@@ -872,10 +922,22 @@ const QUESTIONS = [
     expl: 'Un riesgo puede ser negativo (amenaza) o positivo (OPORTUNIDAD). No se debe ignorar ninguno de los dos.' },
 
   // ========== AUDITORÍA ==========
-  { cat: 'au', q: '¿Cuántas fases tiene el proceso de auditoría informática?',
-    opts: ['3 fases', '5 fases (Planificación, Relevamiento, Evaluación, Informe, Seguimiento)', '7 fases', '10 fases'], correct: 1,
-    expl: 'Las 5 fases del proceso de auditoría son: 1) Planificación 2) Relevamiento de información 3) Evaluación y análisis 4) Informe 5) Seguimiento (opcional).',
-    img: 'auditphases' },
+  { cat: 'au',
+    variants: [
+      { q: '¿Cuántas fases tiene el proceso de auditoría informática?',
+        opts: ['3', '5', '7', '10'], correct: 1, img: 'auditphases' },
+      { q: '¿Cuál es la PRIMERA fase del proceso de auditoría informática?',
+        opts: ['Planificación', 'Relevamiento', 'Evaluación', 'Informe'], correct: 0 },
+      { q: 'En el proceso de auditoría, ¿qué fase viene DESPUÉS de la Planificación?',
+        opts: ['Informe', 'Relevamiento', 'Evaluación', 'Seguimiento'], correct: 1 },
+      { q: 'En el proceso de auditoría, ¿en qué fase se identifican vulnerabilidades y se comparan con buenas prácticas (ISO 27001, COBIT)?',
+        opts: ['Relevamiento', 'Evaluación y análisis', 'Informe', 'Planificación'], correct: 1 },
+      { q: 'En el proceso de auditoría, ¿en qué fase se redactan los hallazgos clasificados por criticidad y se proponen acciones correctivas?',
+        opts: ['Relevamiento', 'Evaluación', 'Informe', 'Seguimiento'], correct: 2 },
+      { q: '¿Qué fase de auditoría es OPCIONAL y verifica que las recomendaciones se hayan aplicado?',
+        opts: ['Planificación', 'Evaluación', 'Informe', 'Seguimiento'], correct: 3 }
+    ],
+    expl: 'Las 5 fases: 1) PLANIFICACIÓN (diagnóstico preliminar, plan) 2) RELEVAMIENTO (entrevistas, análisis) 3) EVALUACIÓN Y ANÁLISIS (identificar vulnerabilidades vs ISO/COBIT) 4) INFORME (hallazgos + recomendaciones) 5) SEGUIMIENTO (opcional, verificar aplicación).' },
 
   { cat: 'au', q: '¿Cuál es la diferencia entre AUDITOR y PERITO informático?',
     opts: ['Son lo mismo', 'El auditor hace evaluación técnica de sistemas; el perito actúa en un contexto judicial asesorando al juez', 'El perito es interno; el auditor externo', 'El perito hace informes; el auditor no'], correct: 1,
@@ -885,17 +947,41 @@ const QUESTIONS = [
     opts: ['ITIL', 'COSO', 'PMBOK', 'Scrum'], correct: 1,
     expl: 'COSO es el marco de referencia para evaluar y mejorar los sistemas de control interno. Incluye ambiente de control, evaluación de riesgos, actividades de control, información y monitoreo.' },
 
-  { cat: 'au', q: '¿Qué norma ISO se aplica para gestión de SEGURIDAD DE LA INFORMACIÓN?',
-    opts: ['ISO 9001', 'ISO 27001', 'ISO 31000', 'ISO 14001'], correct: 1,
-    expl: 'ISO 27001: seguridad de la información. Otros: ISO 9001 (calidad), ISO 31000 (gestión de riesgos), ISO 14001 (medio ambiente).' },
+  { cat: 'au',
+    variants: [
+      { q: '¿Qué norma ISO se aplica para gestión de SEGURIDAD DE LA INFORMACIÓN?',
+        opts: ['ISO 9001', 'ISO 27001', 'ISO 31000', 'ISO 14001'], correct: 1 },
+      { q: '¿Qué norma ISO se usa para GESTIÓN DE CALIDAD (aplicable a cualquier organización)?',
+        opts: ['ISO 9001', 'ISO 27001', 'ISO 31000', 'ISO 45001'], correct: 0 },
+      { q: '¿Qué norma ISO se usa para GESTIÓN DE RIESGOS?',
+        opts: ['ISO 9001', 'ISO 27001', 'ISO 31000', 'ISO 14001'], correct: 2 },
+      { q: '¿Qué framework se usa como marco integrado de CONTROL INTERNO?',
+        opts: ['COBIT', 'COSO', 'ITIL', 'ISO 9001'], correct: 1 },
+      { q: '¿Qué marco/norma se aplica para GOBIERNO DE TI?',
+        opts: ['COBIT', 'COSO', 'ISO 9001', 'PMBOK'], correct: 0 },
+      { q: '¿Qué norma ISO establece elementos como plan de calidad, revisión, control y corrección para sistemas de administración de calidad?',
+        opts: ['ISO 9001:2000', 'ISO 27001', 'ISO 31000', 'ISO 14001'], correct: 0 }
+    ],
+    expl: 'Normas clave: ISO 9001 (calidad, genérica), ISO 27001 (seguridad de la información), ISO 31000 (gestión de riesgos), COSO (control interno), COBIT (gobierno de TI), ITIL (gestión de servicios TI).' },
 
   { cat: 'au', q: '¿Qué tipo de riesgo en auditoría queda FUERA DEL CONTROL del auditor?',
     opts: ['Riesgo inherente', 'Riesgo de control', 'Riesgo de detección', 'Riesgo operativo'], correct: 0,
     expl: 'RIESGO INHERENTE: existe por la naturaleza de la actividad, sin depender de controles. Está fuera del alcance del auditor. Ej: naturaleza de operaciones muy complejas propensa a error.' },
 
-  { cat: 'au', q: '¿Cuál NO es un tipo de control interno?',
-    opts: ['Preventivo', 'Detectivo', 'Correctivo', 'Descriptivo'], correct: 3,
-    expl: 'Los 3 tipos son: PREVENTIVOS (evitan la acción no deseada), DETECTIVOS (dan a conocer cuando ocurrió) y CORRECTIVOS (facilitan volver a la normalidad). "Descriptivo" no es un tipo de control.' },
+  { cat: 'au',
+    variants: [
+      { q: '¿Cuál NO es un tipo de control interno?',
+        opts: ['Preventivo', 'Detectivo', 'Correctivo', 'Descriptivo'], correct: 3 },
+      { q: '¿Qué tipo de control interno EVITA que ocurra una acción no deseada (ej: restricción de acceso)?',
+        opts: ['Preventivo', 'Detectivo', 'Correctivo', 'Analítico'], correct: 0 },
+      { q: '¿Qué tipo de control interno DA A CONOCER y REGISTRA la ocurrencia de un evento (ej: registrar modificación de datos)?',
+        opts: ['Preventivo', 'Detectivo', 'Correctivo', 'Reactivo'], correct: 1 },
+      { q: '¿Qué tipo de control interno FACILITA LA VUELTA a la actividad normal ante una falla (ej: procedimientos post-caída)?',
+        opts: ['Preventivo', 'Detectivo', 'Correctivo', 'Predictivo'], correct: 2 },
+      { q: '¿Cuántos tipos principales de control interno existen?',
+        opts: ['2', '3', '4', '5'], correct: 1 }
+    ],
+    expl: 'Los 3 tipos: PREVENTIVOS (evitan la acción no deseada, ej: restricción de acceso), DETECTIVOS (registran la ocurrencia, ej: log de modificaciones) y CORRECTIVOS (facilitan volver a la normalidad, ej: procedimientos ante caída del sistema).' },
 
   { cat: 'au', q: 'La AUDITORÍA INTERNA es principalmente...',
     opts: ['Correctiva y externa', 'Preventiva: busca encontrar problemas antes que se vuelvan graves', 'Solo automatizada', 'Solo financiera'], correct: 1,
@@ -905,9 +991,20 @@ const QUESTIONS = [
     opts: ['Una opinión personal', 'Una suposición del auditor', 'Una EVIDENCIA verificable', 'Un contrato'], correct: 2,
     expl: 'Las EVIDENCIAS son el soporte de todo hallazgo. Se recolectan por técnicas: ocular, verbal, física, documental o analítica. Un hallazgo sin evidencia no es válido.' },
 
-  { cat: 'au', q: '¿Qué técnica de recolección de evidencia consiste en "indagación testimonial y declaraciones"?',
-    opts: ['Ocular (observación directa)', 'Verbal (entrevistas, declaraciones)', 'Física (examinar activos)', 'Documental (revisar registros)'], correct: 1,
-    expl: 'VERBAL: obtener información mediante indagación, testimoniales, declaraciones y entrevistas con usuarios/responsables.' },
+  { cat: 'au',
+    variants: [
+      { q: '¿Qué técnica de recolección de evidencia consiste en INDAGACIÓN TESTIMONIAL y declaraciones?',
+        opts: ['Ocular', 'Verbal', 'Física', 'Documental'], correct: 1 },
+      { q: '¿Qué técnica de recolección de evidencia consiste en OBSERVACIÓN Y COMPARACIÓN DIRECTA?',
+        opts: ['Ocular', 'Verbal', 'Física', 'Documental'], correct: 0 },
+      { q: '¿Qué técnica de recolección de evidencia consiste en EXAMINAR DOCUMENTACIÓN, activos y verificar autenticidad?',
+        opts: ['Ocular', 'Verbal', 'Física', 'Documental'], correct: 2 },
+      { q: '¿Qué técnica de recolección de evidencia consiste en COMPROBACIÓN LEGAL/matemática (contratos, facturas, cálculos)?',
+        opts: ['Ocular', 'Verbal', 'Documental', 'Analítica'], correct: 2 },
+      { q: '¿Qué técnica de recolección de evidencia se obtiene de ANALIZAR la información recolectada?',
+        opts: ['Ocular', 'Verbal', 'Analítica', 'Documental'], correct: 2 }
+    ],
+    expl: 'Las 5 técnicas: OCULAR (observación directa), VERBAL (indagación, entrevistas), FÍSICA (examinar activos), DOCUMENTAL (comprobación de contratos, cálculos matemáticos) y ANALÍTICA (analizar información).' },
 
   { cat: 'au', q: '¿Cuál es la función principal del CONTROL INTERNO?',
     opts: ['Auditar los estados financieros', 'Prevenir y evitar la ocurrencia de riesgos', 'Reemplazar a la auditoría externa', 'Contratar personal'], correct: 1,
@@ -1109,7 +1206,69 @@ const QUESTIONS = [
     scenario: 'Un supermercado incorpora un sistema de autoservicio con lectores biométricos (huella) para autenticar clientes. El área de Seguridad revisa el diseño antes de implementarlo.',
     q: '¿Qué tipo de autenticación están usando y qué categoría de auditoría aplica?',
     opts: ['Autenticación por contraseña, auditoría física', 'Autenticación biométrica, auditoría de seguridad lógica (mecanismos de autenticación)', 'Autenticación criptográfica, auditoría de redes', 'Ninguna categoría específica'], correct: 1,
-    expl: 'La huella dactilar es AUTENTICACIÓN BIOMÉTRICA (uno de los 3 métodos: código/clave, criptografía, biométrica). Se audita como parte de SEGURIDAD LÓGICA, que revisa niveles de acceso, mecanismos de autenticación, contraseñas y permisos. La seguridad FÍSICA sería sobre el hardware del lector.' }
+    expl: 'La huella dactilar es AUTENTICACIÓN BIOMÉTRICA (uno de los 3 métodos: código/clave, criptografía, biométrica). Se audita como parte de SEGURIDAD LÓGICA, que revisa niveles de acceso, mecanismos de autenticación, contraseñas y permisos. La seguridad FÍSICA sería sobre el hardware del lector.' },
+
+  // ========== PREGUNTAS CON VARIANTES ADICIONALES ==========
+
+  { cat: 'es',
+    variants: [
+      { q: 'Un consultor senior estima costos según su experiencia sin cálculos formales. ¿Qué método está usando?',
+        opts: ['Analógica', 'Juicio de Expertos', 'Paramétrica', 'COCOMO II'], correct: 1 },
+      { q: 'El equipo compara este proyecto con uno similar realizado el año pasado. ¿Qué método está usando?',
+        opts: ['Analógica', 'Juicio de Expertos', 'Basada en Proceso', 'PF'], correct: 0 },
+      { q: 'Se usan relaciones estadísticas entre datos históricos y variables para predecir el costo. ¿Qué método es?',
+        opts: ['Analógica', 'Juicio de Expertos', 'Paramétrica', 'Basada en Proceso'], correct: 2 },
+      { q: 'El proyecto se descompone en tareas pequeñas y se estima el esfuerzo de cada una. ¿Qué método es?',
+        opts: ['Analógica', 'Paramétrica', 'Basada en Proceso', 'PF'], correct: 2 },
+      { q: '¿Qué método de estimación usa relaciones estadísticas basadas en LOC (líneas de código) y factores de escala?',
+        opts: ['Analógica', 'Juicio de Expertos', 'COCOMO II', 'PF'], correct: 2 }
+    ],
+    expl: 'Métodos de estimación: JUICIO DE EXPERTOS (opinión calificada), ANALÓGICA (comparar con proyectos similares), PARAMÉTRICA (datos históricos + variables), BASADA EN PROCESO (descomponer en tareas), PUNTOS DE FUNCIÓN (funcionalidad del usuario), COCOMO II (tamaño + factores de escala).' },
+
+  { cat: 'au',
+    variants: [
+      { q: 'Un auditor NO detectó una falla porque aplicó incorrectamente un procedimiento. ¿Qué tipo de riesgo es?',
+        opts: ['Inherente', 'De control', 'De detección', 'Operativo'], correct: 2 },
+      { q: 'Un sistema tiene errores porque el control existente era débil y no los previno. ¿Qué tipo de riesgo es?',
+        opts: ['Inherente', 'De control', 'De detección', 'Estratégico'], correct: 1 },
+      { q: 'Un área tiene errores por su propia naturaleza compleja, INDEPENDIENTE de los controles. ¿Qué tipo de riesgo es? (fuera del alcance del auditor)',
+        opts: ['Inherente', 'De control', 'De detección', 'Financiero'], correct: 0 },
+      { q: '¿Cuántos tipos de riesgo se consideran en la fase de PLANIFICACIÓN de una auditoría?',
+        opts: ['2', '3', '4', '5'], correct: 1 }
+    ],
+    expl: 'Los 3 riesgos en auditoría: INHERENTE (por naturaleza del área, FUERA del control del auditor), DE CONTROL (errores no prevenidos por debilidad de controles), DE DETECCIÓN (auditor no detecta por mal procedimiento).' },
+
+  { cat: 'le',
+    variants: [
+      { q: 'Según la Ley 25.326, ¿cuál de estos NO es un dato sensible?',
+        opts: ['Religión', 'Ideología política', 'Pertenencia racial', 'Número de DNI'], correct: 3 },
+      { q: 'Según la Ley 25.326, ¿cuál de estos SÍ es un dato sensible?',
+        opts: ['Nombre completo', 'Dirección postal', 'Orientación sexual', 'Número de teléfono'], correct: 2 },
+      { q: 'Según la Ley 25.326, los datos de HISTORIA CLÍNICA (salud) se consideran:',
+        opts: ['Datos comunes', 'Datos sensibles', 'Datos públicos', 'No están regulados'], correct: 1 },
+      { q: 'Según la Ley 25.326, ¿cuál de estos NO es un dato sensible?',
+        opts: ['Religión', 'Salud', 'Fecha de nacimiento', 'Ideología política'], correct: 2 },
+      { q: '¿Qué derecho constitucional argentino permite a una persona pedir la eliminación de sus datos incorrectos de una base?',
+        opts: ['Hábeas corpus', 'Hábeas data', 'Amparo genérico', 'Derecho al olvido'], correct: 1 }
+    ],
+    expl: 'Datos SENSIBLES (Ley 25.326): religión, ideología política, pertenencia racial/étnica, orientación sexual, datos de salud. Requieren protección REFORZADA. Los datos comunes (nombre, DNI, dirección) NO son sensibles pero también están protegidos. El HÁBEAS DATA es el derecho constitucional que permite acceder, rectificar y eliminar datos personales.' },
+
+  { cat: 'is',
+    variants: [
+      { q: '¿Qué modelo de proceso es SECUENCIAL y solo funciona bien con requisitos estables?',
+        opts: ['Cascada', 'Espiral', 'Iterativo', 'RUP'], correct: 0 },
+      { q: '¿Qué modelo de proceso es el ÚNICO que contempla el análisis de RIESGOS en cada iteración?',
+        opts: ['Cascada', 'Iterativo', 'Espiral', 'V-Model'], correct: 2 },
+      { q: '¿Qué modelo de proceso divide el sistema en SUBSISTEMAS donde cada versión agrega funcionalidad completa?',
+        opts: ['Iterativo', 'Incremental', 'Cascada', 'Prototipo'], correct: 1 },
+      { q: '¿Qué modelo de proceso es ITERATIVO E INCREMENTAL, centrado en arquitectura y dirigido por casos de uso?',
+        opts: ['SCRUM', 'RUP', 'V-Model', 'Cascada'], correct: 1 },
+      { q: '¿Qué modelo de proceso ENTREGA UN SISTEMA COMPLETO pero con funcionalidad parcial que se refina en cada iteración?',
+        opts: ['Iterativo', 'Incremental', 'Cascada', 'RUP'], correct: 0 },
+      { q: '¿Qué modelo de proceso ORIENTADO A OBJETOS usa UML y es conducido por Casos de Uso?',
+        opts: ['Cascada', 'V-Model', 'OO (UML + Proceso Unificado)', 'Espiral'], correct: 2 }
+    ],
+    expl: 'Modelos: CASCADA (secuencial, requisitos estables), ITERATIVO (sistema completo, funcionalidad parcial refinada), INCREMENTAL (subsistemas, agrega funcionalidad), ESPIRAL (único con análisis de riesgo por ciclo), RUP (iterativo + incremental + UML + casos de uso), OO (basado en objetos con UML), ÁGIL (SCRUM, XP, Kanban - poca documentación, entregas rápidas).' }
 ];
 
 // Categorías con metadatos
@@ -1742,7 +1901,20 @@ function loadQuestion() {
   state.selectedIndex = -1;
 
   const qIndex = state.currentQueue[state.currentIndex];
-  const q = QUESTIONS[qIndex];
+  const qBase = QUESTIONS[qIndex];
+
+  // 🎲 Si la pregunta tiene variantes, elegir una al azar
+  let q;
+  if (qBase.variants && qBase.variants.length > 0) {
+    const variant = qBase.variants[Math.floor(Math.random() * qBase.variants.length)];
+    q = { cat: qBase.cat, q: variant.q, opts: variant.opts, correct: variant.correct,
+          expl: qBase.expl, scenario: variant.scenario || qBase.scenario, img: variant.img || qBase.img };
+  } else {
+    q = qBase;
+  }
+  // Guardar la variante seleccionada para que selectOption la use
+  state._currentQ = q;
+
   const catInfo = CATEGORIES[q.cat];
 
   document.getElementById('q-category').textContent = catInfo.emoji + ' ' + catInfo.name;
@@ -1866,7 +2038,7 @@ function selectOption(displayIdx, originalIdx, correctIdx, qIndex) {
   const expl = document.getElementById('explanation');
   const explTitle = document.getElementById('expl-title');
   const explBody = document.getElementById('expl-body');
-  const q = QUESTIONS[qIndex];
+  const q = state._currentQ || QUESTIONS[qIndex];
 
   if (isCorrect) {
     state.stats.correct++;
