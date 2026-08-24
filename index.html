@@ -9,7 +9,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <title>Simulador EFIP II — Licenciatura en Informática</title>
 <style>
-:root {
+:root, :root.dark {
   --bg-1: #0f172a;
   --bg-2: #1e293b;
   --bg-3: #334155;
@@ -22,7 +22,24 @@
   --card: #1e293b;
   --border: #334155;
   --shadow: 0 10px 30px rgba(0,0,0,.35);
+  --scenario-bg: rgba(34,211,238,.08);
 }
+:root.light {
+  --bg-1: #f1f5f9;
+  --bg-2: #ffffff;
+  --bg-3: #e2e8f0;
+  --accent: #0891b2;
+  --accent-2: #059669;
+  --error: #dc2626;
+  --warn: #d97706;
+  --text: #0f172a;
+  --text-dim: #475569;
+  --card: #ffffff;
+  --border: #cbd5e1;
+  --shadow: 0 10px 30px rgba(0,0,0,.08);
+  --scenario-bg: rgba(8,145,178,.06);
+}
+:root.light body { background: linear-gradient(135deg, #f1f5f9 0%, #e0e7ff 100%); }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -492,7 +509,7 @@ body { overscroll-behavior: contain; }
 
 /* Estilos para escenarios situacionales */
 .q-scenario {
-  background: linear-gradient(135deg, rgba(34,211,238,.08), rgba(16,185,129,.08));
+  background: var(--scenario-bg);
   border-left: 4px solid var(--accent);
   padding: 14px 16px;
   border-radius: 8px;
@@ -511,9 +528,11 @@ body { overscroll-behavior: contain; }
 <body>
 <div class="app">
 
-<header>
+<header style="position: relative;">
+  <button id="theme-toggle" onclick="toggleTheme()" title="Cambiar tema"
+    style="position: absolute; top: 15px; right: 15px; background: var(--bg-3); border: 1px solid var(--border); color: var(--text); padding: 8px 12px; border-radius: 20px; cursor: pointer; font-size: 18px; min-height: 40px;">🌙</button>
   <h1>Simulador EFIP II</h1>
-  <div class="subtitle">Licenciatura en Informática · Universidad Siglo 21 · 60+ preguntas</div>
+  <div class="subtitle">Licenciatura en Informática · Universidad Siglo 21 · 136 preguntas</div>
 </header>
 
 <!-- Pantalla: Selección -->
@@ -538,12 +557,36 @@ body { overscroll-behavior: contain; }
     <button class="btn btn-primary" onclick="startMode('mix')" style="flex: 1; min-width: 200px;">
       🎯 Todas mezcladas
     </button>
+    <button class="btn btn-primary" onclick="startExamMode()" style="flex: 1; min-width: 200px; background: linear-gradient(135deg, #ef4444, #dc2626); color: white;">
+      ⏱️ Modo Examen
+    </button>
     <button class="btn btn-secondary" id="btn-review" onclick="startMode('review')" style="flex: 1; min-width: 200px; display: none;">
       🔁 Reforzar errores
+    </button>
+    <button class="btn btn-secondary" onclick="showStats()" style="flex: 1; min-width: 130px;">
+      📊 Mis estadísticas
     </button>
     <button class="btn btn-secondary" onclick="resetProgress()" title="Borrar progreso">
       ↺ Reiniciar
     </button>
+  </div>
+</div>
+
+<!-- Pantalla: Estadísticas por dominio + badges -->
+<div id="screen-stats" class="screen">
+  <div style="margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+    <button class="btn btn-secondary" onclick="goMenu()">← Menú</button>
+    <h2 style="font-size: 20px; margin: 0; flex: 1;">📊 Tus estadísticas</h2>
+  </div>
+
+  <div class="question-card">
+    <h3 style="color: var(--accent); margin-bottom: 15px;">🏆 Logros conseguidos</h3>
+    <div id="stats-badges" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px;"></div>
+  </div>
+
+  <div class="question-card" style="margin-top: 15px;">
+    <h3 style="color: var(--accent); margin-bottom: 15px;">📈 Progreso por dominio</h3>
+    <div id="stats-domains"></div>
   </div>
 </div>
 
@@ -572,6 +615,23 @@ body { overscroll-behavior: contain; }
     <div id="learn-content" style="line-height: 1.7; margin-bottom: 25px;"></div>
 
     <div id="learn-image" class="q-image" style="display:none;"></div>
+
+    <!-- Sección de ejemplos concretos -->
+    <div id="learn-examples" style="display:none; margin-top: 25px;">
+      <h3 style="color: var(--accent); margin-bottom: 15px;">💡 Ejemplos concretos</h3>
+      <div id="learn-examples-content"></div>
+    </div>
+
+    <!-- Comparación / infografía -->
+    <div id="learn-compare" style="display:none; margin-top: 25px;"></div>
+
+    <!-- Mini-quiz rápido de auto-evaluación -->
+    <div id="learn-miniquiz" style="display:none; margin-top: 25px; padding: 18px; background: linear-gradient(135deg, rgba(34,211,238,.05), rgba(16,185,129,.05)); border-radius: 12px; border: 1px dashed var(--accent);">
+      <h3 style="color: var(--accent); margin-bottom: 12px;">⚡ Test rápido — ¿Lo entendiste?</h3>
+      <div id="miniquiz-question" style="margin-bottom: 12px; font-weight: 500;"></div>
+      <div id="miniquiz-options" style="display: flex; flex-direction: column; gap: 8px;"></div>
+      <div id="miniquiz-feedback" style="margin-top: 12px; padding: 10px; border-radius: 8px; display: none;"></div>
+    </div>
 
     <div id="learn-video-container" style="margin: 25px 0;">
       <div style="font-weight: bold; margin-bottom: 12px; color: var(--accent);">🎥 Videos sobre este tema</div>
@@ -606,6 +666,9 @@ body { overscroll-behavior: contain; }
 
 <!-- Pantalla: Quiz -->
 <div id="screen-quiz" class="screen">
+  <div id="exam-timer" style="display:none; text-align:center; padding: 10px; background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border-radius: 10px; margin-bottom: 12px; font-weight: bold; font-size: 18px; letter-spacing: 2px;">
+    ⏱ <span id="exam-time-text">00:00</span>
+  </div>
   <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
   <div class="stats-bar">
     <div class="stat"><div class="stat-value" id="q-current">0</div><div class="stat-label">pregunta</div></div>
@@ -1346,7 +1409,18 @@ const TOPICS = [
       </ul>
     `,
     svg: 'scrum',
-    youtubeSearch: 'scrum explicado en 10 minutos español'
+    youtubeSearch: 'scrum explicado en 10 minutos español',
+    examples: [
+      { icon: '🏢', title: 'Netflix', text: 'Usa SCRUM para desarrollar features del reproductor. Sprints de 2 semanas, cada equipo tiene un Product Owner que define prioridades según analíticas de uso.' },
+      { icon: '🏦', title: 'Banco digital', text: 'Un banco lanza una app móvil. En el Sprint 1 hacen "consulta de saldo", en el Sprint 2 "transferencias", en el Sprint 3 "pago de servicios". Cada Sprint entrega valor real al cliente.' },
+      { icon: '🚫', title: 'Cuándo NO usar SCRUM', text: 'Un proyecto de construcción de una represa hidroeléctrica tiene requisitos técnicos fijos, cambios muy costosos y no admite iteraciones. Ahí Cascada es mejor.' }
+    ],
+    miniquiz: {
+      q: 'Si un cliente cambia los requisitos cada 2 semanas, ¿cuál es la mejor metodología?',
+      opts: ['Cascada', 'SCRUM', 'V-Model'],
+      correct: 1,
+      expl: '¡Exacto! SCRUM está diseñado para adaptarse a cambios continuos. Cascada fallaría.'
+    }
   },
   {
     id: 'requerimientos',
@@ -1441,7 +1515,19 @@ const TOPICS = [
       <p><b>AMFE</b> (Análisis de Modo de Falla y Efectos), <b>FODA</b> (Fortalezas/Oportunidades/Debilidades/Amenazas), <b>PESTEL</b> (Político/Económico/Social/Tecnológico/Ecológico/Legal).</p>
     `,
     svg: 'riskmatrix',
-    youtubeSearch: 'gestión de riesgos en proyectos'
+    youtubeSearch: 'gestión de riesgos en proyectos',
+    examples: [
+      { icon: '🔥', title: 'Riesgo: pérdida de personal clave (Prob: 3, Impacto: 5, Exposición: 15 → Importante)', text: 'MITIGACIÓN: documentar el código exhaustivamente, formar backup. CONTINGENCIA: contratos con freelancers de confianza.' },
+      { icon: '💸', title: 'Riesgo: caída del sistema en producción (Prob: 2, Impacto: 5, Exposición: 10 → Moderado)', text: 'MITIGACIÓN: pruebas de carga previas al despliegue. CONTINGENCIA: procedimiento de rollback + servidor de backup.' },
+      { icon: '📉', title: 'Riesgo: recesión económica en Argentina (Prob: 4, Impacto: 3, Exposición: 12 → Importante)', text: 'TRANSFERIR: cobrar en USD. MITIGAR: diversificar clientes. Se identifica con PESTEL.' },
+      { icon: '⚡', title: 'Riesgo: incendio en el datacenter (Prob: 1, Impacto: 5, Exposición: 5 → Aceptable)', text: 'TRANSFERIR: contratar seguro. MITIGAR: sistema de detección + extintores. Es un riesgo INTRÍNSECO.' }
+    ],
+    miniquiz: {
+      q: 'Un banco contrata un seguro de responsabilidad para cubrir eventuales demandas por pérdida de datos. ¿Qué estrategia está usando?',
+      opts: ['Anular', 'Mitigar', 'Transferir', 'Aceptar'],
+      correct: 2,
+      expl: '¡Correcto! Contratar un seguro es TRANSFERIR el riesgo a un tercero (la aseguradora).'
+    }
   },
   {
     id: 'estimacion',
@@ -1563,7 +1649,19 @@ const TOPICS = [
       <p>Son el soporte de todo hallazgo. Técnicas: <b>Ocular</b> (observación), <b>Verbal</b> (indagación), <b>Física</b> (examinar activos), <b>Documental</b> (revisar registros), <b>Analítica</b> (analizar información).</p>
     `,
     svg: 'auditphases',
-    youtubeSearch: 'auditoría informática qué es'
+    youtubeSearch: 'auditoría informática qué es',
+    examples: [
+      { icon: '🏛️', title: 'Auditoría al Municipio (caso SoftFactor21)', text: 'Áreas: catastro, contaduría, servicios públicos. Enfoque: seguridad, integridad de datos, eficiencia. Marcos: ISO 27001, COBIT. Contratados como AUDITORES (no peritos, porque no es contexto judicial).' },
+      { icon: '🏦', title: 'Auditoría interna en un banco', text: 'Preventiva: cada 3 meses revisan políticas de acceso, respaldos, cumplimiento de PCI-DSS. Detectan pequeños problemas antes de que sean graves.' },
+      { icon: '⚖️', title: 'Perito informático (contexto judicial)', text: 'Un juez llama a un perito para determinar si un correo electrónico fue alterado en un juicio por acoso laboral. Aquí NO es auditor, es perito.' },
+      { icon: '📋', title: 'Fase 4 en acción — Informe', text: 'Un auditor entrega al directorio: "Se detectaron 3 hallazgos CRÍTICOS (sin cifrado en BBDD, contraseñas débiles, falta backup) y 5 hallazgos IMPORTANTES. Se sugiere implementación en 30 días."' }
+    ],
+    miniquiz: {
+      q: 'El juez de una causa penal necesita analizar un disco rígido incautado para determinar si contiene evidencia de fraude. ¿Contrata a un auditor o a un perito?',
+      opts: ['Auditor informático', 'Perito informático', 'Ambos hacen lo mismo'],
+      correct: 1,
+      expl: '¡Exacto! En contexto JUDICIAL siempre es PERITO, que asesora al juez. El AUDITOR trabaja en contexto profesional/empresarial.'
+    }
   },
   {
     id: 'seguridad',
@@ -1801,25 +1899,80 @@ const IMAGES = {
 };
 
 // ============================================
-// ESTADO
+// ESTADO + PERSISTENCIA
 // ============================================
+const STORAGE_KEY = 'efip2_sim_v2';
+
+function loadState() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      return {
+        reviewPool: parsed.reviewPool || [],
+        stats: parsed.stats || { correct: 0, wrong: 0 },
+        domainStats: parsed.domainStats || {},   // { 'is': {c: 5, w: 2}, ... }
+        badges: parsed.badges || [],
+        theme: parsed.theme || 'dark',
+        soundEnabled: parsed.soundEnabled !== false
+      };
+    }
+  } catch(e) {}
+  return { reviewPool: [], stats: { correct: 0, wrong: 0 }, domainStats: {}, badges: [], theme: 'dark', soundEnabled: true };
+}
+
+function saveState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      reviewPool: state.reviewPool,
+      stats: state.stats,
+      domainStats: state.domainStats,
+      badges: state.badges,
+      theme: state.theme,
+      soundEnabled: state.soundEnabled
+    }));
+  } catch(e) {}
+}
+
+const loaded = loadState();
 let state = {
   currentQueue: [],
   currentIndex: 0,
   answered: false,
   selectedIndex: -1,
   mode: 'mix',
-  reviewPool: [], // Preguntas mal contestadas
+  reviewPool: loaded.reviewPool,
   stats: {
     total: QUESTIONS.length,
-    correct: 0,
-    wrong: 0,
+    correct: loaded.stats.correct || 0,
+    wrong: loaded.stats.wrong || 0,
     sessionCorrect: 0,
     sessionWrong: 0,
     sessionTotal: 0
   },
-  wrongInSession: [] // Para poder reforzar al terminar
+  domainStats: loaded.domainStats, // { cat: { c: 5, w: 2 } }
+  badges: loaded.badges,
+  theme: loaded.theme,
+  soundEnabled: loaded.soundEnabled,
+  wrongInSession: [],
+  examMode: false,
+  examStartTime: null,
+  examTimerInterval: null
 };
+
+// ============================================
+// TEMA CLARO/OSCURO
+// ============================================
+function applyTheme() {
+  document.documentElement.className = state.theme;
+  document.getElementById('theme-toggle').textContent = state.theme === 'dark' ? '☀️' : '🌙';
+  document.querySelector('meta[name="theme-color"]').setAttribute('content', state.theme === 'dark' ? '#0f172a' : '#f1f5f9');
+}
+function toggleTheme() {
+  state.theme = state.theme === 'dark' ? 'light' : 'dark';
+  applyTheme();
+  saveState();
+}
 
 // ============================================
 // INICIALIZACIÓN
@@ -2010,7 +2163,7 @@ function playWhistle() {
 function showReferee() {
   const overlay = document.getElementById('ref-overlay');
   overlay.classList.add('show');
-  playWhistle();
+  if (state.soundEnabled) playWhistle();
   // Cerrar al click o después de 2.5s
   const close = () => {
     overlay.classList.remove('show');
@@ -2018,6 +2171,97 @@ function showReferee() {
   };
   overlay.addEventListener('click', close);
   setTimeout(close, 2500);
+}
+
+// Sonido de acierto (agradable tin-tin)
+function playCorrect() {
+  if (!state.soundEnabled) return;
+  try {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    const ctx = audioCtx;
+    // Dos tonos ascendentes: C6 y G6 (do agudo, sol agudo)
+    function tone(freq, start, dur, vol = 0.15) {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.type = 'sine';
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0, ctx.currentTime + start);
+      gain.gain.linearRampToValueAtTime(vol, ctx.currentTime + start + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + start + dur);
+      osc.start(ctx.currentTime + start);
+      osc.stop(ctx.currentTime + start + dur);
+    }
+    tone(1046.50, 0, 0.15);   // Do 6
+    tone(1567.98, 0.1, 0.3);  // Sol 6
+  } catch(e) {}
+}
+
+// ============================================
+// BADGES / LOGROS
+// ============================================
+const BADGES_DEF = {
+  first_correct:  { emoji: '🌱', title: 'Primer acierto', desc: 'Respondiste bien tu primera pregunta' },
+  streak_5:       { emoji: '🔥', title: 'Racha de 5', desc: '5 respuestas correctas seguidas' },
+  streak_10:      { emoji: '⚡', title: 'Racha de 10', desc: '10 respuestas correctas seguidas' },
+  perfect_domain: { emoji: '🏆', title: 'Dominio Perfect', desc: 'Completaste un dominio sin errores' },
+  half_way:       { emoji: '📖', title: 'A mitad de camino', desc: 'Respondiste 50 preguntas' },
+  century:        { emoji: '💯', title: 'Century', desc: 'Respondiste 100 preguntas' },
+  no_errors:      { emoji: '👑', title: 'Sin errores pendientes', desc: 'Reforzaste todos tus errores' },
+  exam_champion:  { emoji: '🥇', title: 'Aprobado en modo examen', desc: '≥ 70% en modo examen cronometrado' },
+  night_owl:      { emoji: '🦉', title: 'Estudioso nocturno', desc: 'Estudiaste después de las 22h' },
+  early_bird:     { emoji: '🌅', title: 'Estudioso mañanero', desc: 'Estudiaste antes de las 8h' }
+};
+let currentStreak = 0;
+
+function awardBadge(id) {
+  if (state.badges.includes(id)) return;
+  state.badges.push(id);
+  saveState();
+  const b = BADGES_DEF[id];
+  // Toast temporal
+  const toast = document.createElement('div');
+  toast.style.cssText = 'position:fixed; top:20px; right:20px; background: linear-gradient(135deg, #f59e0b, #d97706); color:white; padding:14px 20px; border-radius:12px; box-shadow: 0 10px 30px rgba(0,0,0,.4); z-index:10000; animation: fadeIn .3s; max-width: 320px;';
+  toast.innerHTML = `<div style="font-size:24px;">${b.emoji} <b>¡Logro desbloqueado!</b></div><div style="margin-top:4px;"><b>${b.title}</b></div><div style="font-size:12px; opacity:.9;">${b.desc}</div>`;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 4000);
+}
+
+function checkTimeBasedBadges() {
+  const h = new Date().getHours();
+  if (h >= 22 || h < 3) awardBadge('night_owl');
+  if (h >= 5 && h < 8) awardBadge('early_bird');
+}
+
+// ============================================
+// MODO EXAMEN (cronómetro)
+// ============================================
+function startExamMode() {
+  state.examMode = true;
+  startMode('mix');
+  state.examStartTime = Date.now();
+  document.getElementById('exam-timer').style.display = 'block';
+  if (state.examTimerInterval) clearInterval(state.examTimerInterval);
+  state.examTimerInterval = setInterval(updateExamTimer, 1000);
+  updateExamTimer();
+}
+function updateExamTimer() {
+  if (!state.examStartTime) return;
+  const elapsed = Math.floor((Date.now() - state.examStartTime) / 1000);
+  const mins = Math.floor(elapsed / 60).toString().padStart(2, '0');
+  const secs = (elapsed % 60).toString().padStart(2, '0');
+  document.getElementById('exam-time-text').textContent = `${mins}:${secs}`;
+}
+function stopExamTimer() {
+  if (state.examTimerInterval) {
+    clearInterval(state.examTimerInterval);
+    state.examTimerInterval = null;
+  }
+  document.getElementById('exam-timer').style.display = 'none';
+  const elapsed = state.examStartTime ? Math.floor((Date.now() - state.examStartTime) / 1000) : 0;
+  state.examStartTime = null;
+  return elapsed;
 }
 
 function selectOption(displayIdx, originalIdx, correctIdx, qIndex) {
@@ -2040,17 +2284,32 @@ function selectOption(displayIdx, originalIdx, correctIdx, qIndex) {
   const explBody = document.getElementById('expl-body');
   const q = state._currentQ || QUESTIONS[qIndex];
 
+  // Inicializar stats del dominio si no existe
+  if (!state.domainStats[q.cat]) state.domainStats[q.cat] = { c: 0, w: 0 };
+
   if (isCorrect) {
     state.stats.correct++;
     state.stats.sessionCorrect++;
+    state.domainStats[q.cat].c++;
+    currentStreak++;
+    playCorrect();
     explTitle.textContent = '✓ ¡Correcto!';
     expl.classList.remove('wrong-answer');
     // Si estaba en pool de refuerzo y la acertó, la sacamos
     const poolIdx = state.reviewPool.indexOf(qIndex);
     if (poolIdx >= 0) state.reviewPool.splice(poolIdx, 1);
+    // Badges por rachas y totales
+    if (state.stats.correct === 1) awardBadge('first_correct');
+    if (currentStreak === 5) awardBadge('streak_5');
+    if (currentStreak === 10) awardBadge('streak_10');
+    if (state.stats.correct + state.stats.wrong === 50) awardBadge('half_way');
+    if (state.stats.correct + state.stats.wrong === 100) awardBadge('century');
+    checkTimeBasedBadges();
   } else {
     state.stats.wrong++;
     state.stats.sessionWrong++;
+    state.domainStats[q.cat].w++;
+    currentStreak = 0;
     explTitle.textContent = '✗ Incorrecto — repasá:';
     expl.classList.add('wrong-answer');
     // Agregar al pool si no está
@@ -2059,6 +2318,7 @@ function selectOption(displayIdx, originalIdx, correctIdx, qIndex) {
     // 🚨 ÁRBITRO + SILBATO
     showReferee();
   }
+  saveState();
 
   explBody.textContent = q.expl;
   expl.classList.add('visible');
@@ -2092,6 +2352,23 @@ function showResults() {
   const correct = state.stats.sessionCorrect;
   const pct = Math.round((correct / total) * 100);
 
+  // Si estaba en modo examen, parar cronómetro
+  let examMsg = '';
+  if (state.examMode) {
+    const secs = stopExamTimer();
+    const mins = Math.floor(secs / 60);
+    examMsg = ` · Tiempo: ${mins} min ${secs % 60}s`;
+    state.examMode = false;
+    if (pct >= 70) awardBadge('exam_champion');
+  }
+  // Refuerzo completo sin errores
+  if (state.reviewPool.length === 0 && state.stats.wrong > 0) awardBadge('no_errors');
+  // Dominio perfecto (sesión de categoría con 100%)
+  if (['is','gp','ri','au','es','ca','le','se','cs','ct'].includes(state.mode) && pct === 100 && total >= 5) {
+    awardBadge('perfect_domain');
+  }
+  saveState();
+
   document.getElementById('results-score').textContent = pct;
   document.getElementById('results-title').textContent =
     state.mode === 'review' ? '🔁 Sesión de refuerzo terminada' : '🎓 Sesión completada';
@@ -2104,7 +2381,7 @@ function showResults() {
   else { emoji = '📚'; msg = 'Necesitás más repaso. Revisá el material antes de volver a probar.'; }
 
   document.getElementById('results-emoji').textContent = emoji;
-  document.getElementById('results-message').textContent = `Acertaste ${correct} de ${total} preguntas. ${msg}`;
+  document.getElementById('results-message').textContent = `Acertaste ${correct} de ${total} preguntas.${examMsg} ${msg}`;
 
   document.getElementById('btn-review-now').style.display =
     state.wrongInSession.length > 0 ? 'inline-flex' : 'none';
@@ -2142,16 +2419,68 @@ function rerender() {
   startMode('mix');
 }
 
+// ============================================
+// ESTADÍSTICAS + BADGES
+// ============================================
+function showStats() {
+  // Badges
+  const badgesEl = document.getElementById('stats-badges');
+  badgesEl.innerHTML = '';
+  Object.entries(BADGES_DEF).forEach(([id, b]) => {
+    const unlocked = state.badges.includes(id);
+    const card = document.createElement('div');
+    card.style.cssText = `padding: 14px 10px; background: var(--bg-2); border: 1px solid var(--border); border-radius: 10px; text-align: center; ${unlocked ? '' : 'opacity: .3; filter: grayscale(1);'}`;
+    card.innerHTML = `<div style="font-size:32px; margin-bottom:4px;">${b.emoji}</div><div style="font-weight:bold; font-size:13px; margin-bottom:2px;">${b.title}</div><div style="font-size:11px; color:var(--text-dim);">${b.desc}</div>`;
+    badgesEl.appendChild(card);
+  });
+
+  // Stats por dominio
+  const domainsEl = document.getElementById('stats-domains');
+  domainsEl.innerHTML = '';
+  Object.entries(CATEGORIES).forEach(([key, info]) => {
+    const s = state.domainStats[key] || { c: 0, w: 0 };
+    const total = s.c + s.w;
+    const pct = total > 0 ? Math.round((s.c / total) * 100) : 0;
+    const barColor = pct >= 75 ? 'var(--accent-2)' : pct >= 50 ? '#eab308' : total > 0 ? 'var(--error)' : 'var(--bg-3)';
+    const item = document.createElement('div');
+    item.style.cssText = 'margin-bottom: 15px;';
+    item.innerHTML = `
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-size:18px;">${info.emoji}</span>
+          <span style="font-weight:600;">${info.name}</span>
+        </div>
+        <div style="font-size:13px; color:var(--text-dim);">
+          ${total > 0 ? `<b style="color:${barColor}">${pct}%</b> · ${s.c}/${total}` : '<span style="opacity:.5">Sin practicar</span>'}
+        </div>
+      </div>
+      <div style="height:8px; background:var(--bg-3); border-radius:4px; overflow:hidden;">
+        <div style="height:100%; width:${pct}%; background:${barColor}; transition: width .3s;"></div>
+      </div>
+    `;
+    domainsEl.appendChild(item);
+  });
+
+  showScreen('stats');
+}
+
+// Inicializar tema al cargar
+applyTheme();
+
 function goMenu() {
   showScreen('menu');
   updateMenuStats();
 }
 
 function resetProgress() {
-  if (confirm('¿Seguro que querés borrar todo tu progreso?')) {
+  if (confirm('¿Seguro que querés borrar todo tu progreso? Se perderán badges, estadísticas y pool de refuerzo.')) {
     state.stats.correct = 0;
     state.stats.wrong = 0;
     state.reviewPool = [];
+    state.domainStats = {};
+    state.badges = [];
+    currentStreak = 0;
+    saveState();
     updateMenuStats();
   }
 }
@@ -2203,6 +2532,60 @@ function showTopic(topicId) {
     imgContainer.style.display = 'block';
   } else {
     imgContainer.style.display = 'none';
+  }
+
+  // Ejemplos concretos
+  const examplesContainer = document.getElementById('learn-examples');
+  const examplesContent = document.getElementById('learn-examples-content');
+  if (currentTopic.examples && currentTopic.examples.length > 0) {
+    examplesContent.innerHTML = currentTopic.examples.map(ex => `
+      <div style="background: var(--bg-1); border-left: 4px solid var(--accent-2); padding: 14px 16px; border-radius: 8px; margin-bottom: 10px;">
+        <div style="font-weight:bold; margin-bottom:6px; color: var(--accent-2);">
+          <span style="font-size:20px; margin-right:6px;">${ex.icon}</span>${ex.title}
+        </div>
+        <div style="color: var(--text-dim); font-size: 14px; line-height: 1.6;">${ex.text}</div>
+      </div>
+    `).join('');
+    examplesContainer.style.display = 'block';
+  } else {
+    examplesContainer.style.display = 'none';
+  }
+
+  // Mini-quiz de auto-evaluación
+  const miniquiz = document.getElementById('learn-miniquiz');
+  const feedback = document.getElementById('miniquiz-feedback');
+  feedback.style.display = 'none';
+  if (currentTopic.miniquiz) {
+    document.getElementById('miniquiz-question').textContent = currentTopic.miniquiz.q;
+    const optsEl = document.getElementById('miniquiz-options');
+    optsEl.innerHTML = '';
+    currentTopic.miniquiz.opts.forEach((opt, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'option';
+      btn.textContent = opt;
+      btn.onclick = () => {
+        [...optsEl.querySelectorAll('.option')].forEach((b, bi) => {
+          b.disabled = true;
+          if (bi === currentTopic.miniquiz.correct) b.classList.add('correct');
+          if (bi === i && i !== currentTopic.miniquiz.correct) b.classList.add('wrong');
+        });
+        feedback.style.display = 'block';
+        if (i === currentTopic.miniquiz.correct) {
+          feedback.style.background = 'rgba(16,185,129,.15)';
+          feedback.style.borderLeft = '4px solid var(--accent-2)';
+          feedback.innerHTML = '<b style="color:var(--accent-2)">✓ ¡Muy bien!</b> ' + currentTopic.miniquiz.expl;
+          playCorrect();
+        } else {
+          feedback.style.background = 'rgba(239,68,68,.15)';
+          feedback.style.borderLeft = '4px solid var(--error)';
+          feedback.innerHTML = '<b style="color:var(--error)">✗ Repasá:</b> La correcta era "' + currentTopic.miniquiz.opts[currentTopic.miniquiz.correct] + '". ' + currentTopic.miniquiz.expl;
+        }
+      };
+      optsEl.appendChild(btn);
+    });
+    miniquiz.style.display = 'block';
+  } else {
+    miniquiz.style.display = 'none';
   }
 
   // Búsquedas de YouTube (evitamos el embed roto por listType=search)
