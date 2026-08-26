@@ -690,6 +690,99 @@ body { overscroll-behavior: contain; }
 }
 .activity-btn:hover { background: #9333ea; }
 
+/* ========= STORYTELLING INTERACTIVO ========= */
+.story-scene {
+  position: relative;
+  padding: 15px;
+  background: linear-gradient(180deg, rgba(30,58,138,.1), rgba(16,185,129,.05));
+  border-radius: 12px;
+  margin-bottom: 15px;
+  min-height: 240px;
+}
+.story-scene svg { display: block; margin: 0 auto; max-width: 100%; }
+.story-tap-hint {
+  text-align: center;
+  color: var(--accent);
+  font-size: 13px;
+  margin-top: 10px;
+  animation: pulse 1.5s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: .5; }
+  50% { opacity: 1; }
+}
+.story-dialogs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px;
+}
+.story-dialog {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  animation: bubblePop .4s cubic-bezier(.5,-.3,.5,1.5) both;
+}
+.story-dialog.right { flex-direction: row-reverse; }
+.story-avatar {
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: white;
+  font-weight: bold;
+  flex-shrink: 0;
+  box-shadow: 0 3px 8px rgba(0,0,0,.3);
+}
+.story-bubble {
+  position: relative;
+  background: var(--bg-2);
+  border: 2px solid var(--border);
+  padding: 12px 16px;
+  border-radius: 16px;
+  max-width: 80%;
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.story-bubble::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: -8px;
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid var(--bg-2);
+}
+.story-dialog.right .story-bubble::before {
+  left: auto;
+  right: -8px;
+  border-right: none;
+  border-left: 8px solid var(--bg-2);
+}
+.story-name {
+  font-weight: bold;
+  color: var(--accent);
+  font-size: 12px;
+  margin-bottom: 4px;
+  display: block;
+}
+@keyframes bubblePop {
+  from { opacity: 0; transform: scale(0.7) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.story-step-counter {
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 12px;
+  margin: 8px 0;
+}
+
 /* Estilos para escenarios situacionales */
 .q-scenario {
   background: var(--scenario-bg);
@@ -3381,6 +3474,18 @@ function showStats() {
 // ============================================
 // STORYTELLING DEL CASO SOFTFACTOR21
 // ============================================
+
+// Personajes (avatares emoji + colores)
+const CHARS = {
+  jp: { name: 'Juan Pablo',  emoji: '👨🏻‍💼', color: '#3b82f6' },
+  ni: { name: 'Nicolás',     emoji: '👨🏻‍🎓', color: '#059669' },
+  al: { name: 'Alfredo',     emoji: '👨🏽‍💻', color: '#7c3aed' },
+  mi: { name: 'Micaela',     emoji: '👩🏻‍💻', color: '#ec4899' },
+  ra: { name: 'Raúl',        emoji: '🧔🏻',    color: '#dc2626' },
+  la: { name: 'Laura',       emoji: '👩🏽‍💼', color: '#0891b2' },
+  an: { name: 'Ana (profe)', emoji: '👩🏼‍🏫', color: '#f59e0b' }
+};
+
 const STORY_SLIDES = [
   {
     title: '🏢 SoftFactor21',
@@ -3441,8 +3546,16 @@ const STORY_SLIDES = [
         <text x="30" y="155" text-anchor="middle" fill="#94a3b8" font-size="9">Dueño · Redes académicas</text>
       </g>
     </svg>`,
-    text: '<p><b>Juan Pablo</b> fundó la empresa mientras cursaba su <b>MBA en Universidad Siglo 21</b>. Su estrategia: apalancarse en nuevas tecnologías y tendencias. Cree que la clave del crecimiento está en <i>combinar código abierto con software propietario</i>.</p><p style="margin-top:10px;"><b>Nicolás</b> es el otro dueño. Su rol clave: mantener vínculo con instituciones educativas. Confirma que <b>faltan programadores</b> (5.000 vacantes/año en Argentina).</p>',
-    key: '🎯 Enunciado 1 puede preguntar por el enfoque de Juan Pablo sobre open source + propietario.'
+    text: '<p><b>Juan Pablo</b> fundó la empresa mientras cursaba su <b>MBA en Universidad Siglo 21</b>. Su estrategia: apalancarse en nuevas tecnologías y tendencias.</p><p style="margin-top:10px;"><b>Nicolás</b> es el otro dueño. Su rol clave: mantener vínculo con instituciones educativas.</p>',
+    key: '🎯 Enunciado 1 puede preguntar por el enfoque de Juan Pablo sobre open source + propietario.',
+    steps: [
+      { char: 'jp', side: 'left',  text: 'Cuando cursaba mi MBA en Universidad Siglo 21 tuve la idea de crear una empresa de software.' },
+      { char: 'jp', side: 'left',  text: 'Fundé SoftFactor21 en el año 2000, apalancándome en las nuevas tecnologías.' },
+      { char: 'ni', side: 'right', text: 'Yo me sumé como socio. Desde entonces tuvimos una expansión increíble en clientes y estructura.' },
+      { char: 'jp', side: 'left',  text: 'Si copiamos modelos de ecosistemas, la clave está en combinar código abierto con software propietario.' },
+      { char: 'jp', side: 'left',  text: '👉 De esa forma mitigamos riesgos y reducimos costos.' },
+      { char: 'ni', side: 'right', text: 'Yo estoy en vínculo con las instituciones educativas. Pero hay un problema serio en el mercado...' }
+    ]
   },
   {
     title: '🏗️ Estructura de la empresa',
@@ -3484,8 +3597,16 @@ const STORY_SLIDES = [
       <rect x="60" y="240" width="280" height="18" rx="3" fill="#334155"/>
       <text x="200" y="252" text-anchor="middle" fill="#94a3b8" font-size="9">Base unificada: Capital Humano + Gestión de Calidad</text>
     </svg>`,
-    text: '<p>SoftFactor21 se organiza en <b>2 unidades de negocio independientes</b>, pero comparten la gestión de capital humano y de calidad.</p><p style="margin-top:10px;"><b>Desarrollo</b> es una "software factory" liderada por <b>Alfredo</b>, que si bien profesionaliza sus procesos, <i>aún no logra estandarizarlos</i>. Ese es un problema pendiente.</p>',
-    key: '⚠️ Alfredo aún no estandariza procesos → oportunidad para aplicar Ingeniería de Software y CMM.'
+    text: '<p>SoftFactor21 se organiza en <b>2 unidades de negocio independientes</b>, pero comparten la gestión de capital humano y de calidad.</p>',
+    key: '⚠️ Alfredo aún no estandariza procesos → oportunidad para aplicar Ingeniería de Software y CMM.',
+    steps: [
+      { char: 'jp', side: 'left',  text: 'Tenemos 2 unidades de negocio que operan de manera independiente.' },
+      { char: 'al', side: 'right', text: 'Yo soy Alfredo, Gerente de Desarrollo. Mi área es una "software factory" con 12 personas.' },
+      { char: 'al', side: 'right', text: '¡Confesión! Aunque profesionalizo mis procesos, aún no logro estandarizarlos del todo. 😅' },
+      { char: 'la', side: 'left',  text: 'Yo soy Laura, Gerente de Soluciones Tecnológicas. Lidero un equipo de 4 personas.' },
+      { char: 'la', side: 'left',  text: 'Trabajamos con organizaciones públicas: municipios, ministerios provinciales.' },
+      { char: 'jp', side: 'right', text: 'Ambas unidades comparten la base: Capital Humano y Gestión de Calidad.' }
+    ]
   },
   {
     title: '👥 Los personajes',
@@ -3510,8 +3631,16 @@ const STORY_SLIDES = [
         </g>
       `).join('')}
     </svg>`,
-    text: '<p><b>Alfredo</b>: Gerente de Desarrollo, ex programador, gran experiencia, pero <b>no estandariza procesos</b>.</p><p style="margin-top:8px;"><b>Micaela</b>: Lic. en Informática con experiencia en gestión de proyectos. Su equipo es flexible.</p><p style="margin-top:8px;"><b>Raúl</b>: Idóneo, con mucha experiencia. Su equipo aplica técnicas de casos de prueba pero <b>NO tiene testing automatizado</b>.</p><p style="margin-top:8px;"><b>Laura</b>: Gerente de Soluciones Tecnológicas. Equipo de estudiantes avanzados. Gran habilidad para definir requerimientos.</p>',
-    key: '📝 Puede preguntar cuántas personas hay en cada equipo, o quién lidera cada área.'
+    text: '<p>Conocé al equipo. Cada uno tiene su historia y sus desafíos:</p>',
+    key: '📝 Puede preguntar cuántas personas hay en cada equipo, o quién lidera cada área.',
+    steps: [
+      { char: 'al', side: 'left',  text: 'Nací como programador. Con el tiempo me profesionalicé, pero mi gran desafío sigue siendo estandarizar procesos.' },
+      { char: 'mi', side: 'right', text: '¡Hola! Soy Mica, Licenciada en Informática con experiencia en gestión de proyectos.' },
+      { char: 'mi', side: 'right', text: 'Lidero 7 programadores. Somos flexibles y trabajamos bien con la otra unidad.' },
+      { char: 'ra', side: 'left',  text: 'Soy Raúl, testing office. Tengo mucha experiencia... pero soy idóneo, no titulado.' },
+      { char: 'ra', side: 'left',  text: 'Tengo 3 personas a cargo. NO tenemos herramientas automatizadas 😰 pero aplicamos técnicas de diseño de casos.' },
+      { char: 'la', side: 'right', text: 'Mi equipo son 4 estudiantes avanzados de la carrera. Tenemos gran habilidad para definir requerimientos.' }
+    ]
   },
   {
     title: '🎯 El gran proyecto',
@@ -3565,8 +3694,17 @@ const STORY_SLIDES = [
       <path d="M 275 95 Q 300 95 315 100" fill="none" stroke="#22d3ee" stroke-width="2" stroke-dasharray="4,4"/>
       <text x="200" y="240" text-anchor="middle" fill="#94a3b8" font-size="10">Roadmap: 2 años · Municipio del interior</text>
     </svg>`,
-    text: '<p>Laura tiene el detalle del plan: un <b>Sistema de Estacionamiento Medido</b> con 3 componentes:</p><ul style="padding-left:20px; margin-top:10px;"><li><b>App móvil</b> para el ciudadano</li><li><b>Aplicación web</b> para el municipio</li><li><b>App para kioscos</b> de carga presencial</li></ul><p style="margin-top:10px;">Es parte de un roadmap de <b>2 años</b> para informatizar todas las áreas de una municipalidad del interior.</p>',
-    key: '💡 Por la complejidad (multi-app + requisitos cambiantes) conviene modelo iterativo e incremental, NO cascada.'
+    text: '<p>Laura presenta el gran proyecto que tienen entre manos.</p>',
+    key: '💡 Por la complejidad (multi-app + requisitos cambiantes) conviene modelo iterativo e incremental, NO cascada.',
+    steps: [
+      { char: 'la', side: 'left', text: 'Tenemos un gran nuevo proyecto: una municipalidad del interior nos contrató.' },
+      { char: 'la', side: 'left', text: 'Diseñamos un roadmap a 2 años para informatizar todas sus áreas.' },
+      { char: 'la', side: 'left', text: 'El primer sistema es de estacionamiento medido. Tiene 3 componentes...' },
+      { char: 'la', side: 'left', text: '📱 App móvil para el CIUDADANO.' },
+      { char: 'la', side: 'left', text: '💻 Aplicación WEB para el MUNICIPIO.' },
+      { char: 'la', side: 'left', text: '🏪 App para los KIOSCOS de carga presencial.' },
+      { char: 'jp', side: 'right', text: '¡Excelente! Ahora hay que definir bien el proceso de desarrollo.' }
+    ]
   },
   {
     title: '💰 La decisión estratégica',
@@ -3599,8 +3737,16 @@ const STORY_SLIDES = [
       </g>
       <text x="200" y="253" text-anchor="middle" fill="#fbbf24" font-size="11" font-weight="bold">Laura recomienda: Opción B (SaaS)</text>
     </svg>`,
-    text: '<p>Laura plantea 2 alternativas:</p><ul style="padding-left:20px; margin-top:10px;"><li><b>A) Sistema dedicado</b>: solo para este municipio. Simple pero sin crecimiento.</li><li><b>B) SaaS</b>: <i>Software as a Service</i>. Se ofrece a múltiples municipios con soporte continuo. <b>Escalable.</b></li></ul><p style="margin-top:10px;">Si eligen SaaS, dice Laura: <i>"la plataforma tendrá una posibilidad de crecimiento al ritmo de los clientes que se presenten, por lo que necesitamos definir firmemente un proceso de desarrollo"</i>.</p>',
-    key: '🎯 SaaS + requisitos cambiantes = SCRUM + modelo iterativo + open source combinado con propietario.'
+    text: '<p>En la reunión de directorio, Laura pone sobre la mesa una decisión estratégica clave.</p>',
+    key: '🎯 SaaS + requisitos cambiantes = SCRUM + modelo iterativo + open source combinado con propietario.',
+    steps: [
+      { char: 'la', side: 'left',  text: 'Tenemos 2 caminos posibles con el sistema de estacionamiento...' },
+      { char: 'la', side: 'left',  text: 'Opción A: hacerlo dedicado, exclusivo para este municipio. Simple pero limitado.' },
+      { char: 'la', side: 'left',  text: 'Opción B: hacerlo como SaaS (Software as a Service), venderlo a otros municipios con soporte y mantenimiento continuo.' },
+      { char: 'la', side: 'left',  text: 'Si vamos por SaaS, la plataforma crece al ritmo de los clientes... ¡pero necesitamos un proceso de desarrollo firme!' },
+      { char: 'jp', side: 'right', text: 'Como te dije antes: combinemos open source con propietario. Modelo de ecosistema.' },
+      { char: 'la', side: 'left',  text: 'Perfecto. Vamos a necesitar un "crew" dedicado y sumar personas, incluso freelancers.' }
+    ]
   },
   {
     title: '⚡ El desafío del talento',
@@ -3623,8 +3769,16 @@ const STORY_SLIDES = [
       <text x="200" y="230" text-anchor="middle" fill="#94a3b8" font-size="11">Preocupación a nivel academia y país</text>
       <text x="200" y="250" text-anchor="middle" fill="#f87171" font-size="10">⚠️ Riesgo de PROYECTO (falta de recursos humanos)</text>
     </svg>`,
-    text: '<p><b>Nicolás</b>, que está en contacto con instituciones educativas, alerta: cada año quedan <b>5.000 puestos vacantes</b> en tecnología en Argentina.</p><p style="margin-top:10px;">Para el nuevo proyecto SaaS, Laura dice que hay que incorporar personas y definir procedimientos que incluyan <b>trabajo freelance</b>.</p><p style="margin-top:10px; padding:10px; background:rgba(239,68,68,.1); border-left:3px solid #ef4444; border-radius:6px;"><b>Riesgo identificado:</b> Ausencia de programadores clave durante el desarrollo.<br>Probabilidad: <b>Alta (5)</b> · Impacto: <b>Alto (4)</b> · Exposición: <b>20 (Crítico)</b></p>',
-    key: '📌 Este riesgo es de PROYECTO (afecta cronograma/recursos), no de producto. Mitigación: convenios con universidades + freelancers.'
+    text: '<p>Nicolás trae al directorio una alarma del mercado laboral.</p>',
+    key: '📌 Este riesgo es de PROYECTO (afecta cronograma/recursos), no de producto. Mitigación: convenios con universidades + freelancers.',
+    steps: [
+      { char: 'ni', side: 'left', text: 'Traigo malas noticias del mercado: no va a ser fácil incorporar programadores.' },
+      { char: 'ni', side: 'left', text: 'Cada año en Argentina quedan 5.000 puestos VACANTES en tecnología. 😰' },
+      { char: 'ni', side: 'left', text: 'Es una preocupación a nivel academia y a nivel país. Falta demanda global de recursos.' },
+      { char: 'jp', side: 'right', text: 'Entonces esto es un riesgo de PROYECTO. Alta probabilidad, alto impacto.' },
+      { char: 'la', side: 'left', text: 'Podemos mitigar: convenios con universidades + freelancers + documentar exhaustivamente el código.' },
+      { char: 'jp', side: 'right', text: 'También podríamos transferir: subcontratar partes del desarrollo a especialistas.' }
+    ]
   },
   {
     title: '🔍 El pedido de auditoría',
@@ -3650,8 +3804,16 @@ const STORY_SLIDES = [
         </g>
       `).join('')}
     </svg>`,
-    text: '<p>El municipio también pide un servicio de <b>auditoría informática</b> sobre 3 áreas críticas:</p><ol style="padding-left:20px; margin-top:10px;"><li><b>Catastro</b></li><li><b>Contaduría</b></li><li><b>Servicios Públicos</b></li></ol><p style="margin-top:10px;">Como Laura y su equipo <b>no tienen experiencia</b> en auditoría, plantean contratar personal específico para eso.</p><p style="margin-top:10px; padding:10px; background:rgba(34,211,238,.1); border-left:3px solid #22d3ee; border-radius:6px;"><b>Son contratados como AUDITORES</b> (no como peritos). El perito es en contexto judicial. Aquí es evaluación técnica de sistemas.</p>',
-    key: '⚖️ La diferencia AUDITOR vs PERITO es una pregunta clásica del examen (Enunciado 4).'
+    text: '<p>Nuevo pedido del municipio: no solo el sistema, también quieren auditoría.</p>',
+    key: '⚖️ La diferencia AUDITOR vs PERITO es una pregunta clásica del examen (Enunciado 4).',
+    steps: [
+      { char: 'la', side: 'left',  text: 'El municipio nos pide ADEMÁS un servicio de auditoría informática.' },
+      { char: 'la', side: 'left',  text: 'Son 3 áreas: 📊 Catastro, 💰 Contaduría y 🏛️ Servicios Públicos.' },
+      { char: 'la', side: 'left',  text: 'El problema: mi equipo no tiene experiencia en auditoría... 🤔' },
+      { char: 'al', side: 'right', text: 'Tenemos que contratar personal específico para esa dedicación.' },
+      { char: 'jp', side: 'left',  text: 'Ojo con la diferencia: nos contratan como AUDITORES, no como PERITOS.' },
+      { char: 'jp', side: 'left',  text: 'El perito es judicial (asesora al juez). El auditor hace evaluación técnica profesional.' }
+    ]
   },
   {
     title: '📋 Los 4 enunciados del examen',
@@ -3692,49 +3854,123 @@ const STORY_SLIDES = [
         <text x="150" y="166" text-anchor="middle" fill="#a7f3d0" font-size="10" font-style="italic">de programadores es un riesgo de proyecto"</text>
       </g>
     </svg>`,
-    text: '<p>Los profesores valoran mucho conectar la teoría con el caso. Siempre agregá un "por ejemplo" que referencie a SoftFactor21.</p><p style="margin-top:10px;"><b>Ejemplos rápidos:</b></p><ul style="padding-left:20px;"><li>SCRUM → "es lo que recomendaría para SoftFactor21 por sus sprints y adaptabilidad al SaaS"</li><li>Riesgo → "la falta de programadores es un riesgo de proyecto"</li><li>Auditor → "Laura y equipo son auditores, no peritos, porque es contexto profesional"</li></ul><p style="margin-top:15px; text-align:center; padding:12px; background:linear-gradient(135deg,#22d3ee22,#10b98122); border-radius:10px; font-size:15px;"><b>¡Estás listo/a para el examen! 🎓</b></p>',
-    key: '💪 Éxitos en Triunvirato.'
+    text: '<p style="text-align:center; padding:12px; background:linear-gradient(135deg,#22d3ee22,#10b98122); border-radius:10px; font-size:15px;"><b>¡Estás listo/a para el examen! 🎓</b></p>',
+    key: '💪 Éxitos en Triunvirato.',
+    steps: [
+      { char: 'an', side: 'left',  text: '¡Hola! Soy Ana, la profesora que corrige. Te doy mi regla de oro para aprobar.' },
+      { char: 'an', side: 'left',  text: 'Siempre CONECTÁ la teoría con el CASO SoftFactor21. Los profes valoramos eso muchísimo.' },
+      { char: 'an', side: 'left',  text: 'Ejemplo malo: "SCRUM es una metodología ágil"... 🙄' },
+      { char: 'an', side: 'left',  text: 'Ejemplo bueno: "SCRUM es lo que recomendaría para SoftFactor21 porque sus sprints permiten adaptarse al modelo SaaS que propone Laura". 🌟' },
+      { char: 'an', side: 'left',  text: 'Otro: "La falta de programadores que menciona Nicolás es un riesgo de PROYECTO con probabilidad alta"' },
+      { char: 'an', side: 'left',  text: 'Y siempre: usá vocabulario técnico correcto. Decí "stakeholder", no "gente involucrada".' },
+      { char: 'an', side: 'left',  text: '¡Éxitos en el examen! 🎓 Nos vemos en la defensa oral. ✨' }
+    ]
   }
 ];
 
 let currentSlide = 0;
+let currentStep = 0; // paso actual dentro del slide (para diálogos progresivos)
 
 function openStory() {
   currentSlide = 0;
+  currentStep = 0;
   showScreen('story');
   renderSlide();
 }
 
 function renderSlide() {
   const slide = STORY_SLIDES[currentSlide];
+  const hasSteps = slide.steps && slide.steps.length > 0;
   document.getElementById('story-counter').textContent = `${currentSlide + 1} / ${STORY_SLIDES.length}`;
+
+  // Renderizar diálogos hasta el paso actual
+  const dialogsHtml = hasSteps ? `
+    <div class="story-dialogs">
+      ${slide.steps.slice(0, currentStep).map(step => {
+        const c = CHARS[step.char];
+        return `
+          <div class="story-dialog ${step.side === 'right' ? 'right' : ''}">
+            <div class="story-avatar" style="background:${c.color};">${c.emoji}</div>
+            <div class="story-bubble">
+              <span class="story-name">${c.name}</span>
+              ${step.text}
+            </div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+    ${currentStep < slide.steps.length ? `
+      <div class="story-tap-hint">👆 Tocá "Continuar" para el próximo diálogo (${currentStep}/${slide.steps.length})</div>
+    ` : `
+      <div class="story-step-counter">✅ Todos los diálogos vistos (${slide.steps.length}/${slide.steps.length})</div>
+    `}
+  ` : '';
+
   document.getElementById('story-slide').innerHTML = `
     <div style="margin-bottom: 20px;">
       <div style="font-size: 22px; font-weight: bold; color: var(--accent); margin-bottom: 4px;">${slide.title}</div>
       <div style="color: var(--text-dim); font-size: 14px;">${slide.subtitle}</div>
     </div>
-    <div class="q-image" style="padding: 15px;">${slide.svg}</div>
-    <div style="margin-top: 20px; line-height: 1.7; font-size: 15px;">${slide.text}</div>
+    <div class="story-scene">
+      ${slide.svg}
+      ${dialogsHtml}
+    </div>
+    <div style="margin-top: 15px; line-height: 1.7; font-size: 15px;">${slide.text}</div>
     <div style="margin-top: 20px; padding: 12px 15px; background: linear-gradient(135deg, rgba(251,191,36,.15), rgba(245,158,11,.1)); border-left: 4px solid #fbbf24; border-radius: 8px; font-size: 14px; color: var(--text);">
       ${slide.key}
     </div>
   `;
+
   // Dots
   const dotsEl = document.getElementById('story-dots');
   dotsEl.innerHTML = STORY_SLIDES.map((_, i) =>
     `<span onclick="goToSlide(${i})" style="width:10px; height:10px; border-radius:50%; background:${i === currentSlide ? 'var(--accent)' : 'var(--bg-3)'}; cursor:pointer; transition:background .2s;"></span>`
   ).join('');
-  document.getElementById('story-prev').disabled = currentSlide === 0;
-  document.getElementById('story-next').textContent = currentSlide === STORY_SLIDES.length - 1 ? '🎯 Ir a practicar' : 'Siguiente →';
+  document.getElementById('story-prev').disabled = currentSlide === 0 && currentStep === 0;
+
+  // Botón "Siguiente" cambia según estado
+  const btnNext = document.getElementById('story-next');
+  if (hasSteps && currentStep < slide.steps.length) {
+    btnNext.innerHTML = '💬 Continuar diálogo →';
+  } else if (currentSlide === STORY_SLIDES.length - 1) {
+    btnNext.innerHTML = '🎯 Ir a practicar';
+  } else {
+    btnNext.innerHTML = '📄 Siguiente escena →';
+  }
 }
 
 function storyPrev() {
-  if (currentSlide > 0) { currentSlide--; renderSlide(); }
+  const slide = STORY_SLIDES[currentSlide];
+  // Si tiene diálogos y estamos en medio, retroceder un diálogo
+  if (slide.steps && currentStep > 0) {
+    currentStep--;
+    renderSlide();
+  } else if (currentSlide > 0) {
+    currentSlide--;
+    const prevSlide = STORY_SLIDES[currentSlide];
+    currentStep = prevSlide.steps ? prevSlide.steps.length : 0;
+    renderSlide();
+  }
 }
 function storyNext() {
+  const slide = STORY_SLIDES[currentSlide];
+  // Si tiene diálogos y quedan por revelar, avanzar el paso
+  if (slide.steps && currentStep < slide.steps.length) {
+    currentStep++;
+    renderSlide();
+    // Auto-scroll al último diálogo
+    setTimeout(() => {
+      const dialogs = document.querySelectorAll('.story-dialog');
+      if (dialogs.length) dialogs[dialogs.length - 1].scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 100);
+    return;
+  }
+  // Cambio de slide
   if (currentSlide < STORY_SLIDES.length - 1) {
     currentSlide++;
+    currentStep = 0;
     renderSlide();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   } else {
     // último slide: ir a practicar preguntas del caso
     state.mode = 'cs';
@@ -3751,7 +3987,11 @@ function storyNext() {
     }
   }
 }
-function goToSlide(i) { currentSlide = i; renderSlide(); }
+function goToSlide(i) {
+  currentSlide = i;
+  currentStep = 0;
+  renderSlide();
+}
 
 // Inicializar tema al cargar
 applyTheme();
