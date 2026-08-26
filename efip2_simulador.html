@@ -656,6 +656,9 @@ body { overscroll-behavior: contain; }
 
     <div id="learn-image" class="q-image" style="display:none;"></div>
 
+    <!-- SVGs adicionales del tema -->
+    <div id="learn-extra-svgs" style="display:none; margin-top: 20px;"></div>
+
     <!-- Sección de ejemplos concretos -->
     <div id="learn-examples" style="display:none; margin-top: 25px;">
       <h3 style="color: var(--accent); margin-bottom: 15px;">💡 Ejemplos concretos</h3>
@@ -957,19 +960,19 @@ const QUESTIONS = [
   { cat: 'is',
     variants: [
       { q: '¿Cuál es el nivel MÁS ALTO del Modelo de Madurez de Capacidades (CMM)?',
-        opts: ['Inicial', 'Definido', 'Gestionado', 'Optimizado'], correct: 3 },
+        opts: ['Inicial', 'Definido', 'Gestionado', 'Optimizado'], correct: 3, img: 'cmm' },
       { q: '¿Cuál es el nivel MÁS BAJO del CMM, donde el éxito depende del esfuerzo personal y hay retrasos/sobrecostes?',
-        opts: ['Inicial', 'Repetible', 'Definido', 'Gestionado'], correct: 0 },
+        opts: ['Inicial', 'Repetible', 'Definido', 'Gestionado'], correct: 0, img: 'cmm' },
       { q: 'En el CMM, ¿qué nivel se caracteriza por tener prácticas de gestión de proyectos, métricas y aseguramiento de calidad razonable?',
-        opts: ['Inicial', 'Repetible', 'Definido', 'Gestionado'], correct: 1 },
+        opts: ['Inicial', 'Repetible', 'Definido', 'Gestionado'], correct: 1, img: 'cmm' },
       { q: 'En el CMM, ¿qué nivel dispone de correctos procedimientos, técnicas detalladas y métricas más avanzadas?',
-        opts: ['Repetible', 'Definido', 'Gestionado', 'Optimizado'], correct: 1 },
+        opts: ['Repetible', 'Definido', 'Gestionado', 'Optimizado'], correct: 1, img: 'cmm' },
       { q: 'En el CMM, ¿qué nivel se caracteriza por usar métricas significativas para toma de decisiones y gestión de riesgo? (Software de alta calidad)',
-        opts: ['Definido', 'Gestionado', 'Optimizado', 'Repetible'], correct: 1 },
+        opts: ['Definido', 'Gestionado', 'Optimizado', 'Repetible'], correct: 1, img: 'cmm' },
       { q: 'En el CMM, ¿qué nivel enfatiza la MEJORA CONTINUA de los procesos y la gestión de la innovación?',
-        opts: ['Gestionado', 'Optimizado', 'Definido', 'Repetible'], correct: 1 },
+        opts: ['Gestionado', 'Optimizado', 'Definido', 'Repetible'], correct: 1, img: 'cmm' },
       { q: '¿Cuántos niveles tiene el Modelo de Madurez de Capacidades (CMM)?',
-        opts: ['3', '4', '5', '7'], correct: 2 }
+        opts: ['3', '4', '5', '7'], correct: 2, img: 'cmm' }
     ],
     expl: 'Los 5 niveles CMM: 1) INICIAL (procesos inestables, éxito por esfuerzo personal) 2) REPETIBLE (prácticas de gestión, métricas y aseguramiento razonable) 3) DEFINIDO (procedimientos correctos, técnicas detalladas) 4) GESTIONADO (métricas significativas para decisiones, alta calidad) 5) OPTIMIZADO (mejora continua e innovación).' },
 
@@ -1032,9 +1035,9 @@ const QUESTIONS = [
   { cat: 'ri',
     variants: [
       { q: '¿Qué estrategia de riesgo consiste en SUBCONTRATAR el problema a un tercero (ej: contratar un seguro)?',
-        opts: ['Mitigar', 'Anular', 'Transferir', 'Aceptar'], correct: 2 },
+        opts: ['Mitigar', 'Anular', 'Transferir', 'Aceptar'], correct: 2, img: 'estrategias' },
       { q: '¿Qué estrategia de riesgo consiste en ELIMINAR TOTALMENTE la causa del riesgo?',
-        opts: ['Anular', 'Mitigar', 'Aceptar', 'Transferir'], correct: 0 },
+        opts: ['Anular', 'Mitigar', 'Aceptar', 'Transferir'], correct: 0, img: 'estrategias' },
       { q: '¿Qué estrategia de riesgo consiste en REDUCIR el impacto o probabilidad de ocurrencia?',
         opts: ['Anular', 'Mitigar', 'Aceptar', 'Transferir'], correct: 1 },
       { q: '¿Qué estrategia de riesgo consiste en ASUMIR las consecuencias y proveer contramedidas?',
@@ -1079,7 +1082,7 @@ const QUESTIONS = [
     expl: 'Las 5 fases: 1) PLANIFICACIÓN (diagnóstico preliminar, plan) 2) RELEVAMIENTO (entrevistas, análisis) 3) EVALUACIÓN Y ANÁLISIS (identificar vulnerabilidades vs ISO/COBIT) 4) INFORME (hallazgos + recomendaciones) 5) SEGUIMIENTO (opcional, verificar aplicación).' },
 
   { cat: 'au', q: '¿Cuál es la diferencia entre AUDITOR y PERITO informático?',
-    opts: ['Son lo mismo', 'El auditor hace evaluación técnica de sistemas; el perito actúa en un contexto judicial asesorando al juez', 'El perito es interno; el auditor externo', 'El perito hace informes; el auditor no'], correct: 1,
+    opts: ['Son lo mismo', 'El auditor hace evaluación técnica de sistemas; el perito actúa en un contexto judicial asesorando al juez', 'El perito es interno; el auditor externo', 'El perito hace informes; el auditor no'], correct: 1, img: 'auditor_perito',
     expl: 'AUDITOR: evalúa técnicamente sistemas y procesos, emite recomendaciones. PERITO: es un perito judicial que asesora al juez en temas informáticos dentro de una causa legal.' },
 
   { cat: 'au', q: '¿Qué framework internacional se usa como marco integrado de control interno?',
@@ -1184,7 +1187,7 @@ const QUESTIONS = [
     expl: 'VERIFICACIÓN evalúa sintaxis, diseño, precisión técnica (¿lo hicimos bien?). VALIDACIÓN evalúa cumplimiento de requisitos del usuario (¿es lo que quería?). Ambas son necesarias.' },
 
   { cat: 'ca', q: '¿Qué tipo de prueba evalúa componentes INDIVIDUALES aislados?',
-    opts: ['Prueba de Sistema', 'Prueba de Integración', 'Prueba de Unidad', 'Prueba de Validación'], correct: 2,
+    opts: ['Prueba de Sistema', 'Prueba de Integración', 'Prueba de Unidad', 'Prueba de Validación'], correct: 2, img: 'pruebas',
     expl: 'PRUEBA DE UNIDAD: prueba individual de clases, objetos o componentes. Verifica que cada parte funcione aisladamente. Le siguen Integración, Validación y Sistema.' },
 
   { cat: 'ca', q: '¿Qué mide una MÉTRICA DINÁMICA de producto?',
@@ -1218,11 +1221,11 @@ const QUESTIONS = [
 
   // ========== SEGURIDAD ==========
   { cat: 'se', q: '¿Qué es una DMZ?',
-    opts: ['Un tipo de firewall', 'Zona DesMilitarizada: red aislada dentro de la organización donde se ubican los servidores expuestos', 'Un algoritmo de cifrado', 'Un protocolo de red'], correct: 1,
+    opts: ['Un tipo de firewall', 'Zona DesMilitarizada: red aislada dentro de la organización donde se ubican los servidores expuestos', 'Un algoritmo de cifrado', 'Un protocolo de red'], correct: 1, img: 'firewalldmz',
     expl: 'DMZ (DesMilitarized Zone): segmento de red que separa los servidores públicos (web, mail) de la red interna. Las conexiones de la DMZ a la red LOCAL NO están permitidas.' },
 
   { cat: 'se', q: '¿Cuál es la función principal de un FIREWALL?',
-    opts: ['Almacenar datos', 'Bloquear accesos no autorizados a una red privada y filtrar ataques', 'Ejecutar código maligno', 'Compilar programas'], correct: 1,
+    opts: ['Almacenar datos', 'Bloquear accesos no autorizados a una red privada y filtrar ataques', 'Ejecutar código maligno', 'Compilar programas'], correct: 1, img: 'firewalldmz',
     expl: 'FIREWALL: se ubica entre internet y la red interna. Bloquea accesos no autorizados, filtra tráfico, registra actividad. Protege la seguridad y privacidad.' },
 
   { cat: 'se', q: 'La AUDITORÍA DE SEGURIDAD FÍSICA se enfoca en...',
@@ -1238,7 +1241,7 @@ const QUESTIONS = [
     expl: 'BIOMÉTRICO: identifica al usuario por características físicas únicas (huella, iris, cara, voz). Junto con contraseña y criptografía, es una técnica clave de autenticación.' },
 
   { cat: 'se', q: '¿Cuáles son los 3 pilares de la SEGURIDAD DE LA INFORMACIÓN?',
-    opts: ['Velocidad, precisión, costo', 'Confidencialidad, Integridad, Disponibilidad (CID)', 'Software, hardware, red', 'Personas, procesos, tecnología'], correct: 1,
+    opts: ['Velocidad, precisión, costo', 'Confidencialidad, Integridad, Disponibilidad (CID)', 'Software, hardware, red', 'Personas, procesos, tecnología'], correct: 1, img: 'seguridad',
     expl: 'La tríada CID: CONFIDENCIALIDAD (solo autorizados acceden), INTEGRIDAD (los datos no se alteran), DISPONIBILIDAD (acceso cuando se necesita).' },
 
   // ========== CASO SOFTFACTOR21 ==========
@@ -1380,9 +1383,9 @@ const QUESTIONS = [
   { cat: 'le',
     variants: [
       { q: 'Según la Ley 25.326, ¿cuál de estos NO es un dato sensible?',
-        opts: ['Religión', 'Ideología política', 'Pertenencia racial', 'Número de DNI'], correct: 3 },
+        opts: ['Religión', 'Ideología política', 'Pertenencia racial', 'Número de DNI'], correct: 3, img: 'datossensibles' },
       { q: 'Según la Ley 25.326, ¿cuál de estos SÍ es un dato sensible?',
-        opts: ['Nombre completo', 'Dirección postal', 'Orientación sexual', 'Número de teléfono'], correct: 2 },
+        opts: ['Nombre completo', 'Dirección postal', 'Orientación sexual', 'Número de teléfono'], correct: 2, img: 'datossensibles' },
       { q: 'Según la Ley 25.326, los datos de HISTORIA CLÍNICA (salud) se consideran:',
         opts: ['Datos comunes', 'Datos sensibles', 'Datos públicos', 'No están regulados'], correct: 1 },
       { q: 'Según la Ley 25.326, ¿cuál de estos NO es un dato sensible?',
@@ -1396,9 +1399,9 @@ const QUESTIONS = [
   { cat: 'gp',
     variants: [
       { q: 'Según la Pirámide de Maslow, ¿cuál es la necesidad de MENOR nivel (base)?',
-        opts: ['Autorrealización', 'Fisiológicas (comer, dormir)', 'Seguridad', 'Estima'], correct: 1 },
+        opts: ['Autorrealización', 'Fisiológicas (comer, dormir)', 'Seguridad', 'Estima'], correct: 1, img: 'maslow' },
       { q: 'Según la Pirámide de Maslow, ¿cuál es la necesidad de MAYOR nivel (cima)?',
-        opts: ['Fisiológicas', 'Seguridad', 'Autorrealización', 'Sociales'], correct: 2 },
+        opts: ['Fisiológicas', 'Seguridad', 'Autorrealización', 'Sociales'], correct: 2, img: 'maslow' },
       { q: 'En la Pirámide de Maslow, ¿qué nivel abarca amistad, afecto e intimidad?',
         opts: ['Fisiológicas', 'Seguridad', 'Sociales', 'Estima'], correct: 2 },
       { q: 'En la Pirámide de Maslow, ¿qué nivel incluye el reconocimiento, respeto y confianza?',
@@ -1414,9 +1417,9 @@ const QUESTIONS = [
   { cat: 'gp',
     variants: [
       { q: '¿Cuál es la PRIMERA etapa del ciclo de un equipo de trabajo según Tuckman?',
-        opts: ['Tormenta', 'Formación', 'Normalización', 'Alto rendimiento'], correct: 1 },
+        opts: ['Tormenta', 'Formación', 'Normalización', 'Alto rendimiento'], correct: 1, img: 'tuckman' },
       { q: 'En Tuckman, ¿en qué etapa aparecen conflictos, discusiones sobre roles y liderazgo?',
-        opts: ['Formación', 'Tormenta', 'Normalización', 'Despedida'], correct: 1 },
+        opts: ['Formación', 'Tormenta', 'Normalización', 'Despedida'], correct: 1, img: 'tuckman' },
       { q: 'En Tuckman, ¿qué etapa sigue a la Tormenta, cuando se acuerdan reglas y roles?',
         opts: ['Formación', 'Alto rendimiento', 'Normalización', 'Despedida'], correct: 2 },
       { q: 'En Tuckman, ¿en qué etapa el equipo funciona con máxima eficiencia y sinergia?',
@@ -1432,7 +1435,7 @@ const QUESTIONS = [
   { cat: 'gp',
     variants: [
       { q: '¿Qué tipo de contrato conviene cuando el alcance, tiempo y costo están perfectamente definidos?',
-        opts: ['Precio fijo', 'Costo reembolsable', 'Tiempo y materiales', 'Con incentivos'], correct: 0 },
+        opts: ['Precio fijo', 'Costo reembolsable', 'Tiempo y materiales', 'Con incentivos'], correct: 0, img: 'contratos' },
       { q: '¿Qué tipo de contrato paga los costos reales incurridos más un margen (usado en proyectos I+D con mucha incertidumbre)?',
         opts: ['Precio fijo', 'Costo reembolsable', 'Tiempo y materiales', 'Con incentivos'], correct: 1 },
       { q: '¿Qué tipo de contrato paga por hora/día trabajado + costo de materiales (típico en freelance y consultoría)?',
@@ -1466,11 +1469,11 @@ const QUESTIONS = [
       { q: 'En el Análisis del Valor Ganado, ¿qué significa CPTC?',
         opts: ['Costo Prorrateado del Tiempo Calendarizado', 'Costo Presupuestado del Trabajo Calendarizado (planeado)', 'Cuenta Personal del Trabajador', 'Control Preventivo Total del Cronograma'], correct: 1 },
       { q: 'En AVG, ¿qué significa CPTR?',
-        opts: ['Costo Presupuestado del Trabajo Realizado', 'Costo Programado del Trabajo Rechazado', 'Cronograma Personal del Trabajo Real', 'Control Preventivo del Trabajo'], correct: 0 },
+        opts: ['Costo Presupuestado del Trabajo Realizado', 'Costo Programado del Trabajo Rechazado', 'Cronograma Personal del Trabajo Real', 'Control Preventivo del Trabajo'], correct: 0, img: 'avg' },
       { q: 'En AVG, ¿qué significa PAC?',
         opts: ['Pago Anticipado del Cliente', 'Presupuesto Al Concluir (suma total de todos los CPTC)', 'Plan de Aceptación del Cronograma', 'Proyecto Aprobado y Contratado'], correct: 1 },
       { q: 'Si CPTR > CPTC en un proyecto, significa que:',
-        opts: ['Vamos ATRASADOS (menos trabajo del planeado)', 'Vamos ADELANTADOS (más trabajo del planeado)', 'El proyecto está en pausa', 'El presupuesto se agotó'], correct: 1 },
+        opts: ['Vamos ATRASADOS (menos trabajo del planeado)', 'Vamos ADELANTADOS (más trabajo del planeado)', 'El proyecto está en pausa', 'El presupuesto se agotó'], correct: 1, img: 'avg' },
       { q: '¿Qué requisitos previos son necesarios para usar AVG?',
         opts: ['Solo un cronograma', 'Solo un presupuesto', 'Lista de tareas + Cronograma + Presupuesto definido', 'Ninguno, es intuitivo'], correct: 2 }
     ],
@@ -1712,6 +1715,11 @@ const TOPICS = [
       <p>Cualquier persona u organización involucrada o afectada por el proyecto. Con ellos el PM negocia recursos, requerimientos, expectativas.</p>
     `,
     svg: 'triangle',
+    extraSvgs: [
+      { svg: 'tuckman', caption: 'El ciclo del equipo (Tuckman)' },
+      { svg: 'maslow', caption: 'Motivación del equipo — Pirámide de Maslow' },
+      { svg: 'contratos', caption: 'Tipos de contratos con proveedores' }
+    ],
     youtubeSearch: 'gestión de proyectos triple restricción',
     examples: [
       { icon: '📐', title: 'Triple restricción — Presupuesto cerrado', text: 'Cliente pide más alcance sin aumentar presupuesto ni plazo. El PM tiene que sacrificar CALIDAD o negociar la triple restricción. No podés ganar en las 3 al mismo tiempo.' },
@@ -1763,6 +1771,9 @@ const TOPICS = [
       <p><b>AMFE</b> (Análisis de Modo de Falla y Efectos), <b>FODA</b> (Fortalezas/Oportunidades/Debilidades/Amenazas), <b>PESTEL</b> (Político/Económico/Social/Tecnológico/Ecológico/Legal).</p>
     `,
     svg: 'riskmatrix',
+    extraSvgs: [
+      { svg: 'estrategias', caption: 'Las 4 estrategias para enfrentar un riesgo' }
+    ],
     youtubeSearch: 'gestión de riesgos en proyectos',
     examples: [
       { icon: '🔥', title: 'Riesgo: pérdida de personal clave (Prob: 3, Impacto: 5, Exposición: 15 → Importante)', text: 'MITIGACIÓN: documentar el código exhaustivamente, formar backup. CONTINGENCIA: contratos con freelancers de confianza.' },
@@ -1810,6 +1821,9 @@ const TOPICS = [
       <p>Convierte el grado de exposición al riesgo a valor monetario para priorizar y estimar la reserva de contingencia. Se recomienda aplicar tempranamente.</p>
     `,
     svg: 'estimacion',
+    extraSvgs: [
+      { svg: 'avg', caption: 'Análisis del Valor Ganado (AVG) — curva CPTC vs CPTR' }
+    ],
     youtubeSearch: 'estimación de software COCOMO puntos función',
     examples: [
       { icon: '🎯', title: 'Orden de magnitud — Reunión inicial', text: '"¿Cuánto sale un CRM?" Respuesta rápida: entre USD 30K y 80K (rango amplio, ±50%). Sirve para decidir si el proyecto es viable.' },
@@ -1861,6 +1875,10 @@ const TOPICS = [
       </ol>
     `,
     svg: 'testing',
+    extraSvgs: [
+      { svg: 'pruebas', caption: 'Los 4 niveles de pruebas en cadena' },
+      { svg: 'cmm', caption: 'CMM — 5 niveles de madurez de la organización' }
+    ],
     youtubeSearch: 'testing de software tipos de pruebas',
     examples: [
       { icon: '🧪', title: 'Prueba de UNIDAD — Función de cálculo', text: 'Testeás una función que calcula el IVA aislada: `calcularIVA(100) === 21`. No se conecta a base de datos ni a otras funciones.' },
@@ -1924,6 +1942,9 @@ const TOPICS = [
       <p>Son el soporte de todo hallazgo. Técnicas: <b>Ocular</b> (observación), <b>Verbal</b> (indagación), <b>Física</b> (examinar activos), <b>Documental</b> (revisar registros), <b>Analítica</b> (analizar información).</p>
     `,
     svg: 'auditphases',
+    extraSvgs: [
+      { svg: 'auditor_perito', caption: 'Auditor vs Perito — diferencia clave' }
+    ],
     youtubeSearch: 'auditoría informática qué es',
     examples: [
       { icon: '🏛️', title: 'Auditoría al Municipio (caso SoftFactor21)', text: 'Áreas: catastro, contaduría, servicios públicos. Enfoque: seguridad, integridad de datos, eficiencia. Marcos: ISO 27001, COBIT. Contratados como AUDITORES (no peritos, porque no es contexto judicial).' },
@@ -1983,6 +2004,9 @@ const TOPICS = [
       </ul>
     `,
     svg: 'seguridad',
+    extraSvgs: [
+      { svg: 'firewalldmz', caption: 'Arquitectura Firewall + DMZ (doble barrera)' }
+    ],
     youtubeSearch: 'seguridad informática CID firewall DMZ',
     examples: [
       { icon: '🔐', title: 'CID en un banco', text: 'CONFIDENCIALIDAD: solo autorizados ven saldos. INTEGRIDAD: nadie puede alterar transacciones. DISPONIBILIDAD: el sistema debe estar operativo 24/7. Faltar cualquiera compromete al banco.' },
@@ -2039,6 +2063,9 @@ const TOPICS = [
       <p>Durante toda la gestión hay <b>comunicación constante, monitoreo y revisión</b>.</p>
     `,
     svg: null,
+    extraSvgs: [
+      { svg: 'datossensibles', caption: 'Datos SENSIBLES según la Ley 25.326' }
+    ],
     youtubeSearch: 'ley 25326 protección datos personales Argentina',
     examples: [
       { icon: '📧', title: 'Violación típica — Spam sin consentimiento', text: 'Recibís correos publicitarios de una empresa a la que nunca le diste tu email. Esa empresa está VIOLANDO la Ley 25.326. Podés denunciar ante la Dirección Nacional de Datos Personales.' },
@@ -2176,6 +2203,268 @@ const IMAGES = {
     <text x="200" y="162" text-anchor="middle" fill="#eab308" font-size="12" font-weight="bold">Integración</text>
     <text x="200" y="205" text-anchor="middle" fill="#10b981" font-size="12" font-weight="bold">Unidad</text>
     <text x="200" y="245" text-anchor="middle" fill="#94a3b8" font-size="10">De abajo hacia arriba: aisladas → globales</text>
+  </svg>`,
+
+  // ==================== PIRÁMIDE MASLOW ====================
+  maslow: `<svg viewBox="0 0 400 300" style="max-width:100%;">
+    <text x="200" y="20" text-anchor="middle" fill="#f1f5f9" font-size="14" font-weight="bold">Pirámide de Maslow — 5 niveles de necesidades</text>
+    <!-- 5 niveles piramidales -->
+    <polygon points="200,40 235,80 165,80" fill="#a855f7"/>
+    <polygon points="165,80 235,80 265,120 135,120" fill="#3b82f6"/>
+    <polygon points="135,120 265,120 300,160 100,160" fill="#10b981"/>
+    <polygon points="100,160 300,160 335,200 65,200" fill="#f59e0b"/>
+    <polygon points="65,200 335,200 370,240 30,240" fill="#ef4444"/>
+    <!-- Etiquetas -->
+    <text x="200" y="68" text-anchor="middle" fill="white" font-size="9" font-weight="bold">Autorrealización</text>
+    <text x="200" y="105" text-anchor="middle" fill="white" font-size="10" font-weight="bold">Estima / Reconocimiento</text>
+    <text x="200" y="145" text-anchor="middle" fill="white" font-size="10" font-weight="bold">Sociales (amor, amistad)</text>
+    <text x="200" y="185" text-anchor="middle" fill="white" font-size="11" font-weight="bold">Seguridad (empleo, salud)</text>
+    <text x="200" y="225" text-anchor="middle" fill="white" font-size="11" font-weight="bold">Fisiológicas (comer, dormir)</text>
+    <!-- Flecha ascendente -->
+    <path d="M 375 240 L 375 55 M 370 62 L 375 50 L 380 62" stroke="#22d3ee" stroke-width="2" fill="none"/>
+    <text x="390" y="150" fill="#22d3ee" font-size="10" transform="rotate(-90 390 150)">MOTIVACIÓN</text>
+    <text x="200" y="275" text-anchor="middle" fill="#94a3b8" font-size="10">Se cubre un nivel para aspirar al siguiente</text>
+  </svg>`,
+
+  // ==================== CMM PIRÁMIDE ====================
+  cmm: `<svg viewBox="0 0 400 280" style="max-width:100%;">
+    <text x="200" y="20" text-anchor="middle" fill="#f1f5f9" font-size="14" font-weight="bold">CMM — 5 niveles de madurez</text>
+    ${[
+      {n:5,txt:'Optimizado',sub:'Mejora continua e innovación',color:'#a855f7',y:40},
+      {n:4,txt:'Gestionado',sub:'Métricas para decisiones',color:'#3b82f6',y:82},
+      {n:3,txt:'Definido',sub:'Procedimientos correctos',color:'#10b981',y:124},
+      {n:2,txt:'Repetible',sub:'Prácticas de gestión',color:'#f59e0b',y:166},
+      {n:1,txt:'Inicial',sub:'Éxito por esfuerzo personal',color:'#ef4444',y:208}
+    ].map(l=>`
+      <rect x="${60+(l.n-1)*8}" y="${l.y}" width="${280-(l.n-1)*16}" height="35" rx="4" fill="${l.color}" opacity=".9"/>
+      <circle cx="${70+(l.n-1)*8}" cy="${l.y+17}" r="10" fill="rgba(255,255,255,.3)"/>
+      <text x="${70+(l.n-1)*8}" y="${l.y+21}" text-anchor="middle" fill="white" font-size="12" font-weight="bold">${l.n}</text>
+      <text x="${90+(l.n-1)*8}" y="${l.y+15}" fill="white" font-size="12" font-weight="bold">${l.txt}</text>
+      <text x="${90+(l.n-1)*8}" y="${l.y+28}" fill="white" font-size="9" opacity=".9">${l.sub}</text>
+    `).join('')}
+    <path d="M 350 220 L 350 55 M 345 62 L 350 50 L 355 62" stroke="#22d3ee" stroke-width="2" fill="none"/>
+    <text x="365" y="140" fill="#22d3ee" font-size="10" transform="rotate(-90 365 140)">MADUREZ</text>
+    <text x="200" y="265" text-anchor="middle" fill="#94a3b8" font-size="10">De caos (nivel 1) a mejora continua (nivel 5)</text>
+  </svg>`,
+
+  // ==================== TUCKMAN — Ciclo de equipo ====================
+  tuckman: `<svg viewBox="0 0 500 200" style="max-width:100%;">
+    <text x="250" y="20" text-anchor="middle" fill="#f1f5f9" font-size="14" font-weight="bold">Ciclo del equipo (Tuckman)</text>
+    ${[
+      {n:1,t:'Formación',e:'👋',c:'#3b82f6'},
+      {n:2,t:'Tormenta',e:'⚡',c:'#ef4444'},
+      {n:3,t:'Normalización',e:'🤝',c:'#f59e0b'},
+      {n:4,t:'Alto rendim.',e:'🚀',c:'#10b981'},
+      {n:5,t:'Despedida',e:'👋',c:'#94a3b8'}
+    ].map((e,i)=>`
+      <g transform="translate(${i*95+15},50)">
+        <circle cx="40" cy="45" r="38" fill="${e.c}" opacity=".9"/>
+        <text x="40" y="42" text-anchor="middle" fill="white" font-size="22">${e.e}</text>
+        <text x="40" y="58" text-anchor="middle" fill="white" font-size="9" font-weight="bold">${e.n}. ${e.t}</text>
+        ${i<4?`<path d="M 80 45 L 92 45 M 88 40 L 92 45 L 88 50" stroke="#22d3ee" stroke-width="2" fill="none"/>`:''}
+      </g>
+    `).join('')}
+    <text x="250" y="175" text-anchor="middle" fill="#94a3b8" font-size="10">Todo equipo pasa por estas 5 etapas antes de disolverse</text>
+  </svg>`,
+
+  // ==================== FIREWALL + DMZ ====================
+  firewalldmz: `<svg viewBox="0 0 500 220" style="max-width:100%;">
+    <text x="250" y="20" text-anchor="middle" fill="#f1f5f9" font-size="14" font-weight="bold">Arquitectura Firewall + DMZ</text>
+    <!-- Internet -->
+    <g transform="translate(20,60)">
+      <circle cx="35" cy="45" r="30" fill="#1e40af" opacity=".8"/>
+      <text x="35" y="42" text-anchor="middle" fill="white" font-size="20">🌐</text>
+      <text x="35" y="56" text-anchor="middle" fill="white" font-size="9" font-weight="bold">INTERNET</text>
+    </g>
+    <!-- Firewall 1 -->
+    <g transform="translate(100,80)">
+      <rect x="0" y="0" width="12" height="50" fill="#dc2626"/>
+      <rect x="0" y="0" width="12" height="10" fill="#7f1d1d"/>
+      <rect x="0" y="20" width="12" height="10" fill="#7f1d1d"/>
+      <rect x="0" y="40" width="12" height="10" fill="#7f1d1d"/>
+      <text x="6" y="70" text-anchor="middle" fill="#ef4444" font-size="9" font-weight="bold">FW</text>
+    </g>
+    <!-- DMZ -->
+    <g transform="translate(140,50)">
+      <rect x="0" y="0" width="140" height="120" rx="6" fill="rgba(251,191,36,.15)" stroke="#fbbf24" stroke-width="2" stroke-dasharray="5,3"/>
+      <text x="70" y="18" text-anchor="middle" fill="#fbbf24" font-size="11" font-weight="bold">DMZ</text>
+      <text x="70" y="30" text-anchor="middle" fill="#94a3b8" font-size="8">(Zona Desmilitarizada)</text>
+      <rect x="10" y="40" width="35" height="30" rx="3" fill="#059669"/>
+      <text x="27" y="58" text-anchor="middle" fill="white" font-size="8" font-weight="bold">WEB</text>
+      <rect x="52" y="40" width="35" height="30" rx="3" fill="#0891b2"/>
+      <text x="70" y="58" text-anchor="middle" fill="white" font-size="8" font-weight="bold">MAIL</text>
+      <rect x="94" y="40" width="35" height="30" rx="3" fill="#7c3aed"/>
+      <text x="112" y="58" text-anchor="middle" fill="white" font-size="8" font-weight="bold">DNS</text>
+      <text x="70" y="95" text-anchor="middle" fill="#94a3b8" font-size="8">Servidores expuestos</text>
+      <text x="70" y="108" text-anchor="middle" fill="#94a3b8" font-size="8">a Internet</text>
+    </g>
+    <!-- Firewall 2 -->
+    <g transform="translate(295,80)">
+      <rect x="0" y="0" width="12" height="50" fill="#dc2626"/>
+      <rect x="0" y="0" width="12" height="10" fill="#7f1d1d"/>
+      <rect x="0" y="20" width="12" height="10" fill="#7f1d1d"/>
+      <rect x="0" y="40" width="12" height="10" fill="#7f1d1d"/>
+      <text x="6" y="70" text-anchor="middle" fill="#ef4444" font-size="9" font-weight="bold">FW</text>
+    </g>
+    <!-- Red LAN -->
+    <g transform="translate(335,50)">
+      <rect x="0" y="0" width="150" height="120" rx="6" fill="rgba(16,185,129,.15)" stroke="#10b981" stroke-width="2"/>
+      <text x="75" y="18" text-anchor="middle" fill="#10b981" font-size="11" font-weight="bold">RED INTERNA (LAN)</text>
+      <rect x="15" y="30" width="40" height="30" rx="3" fill="#334155"/>
+      <text x="35" y="48" text-anchor="middle" fill="white" font-size="8">PCs</text>
+      <rect x="60" y="30" width="40" height="30" rx="3" fill="#334155"/>
+      <text x="80" y="48" text-anchor="middle" fill="white" font-size="8">Empleados</text>
+      <rect x="105" y="30" width="40" height="30" rx="3" fill="#7c2d12"/>
+      <text x="125" y="48" text-anchor="middle" fill="white" font-size="8" font-weight="bold">BBDD</text>
+      <text x="75" y="80" text-anchor="middle" fill="#94a3b8" font-size="8">Datos sensibles protegidos</text>
+      <text x="75" y="95" text-anchor="middle" fill="#f87171" font-size="8" font-weight="bold">DMZ ✗ NO puede acceder a LAN</text>
+    </g>
+    <text x="250" y="200" text-anchor="middle" fill="#94a3b8" font-size="10">Doble barrera: Internet → FW → DMZ → FW → LAN privada</text>
+  </svg>`,
+
+  // ==================== CONTRATOS ====================
+  contratos: `<svg viewBox="0 0 500 220" style="max-width:100%;">
+    <text x="250" y="20" text-anchor="middle" fill="#f1f5f9" font-size="14" font-weight="bold">4 tipos de contratos</text>
+    ${[
+      {t:'Precio Fijo',s:'Alcance/tiempo/costo definidos',c:'#10b981',x:20,y:45},
+      {t:'Costo Reembolsable',s:'Costos reales + margen',c:'#f59e0b',x:145,y:45},
+      {t:'Tiempo y Materiales',s:'Por horas + materiales',c:'#3b82f6',x:270,y:45},
+      {t:'Con Incentivos',s:'Bonos por desempeño',c:'#a855f7',x:395,y:45}
+    ].map(c=>`
+      <g transform="translate(${c.x},${c.y})">
+        <rect x="0" y="0" width="110" height="140" rx="8" fill="${c.c}" opacity=".9"/>
+        <rect x="15" y="15" width="80" height="60" fill="rgba(255,255,255,.15)" stroke="rgba(255,255,255,.4)" stroke-width="1"/>
+        <line x1="20" y1="30" x2="90" y2="30" stroke="white" opacity=".7"/>
+        <line x1="20" y1="40" x2="90" y2="40" stroke="white" opacity=".7"/>
+        <line x1="20" y1="50" x2="80" y2="50" stroke="white" opacity=".7"/>
+        <line x1="20" y1="60" x2="90" y2="60" stroke="white" opacity=".7"/>
+        <text x="55" y="95" text-anchor="middle" fill="white" font-size="11" font-weight="bold">${c.t}</text>
+        <text x="55" y="112" text-anchor="middle" fill="white" font-size="8" opacity=".9">${c.s.substring(0,20)}</text>
+        <text x="55" y="125" text-anchor="middle" fill="white" font-size="8" opacity=".9">${c.s.substring(20)}</text>
+      </g>
+    `).join('')}
+    <text x="250" y="205" text-anchor="middle" fill="#94a3b8" font-size="10">Elegís según certeza del alcance y del riesgo</text>
+  </svg>`,
+
+  // ==================== AVG - Curva ====================
+  avg: `<svg viewBox="0 0 500 260" style="max-width:100%;">
+    <text x="250" y="20" text-anchor="middle" fill="#f1f5f9" font-size="14" font-weight="bold">Análisis del Valor Ganado (AVG)</text>
+    <!-- Ejes -->
+    <line x1="60" y1="60" x2="60" y2="210" stroke="#94a3b8" stroke-width="2"/>
+    <line x1="60" y1="210" x2="460" y2="210" stroke="#94a3b8" stroke-width="2"/>
+    <text x="20" y="140" fill="#94a3b8" font-size="11" transform="rotate(-90 20 140)">Costo/Trabajo</text>
+    <text x="250" y="230" text-anchor="middle" fill="#94a3b8" font-size="11">Tiempo</text>
+    <!-- CPTC (línea planeada, azul) -->
+    <polyline points="60,190 130,155 200,120 270,90 340,70 410,55" fill="none" stroke="#3b82f6" stroke-width="3"/>
+    <text x="415" y="55" fill="#3b82f6" font-size="11" font-weight="bold">CPTC</text>
+    <text x="415" y="68" fill="#3b82f6" font-size="9">(planeado)</text>
+    <!-- CPTR (línea real, verde/roja - atrasado) -->
+    <polyline points="60,190 130,175 200,155 270,140 340,120 410,105" fill="none" stroke="#f59e0b" stroke-width="3" stroke-dasharray="6,3"/>
+    <text x="415" y="105" fill="#f59e0b" font-size="11" font-weight="bold">CPTR</text>
+    <text x="415" y="118" fill="#f59e0b" font-size="9">(real)</text>
+    <!-- Marca PAC -->
+    <line x1="410" y1="35" x2="410" y2="45" stroke="#a855f7" stroke-width="2"/>
+    <line x1="405" y1="40" x2="415" y2="40" stroke="#a855f7" stroke-width="2"/>
+    <text x="410" y="30" text-anchor="middle" fill="#a855f7" font-size="10" font-weight="bold">PAC</text>
+    <!-- Gap indicando atraso -->
+    <line x1="270" y1="90" x2="270" y2="140" stroke="#ef4444" stroke-width="2" stroke-dasharray="3,3"/>
+    <text x="285" y="120" fill="#ef4444" font-size="10" font-weight="bold">← ATRASO</text>
+    <!-- Leyenda -->
+    <text x="70" y="60" fill="#a5f3fc" font-size="10">CPTC: lo planificado · CPTR: lo realmente hecho</text>
+    <text x="70" y="255" fill="#94a3b8" font-size="10">Si CPTR &lt; CPTC → vamos atrasados. Si CPTR &gt; CPTC → adelantados.</text>
+  </svg>`,
+
+  // ==================== DATOS SENSIBLES ====================
+  datossensibles: `<svg viewBox="0 0 500 220" style="max-width:100%;">
+    <text x="250" y="20" text-anchor="middle" fill="#f1f5f9" font-size="14" font-weight="bold">Datos SENSIBLES — Ley 25.326</text>
+    ${[
+      {t:'Religión',e:'✝️☪️',c:'#a855f7',x:30,y:50},
+      {t:'Ideología política',e:'🏛️',c:'#ef4444',x:130,y:50},
+      {t:'Pertenencia racial',e:'🌍',c:'#f59e0b',x:230,y:50},
+      {t:'Orientación sexual',e:'🏳️‍🌈',c:'#ec4899',x:330,y:50},
+      {t:'Datos de salud',e:'⚕️',c:'#10b981',x:430,y:50}
+    ].map(d=>`
+      <g transform="translate(${d.x-25},${d.y})">
+        <rect x="0" y="0" width="70" height="90" rx="10" fill="${d.c}" opacity=".85"/>
+        <text x="35" y="35" text-anchor="middle" font-size="24">${d.e}</text>
+        <text x="35" y="62" text-anchor="middle" fill="white" font-size="9" font-weight="bold">${d.t.substring(0,10)}</text>
+        ${d.t.length > 10 ? `<text x="35" y="73" text-anchor="middle" fill="white" font-size="9" font-weight="bold">${d.t.substring(10)}</text>` : ''}
+      </g>
+    `).join('')}
+    <g transform="translate(160,160)">
+      <rect x="0" y="0" width="180" height="45" rx="10" fill="rgba(239,68,68,.15)" stroke="#ef4444" stroke-width="2"/>
+      <text x="90" y="20" text-anchor="middle" fill="#f87171" font-size="11" font-weight="bold">⚠️ Protección REFORZADA</text>
+      <text x="90" y="35" text-anchor="middle" fill="#f87171" font-size="9">Requiere consentimiento EXPRESO</text>
+    </g>
+  </svg>`,
+
+  // ==================== ESTRATEGIAS DE RIESGO ====================
+  estrategias: `<svg viewBox="0 0 500 220" style="max-width:100%;">
+    <text x="250" y="20" text-anchor="middle" fill="#f1f5f9" font-size="14" font-weight="bold">4 estrategias para enfrentar un riesgo</text>
+    ${[
+      {t:'ANULAR',s:'Eliminar la causa',e:'🚫',c:'#dc2626',x:30},
+      {t:'MITIGAR',s:'Reducir prob/impacto',e:'📉',c:'#f59e0b',x:150},
+      {t:'ACEPTAR',s:'Asumir consecuencias',e:'🤝',c:'#3b82f6',x:270},
+      {t:'TRANSFERIR',s:'Delegar a tercero',e:'📤',c:'#10b981',x:390}
+    ].map(s=>`
+      <g transform="translate(${s.x},50)">
+        <rect x="0" y="0" width="100" height="130" rx="10" fill="${s.c}" opacity=".9"/>
+        <text x="50" y="45" text-anchor="middle" font-size="36">${s.e}</text>
+        <text x="50" y="80" text-anchor="middle" fill="white" font-size="13" font-weight="bold">${s.t}</text>
+        <text x="50" y="105" text-anchor="middle" fill="white" font-size="9" opacity=".95">${s.s.substring(0,12)}</text>
+        ${s.s.length > 12 ? `<text x="50" y="118" text-anchor="middle" fill="white" font-size="9" opacity=".95">${s.s.substring(12)}</text>` : ''}
+      </g>
+    `).join('')}
+    <text x="250" y="205" text-anchor="middle" fill="#94a3b8" font-size="10">Ejemplo TRANSFERIR: contratar un seguro contra incendios</text>
+  </svg>`,
+
+  // ==================== TIPOS DE PRUEBAS CADENA ====================
+  pruebas: `<svg viewBox="0 0 500 220" style="max-width:100%;">
+    <text x="250" y="20" text-anchor="middle" fill="#f1f5f9" font-size="14" font-weight="bold">4 niveles de pruebas</text>
+    ${[
+      {t:'UNIDAD',s:'Componentes aislados',e:'🧪',c:'#10b981'},
+      {t:'INTEGRACIÓN',s:'Entre módulos',e:'🔌',c:'#f59e0b'},
+      {t:'VALIDACIÓN',s:'Cumple requisitos',e:'✅',c:'#3b82f6'},
+      {t:'SISTEMA',s:'Todo integrado',e:'🌐',c:'#a855f7'}
+    ].map((p,i)=>`
+      <g transform="translate(${i*115+35},60)">
+        <rect x="0" y="0" width="100" height="110" rx="10" fill="${p.c}" opacity=".9"/>
+        <text x="50" y="45" text-anchor="middle" font-size="30">${p.e}</text>
+        <text x="50" y="75" text-anchor="middle" fill="white" font-size="12" font-weight="bold">${p.t}</text>
+        <text x="50" y="95" text-anchor="middle" fill="white" font-size="8">${p.s}</text>
+        ${i<3?`<text x="112" y="55" text-anchor="middle" fill="#22d3ee" font-size="20" font-weight="bold">→</text>`:''}
+      </g>
+    `).join('')}
+    <text x="250" y="200" text-anchor="middle" fill="#94a3b8" font-size="10">Se prueban en cadena: primero unidad, después el todo</text>
+  </svg>`,
+
+  // ==================== AUDITOR VS PERITO ====================
+  auditor_perito: `<svg viewBox="0 0 500 240" style="max-width:100%;">
+    <text x="250" y="20" text-anchor="middle" fill="#f1f5f9" font-size="14" font-weight="bold">Auditor vs Perito Informático</text>
+    <!-- Auditor -->
+    <g transform="translate(30,50)">
+      <rect x="0" y="0" width="200" height="170" rx="12" fill="#059669" opacity=".9"/>
+      <text x="100" y="35" text-anchor="middle" font-size="42">🔍</text>
+      <text x="100" y="75" text-anchor="middle" fill="white" font-size="16" font-weight="bold">AUDITOR</text>
+      <line x1="30" y1="90" x2="170" y2="90" stroke="rgba(255,255,255,.4)"/>
+      <text x="100" y="112" text-anchor="middle" fill="white" font-size="11">Contexto profesional</text>
+      <text x="100" y="130" text-anchor="middle" fill="white" font-size="11">/ empresarial</text>
+      <text x="100" y="152" text-anchor="middle" fill="white" font-size="11">Evaluación técnica</text>
+      <text x="100" y="165" text-anchor="middle" fill="#fde68a" font-size="10" font-weight="bold">Recomendaciones</text>
+    </g>
+    <!-- VS -->
+    <text x="250" y="140" text-anchor="middle" fill="#fbbf24" font-size="20" font-weight="bold">VS</text>
+    <!-- Perito -->
+    <g transform="translate(270,50)">
+      <rect x="0" y="0" width="200" height="170" rx="12" fill="#7c3aed" opacity=".9"/>
+      <text x="100" y="35" text-anchor="middle" font-size="42">⚖️</text>
+      <text x="100" y="75" text-anchor="middle" fill="white" font-size="16" font-weight="bold">PERITO</text>
+      <line x1="30" y1="90" x2="170" y2="90" stroke="rgba(255,255,255,.4)"/>
+      <text x="100" y="112" text-anchor="middle" fill="white" font-size="11">Contexto JUDICIAL</text>
+      <text x="100" y="130" text-anchor="middle" fill="white" font-size="11">(perito judicial)</text>
+      <text x="100" y="152" text-anchor="middle" fill="white" font-size="11">Asesora al juez</text>
+      <text x="100" y="165" text-anchor="middle" fill="#fde68a" font-size="10" font-weight="bold">Dictamen pericial</text>
+    </g>
   </svg>`,
 
   seguridad: `<svg viewBox="0 0 500 220" style="max-width:100%;">
@@ -3208,6 +3497,23 @@ function showTopic(topicId) {
     imgContainer.style.display = 'block';
   } else {
     imgContainer.style.display = 'none';
+  }
+
+  // SVGs adicionales del tema
+  const extraSvgsEl = document.getElementById('learn-extra-svgs');
+  if (currentTopic.extraSvgs && currentTopic.extraSvgs.length > 0) {
+    extraSvgsEl.innerHTML = currentTopic.extraSvgs.map(ex => {
+      const svg = IMAGES[ex.svg] || '';
+      return `
+        <div style="background: var(--bg-1); border-radius: 10px; padding: 15px; margin-bottom: 15px; text-align: center;">
+          ${svg}
+          <div style="color: var(--text-dim); font-size: 13px; margin-top: 8px;">${ex.caption}</div>
+        </div>
+      `;
+    }).join('');
+    extraSvgsEl.style.display = 'block';
+  } else {
+    extraSvgsEl.style.display = 'none';
   }
 
   // Ejemplos concretos
