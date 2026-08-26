@@ -580,6 +580,9 @@ body { overscroll-behavior: contain; }
     <button class="btn btn-primary" onclick="startExamMode()" style="flex: 1; min-width: 200px; background: linear-gradient(135deg, #ef4444, #dc2626); color: white;">
       ⏱️ Modo Examen
     </button>
+    <button class="btn btn-primary" onclick="openStory()" style="flex: 1; min-width: 200px; background: linear-gradient(135deg, #ec4899, #db2777); color: white;">
+      🎬 El Caso (Historia)
+    </button>
     <button class="btn btn-secondary" id="btn-review" onclick="startMode('review')" style="flex: 1; min-width: 200px; display: none;">
       🔁 Reforzar errores
     </button>
@@ -589,6 +592,23 @@ body { overscroll-behavior: contain; }
     <button class="btn btn-secondary" onclick="resetProgress()" title="Borrar progreso">
       ↺ Reiniciar
     </button>
+  </div>
+</div>
+
+<!-- Pantalla: Storytelling del caso SoftFactor21 -->
+<div id="screen-story" class="screen">
+  <div style="margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+    <button class="btn btn-secondary" onclick="goMenu()">← Menú</button>
+    <h2 style="font-size: 18px; margin: 0; flex: 1;">🎬 El Caso SoftFactor21</h2>
+    <span id="story-counter" style="color: var(--text-dim); font-size: 13px;">1 / 10</span>
+  </div>
+  <div class="question-card" style="padding: 0; overflow: hidden;">
+    <div id="story-slide" style="padding: 30px 25px; min-height: 500px; display: flex; flex-direction: column;"></div>
+    <div style="display: flex; gap: 8px; padding: 15px; background: var(--bg-1); border-top: 1px solid var(--border);">
+      <button class="btn btn-secondary" id="story-prev" onclick="storyPrev()" style="flex: 1;">← Anterior</button>
+      <button class="btn btn-primary" id="story-next" onclick="storyNext()" style="flex: 1;">Siguiente →</button>
+    </div>
+    <div id="story-dots" style="display: flex; justify-content: center; gap: 6px; padding: 12px; background: var(--bg-1);"></div>
   </div>
 </div>
 
@@ -2744,6 +2764,381 @@ function showStats() {
 
   showScreen('stats');
 }
+
+// ============================================
+// STORYTELLING DEL CASO SOFTFACTOR21
+// ============================================
+const STORY_SLIDES = [
+  {
+    title: '🏢 SoftFactor21',
+    subtitle: 'La historia empieza acá',
+    svg: `<svg viewBox="0 0 400 260" style="max-width:100%;">
+      <defs><linearGradient id="sky1" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#1e40af"/></linearGradient></defs>
+      <rect x="0" y="0" width="400" height="180" fill="url(#sky1)"/>
+      <rect x="0" y="180" width="400" height="80" fill="#4b5563"/>
+      <!-- Edificio principal -->
+      <rect x="140" y="60" width="120" height="150" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+      ${Array.from({length:5},(_,r)=>Array.from({length:4},(_,c)=>
+        `<rect x="${152+c*22}" y="${75+r*25}" width="14" height="15" fill="${Math.random()>0.4?'#fbbf24':'#334155'}"/>`
+      ).join('')).join('')}
+      <text x="200" y="45" text-anchor="middle" fill="#22d3ee" font-size="18" font-weight="bold">SoftFactor21</text>
+      <!-- Nubes -->
+      <ellipse cx="50" cy="50" rx="30" ry="10" fill="white" opacity=".7"/>
+      <ellipse cx="340" cy="70" rx="35" ry="12" fill="white" opacity=".7"/>
+      <!-- Cartel -->
+      <rect x="170" y="215" width="60" height="30" fill="#fbbf24"/>
+      <text x="200" y="235" text-anchor="middle" fill="#0f172a" font-size="10" font-weight="bold">EST. 2000</text>
+    </svg>`,
+    text: '<p style="font-size:16px; line-height:1.7;">Vamos a conocer <b>SoftFactor21</b>, una empresa argentina de desarrollo de software que va a ser protagonista de todo el examen. Todo lo que estudies acá conviene aterrizarlo a este caso.</p><p style="margin-top:12px; color:var(--text-dim); font-size:14px;">Fundada en <b>2000</b> · Capitales nacionales · Con crecimiento explosivo</p>',
+    key: '💡 Este caso ya cayó en 2025 y probablemente vuelva a caer.'
+  },
+  {
+    title: '👨‍💼 Los dueños',
+    subtitle: 'Juan Pablo y Nicolás',
+    svg: `<svg viewBox="0 0 400 260" style="max-width:100%;">
+      <!-- Fondo oficina -->
+      <rect x="0" y="0" width="400" height="260" fill="#1e293b"/>
+      <line x1="0" y1="180" x2="400" y2="180" stroke="#475569" stroke-width="1"/>
+      <!-- Diploma MBA en la pared -->
+      <rect x="30" y="30" width="70" height="55" fill="#fbbf24" stroke="#78350f" stroke-width="2"/>
+      <text x="65" y="55" text-anchor="middle" fill="#78350f" font-size="8" font-weight="bold">MBA</text>
+      <text x="65" y="70" text-anchor="middle" fill="#78350f" font-size="7">Univ. Siglo 21</text>
+      <!-- Juan Pablo -->
+      <g transform="translate(120,80)">
+        <circle cx="30" cy="30" r="25" fill="#e6b89c"/>
+        <rect x="8" y="55" width="44" height="70" rx="6" fill="#1e40af"/>
+        <rect x="12" y="60" width="36" height="8" fill="#f8fafc"/>
+        <circle cx="22" cy="28" r="2" fill="#000"/>
+        <circle cx="38" cy="28" r="2" fill="#000"/>
+        <path d="M 22 40 Q 30 45 38 40" fill="none" stroke="#000" stroke-width="1.5"/>
+        <text x="30" y="140" text-anchor="middle" fill="#22d3ee" font-size="12" font-weight="bold">Juan Pablo</text>
+        <text x="30" y="155" text-anchor="middle" fill="#94a3b8" font-size="9">Dueño · Visionario</text>
+      </g>
+      <!-- Nicolás -->
+      <g transform="translate(230,80)">
+        <circle cx="30" cy="30" r="25" fill="#e6b89c"/>
+        <rect x="8" y="55" width="44" height="70" rx="6" fill="#059669"/>
+        <rect x="12" y="60" width="36" height="8" fill="#f8fafc"/>
+        <path d="M 15 15 Q 30 5 45 15" fill="#1f2937"/>
+        <circle cx="22" cy="28" r="2" fill="#000"/>
+        <circle cx="38" cy="28" r="2" fill="#000"/>
+        <path d="M 22 40 Q 30 45 38 40" fill="none" stroke="#000" stroke-width="1.5"/>
+        <text x="30" y="140" text-anchor="middle" fill="#22d3ee" font-size="12" font-weight="bold">Nicolás</text>
+        <text x="30" y="155" text-anchor="middle" fill="#94a3b8" font-size="9">Dueño · Redes académicas</text>
+      </g>
+    </svg>`,
+    text: '<p><b>Juan Pablo</b> fundó la empresa mientras cursaba su <b>MBA en Universidad Siglo 21</b>. Su estrategia: apalancarse en nuevas tecnologías y tendencias. Cree que la clave del crecimiento está en <i>combinar código abierto con software propietario</i>.</p><p style="margin-top:10px;"><b>Nicolás</b> es el otro dueño. Su rol clave: mantener vínculo con instituciones educativas. Confirma que <b>faltan programadores</b> (5.000 vacantes/año en Argentina).</p>',
+    key: '🎯 Enunciado 1 puede preguntar por el enfoque de Juan Pablo sobre open source + propietario.'
+  },
+  {
+    title: '🏗️ Estructura de la empresa',
+    subtitle: '2 unidades de negocio independientes',
+    svg: `<svg viewBox="0 0 400 260" style="max-width:100%;">
+      <text x="200" y="20" text-anchor="middle" fill="#f1f5f9" font-size="14" font-weight="bold">SoftFactor21</text>
+      <line x1="200" y1="30" x2="200" y2="55" stroke="#22d3ee" stroke-width="2"/>
+      <line x1="80" y1="55" x2="320" y2="55" stroke="#22d3ee" stroke-width="2"/>
+      <line x1="80" y1="55" x2="80" y2="75" stroke="#22d3ee" stroke-width="2"/>
+      <line x1="320" y1="55" x2="320" y2="75" stroke="#22d3ee" stroke-width="2"/>
+      <!-- Unidad 1: Desarrollo -->
+      <g transform="translate(10,75)">
+        <rect x="0" y="0" width="140" height="160" rx="10" fill="#1e40af" opacity=".9"/>
+        <text x="70" y="20" text-anchor="middle" fill="white" font-size="12" font-weight="bold">💻 Desarrollo</text>
+        <text x="70" y="35" text-anchor="middle" fill="white" font-size="10">Software Factory</text>
+        <text x="70" y="55" text-anchor="middle" fill="#fbbf24" font-size="11" font-weight="bold">Alfredo (Gerente)</text>
+        <text x="70" y="72" text-anchor="middle" fill="white" font-size="9">↳ 12 personas</text>
+        <line x1="15" y1="82" x2="125" y2="82" stroke="white" opacity=".3"/>
+        <text x="70" y="97" text-anchor="middle" fill="#a5f3fc" font-size="10" font-weight="bold">Micaela</text>
+        <text x="70" y="110" text-anchor="middle" fill="white" font-size="9">7 programadores</text>
+        <text x="70" y="128" text-anchor="middle" fill="#fca5a5" font-size="10" font-weight="bold">Raúl</text>
+        <text x="70" y="141" text-anchor="middle" fill="white" font-size="9">3 en testing office</text>
+        <text x="70" y="154" text-anchor="middle" fill="#94a3b8" font-size="8">(sin auto. de pruebas)</text>
+      </g>
+      <!-- Unidad 2: Soluciones Tecnológicas -->
+      <g transform="translate(250,75)">
+        <rect x="0" y="0" width="140" height="160" rx="10" fill="#059669" opacity=".9"/>
+        <text x="70" y="20" text-anchor="middle" fill="white" font-size="12" font-weight="bold">🏛️ Soluciones Tec.</text>
+        <text x="70" y="35" text-anchor="middle" fill="white" font-size="10">(Sector Público)</text>
+        <text x="70" y="55" text-anchor="middle" fill="#fbbf24" font-size="11" font-weight="bold">Laura (Gerente)</text>
+        <text x="70" y="72" text-anchor="middle" fill="white" font-size="9">↳ 4 personas</text>
+        <line x1="15" y1="82" x2="125" y2="82" stroke="white" opacity=".3"/>
+        <text x="70" y="98" text-anchor="middle" fill="white" font-size="10">Relevan necesidades</text>
+        <text x="70" y="112" text-anchor="middle" fill="white" font-size="10">Diseñan soluciones</text>
+        <text x="70" y="126" text-anchor="middle" fill="white" font-size="10">Enlatados o a medida</text>
+        <text x="70" y="150" text-anchor="middle" fill="#fde68a" font-size="9" font-weight="bold">100% clientes públicos</text>
+      </g>
+      <!-- Base unificada -->
+      <rect x="60" y="240" width="280" height="18" rx="3" fill="#334155"/>
+      <text x="200" y="252" text-anchor="middle" fill="#94a3b8" font-size="9">Base unificada: Capital Humano + Gestión de Calidad</text>
+    </svg>`,
+    text: '<p>SoftFactor21 se organiza en <b>2 unidades de negocio independientes</b>, pero comparten la gestión de capital humano y de calidad.</p><p style="margin-top:10px;"><b>Desarrollo</b> es una "software factory" liderada por <b>Alfredo</b>, que si bien profesionaliza sus procesos, <i>aún no logra estandarizarlos</i>. Ese es un problema pendiente.</p>',
+    key: '⚠️ Alfredo aún no estandariza procesos → oportunidad para aplicar Ingeniería de Software y CMM.'
+  },
+  {
+    title: '👥 Los personajes',
+    subtitle: 'Los que van a aparecer en las preguntas',
+    svg: `<svg viewBox="0 0 400 300" style="max-width:100%;">
+      ${[
+        {name:'Alfredo', role:'Gerente Desarrollo', color:'#1e40af', x:60, y:30, badge:'12 pers.'},
+        {name:'Micaela', role:'Lic. Informática', color:'#059669', x:220, y:30, badge:'7 progrs.'},
+        {name:'Raúl', role:'Testing Office', color:'#dc2626', x:60, y:170, badge:'3 pers.'},
+        {name:'Laura', role:'Gte. Soluc. Tec.', color:'#a855f7', x:220, y:170, badge:'4 pers.'}
+      ].map(p=>`
+        <g transform="translate(${p.x},${p.y})">
+          <rect x="0" y="0" width="120" height="120" rx="12" fill="${p.color}" opacity=".9"/>
+          <circle cx="60" cy="40" r="22" fill="#e6b89c"/>
+          <circle cx="52" cy="38" r="2" fill="#000"/>
+          <circle cx="68" cy="38" r="2" fill="#000"/>
+          <path d="M 52 48 Q 60 52 68 48" fill="none" stroke="#000" stroke-width="1.5"/>
+          <text x="60" y="82" text-anchor="middle" fill="white" font-size="13" font-weight="bold">${p.name}</text>
+          <text x="60" y="97" text-anchor="middle" fill="white" font-size="9">${p.role}</text>
+          <rect x="30" y="102" width="60" height="14" rx="7" fill="rgba(0,0,0,.35)"/>
+          <text x="60" y="112" text-anchor="middle" fill="#fbbf24" font-size="9" font-weight="bold">${p.badge}</text>
+        </g>
+      `).join('')}
+    </svg>`,
+    text: '<p><b>Alfredo</b>: Gerente de Desarrollo, ex programador, gran experiencia, pero <b>no estandariza procesos</b>.</p><p style="margin-top:8px;"><b>Micaela</b>: Lic. en Informática con experiencia en gestión de proyectos. Su equipo es flexible.</p><p style="margin-top:8px;"><b>Raúl</b>: Idóneo, con mucha experiencia. Su equipo aplica técnicas de casos de prueba pero <b>NO tiene testing automatizado</b>.</p><p style="margin-top:8px;"><b>Laura</b>: Gerente de Soluciones Tecnológicas. Equipo de estudiantes avanzados. Gran habilidad para definir requerimientos.</p>',
+    key: '📝 Puede preguntar cuántas personas hay en cada equipo, o quién lidera cada área.'
+  },
+  {
+    title: '🎯 El gran proyecto',
+    subtitle: 'Sistema de Estacionamiento Medido',
+    svg: `<svg viewBox="0 0 400 260" style="max-width:100%;">
+      <text x="200" y="20" text-anchor="middle" fill="#f1f5f9" font-size="14" font-weight="bold">Ecosistema de 3 componentes</text>
+      <!-- App móvil -->
+      <g transform="translate(30,50)">
+        <rect x="20" y="0" width="80" height="130" rx="12" fill="#1e293b" stroke="#22d3ee" stroke-width="2"/>
+        <rect x="28" y="15" width="64" height="90" fill="#0f172a"/>
+        <circle cx="60" cy="120" r="5" fill="#334155"/>
+        <rect x="35" y="25" width="50" height="6" fill="#22d3ee"/>
+        <rect x="35" y="40" width="30" height="4" fill="#94a3b8"/>
+        <rect x="35" y="50" width="50" height="20" fill="#059669"/>
+        <text x="60" y="63" text-anchor="middle" fill="white" font-size="8" font-weight="bold">PAGAR</text>
+        <text x="60" y="155" text-anchor="middle" fill="#22d3ee" font-size="11" font-weight="bold">📱 App Móvil</text>
+        <text x="60" y="168" text-anchor="middle" fill="#94a3b8" font-size="9">Ciudadano</text>
+      </g>
+      <!-- Web municipio -->
+      <g transform="translate(155,50)">
+        <rect x="0" y="0" width="120" height="90" rx="6" fill="#1e293b" stroke="#059669" stroke-width="2"/>
+        <rect x="0" y="0" width="120" height="12" fill="#059669"/>
+        <circle cx="8" cy="6" r="2" fill="#ef4444"/>
+        <circle cx="16" cy="6" r="2" fill="#fbbf24"/>
+        <circle cx="24" cy="6" r="2" fill="#10b981"/>
+        <rect x="8" y="20" width="60" height="6" fill="#22d3ee"/>
+        <rect x="8" y="32" width="80" height="4" fill="#94a3b8"/>
+        <rect x="8" y="40" width="80" height="4" fill="#94a3b8"/>
+        <rect x="8" y="48" width="60" height="4" fill="#94a3b8"/>
+        <rect x="8" y="60" width="40" height="20" fill="#059669"/>
+        <rect x="55" y="60" width="40" height="20" fill="#334155"/>
+        <text x="60" y="105" text-anchor="middle" fill="#059669" font-size="11" font-weight="bold">💻 Web</text>
+        <text x="60" y="118" text-anchor="middle" fill="#94a3b8" font-size="9">Municipio</text>
+      </g>
+      <!-- Kiosco de carga -->
+      <g transform="translate(295,50)">
+        <rect x="20" y="0" width="70" height="110" rx="6" fill="#78350f"/>
+        <rect x="25" y="10" width="60" height="55" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+        <text x="55" y="30" text-anchor="middle" fill="#fbbf24" font-size="9" font-weight="bold">CARGAR</text>
+        <rect x="30" y="35" width="15" height="10" fill="#f59e0b"/>
+        <rect x="47" y="35" width="15" height="10" fill="#f59e0b"/>
+        <rect x="64" y="35" width="15" height="10" fill="#f59e0b"/>
+        <rect x="30" y="48" width="49" height="10" fill="#22d3ee"/>
+        <rect x="35" y="75" width="40" height="8" fill="#374151"/>
+        <rect x="35" y="87" width="40" height="15" fill="#0f172a"/>
+        <text x="55" y="135" text-anchor="middle" fill="#f59e0b" font-size="11" font-weight="bold">🏪 Kiosco</text>
+        <text x="55" y="148" text-anchor="middle" fill="#94a3b8" font-size="9">Carga presencial</text>
+      </g>
+      <!-- Líneas conectando -->
+      <path d="M 110 100 Q 140 100 155 90" fill="none" stroke="#22d3ee" stroke-width="2" stroke-dasharray="4,4"/>
+      <path d="M 275 95 Q 300 95 315 100" fill="none" stroke="#22d3ee" stroke-width="2" stroke-dasharray="4,4"/>
+      <text x="200" y="240" text-anchor="middle" fill="#94a3b8" font-size="10">Roadmap: 2 años · Municipio del interior</text>
+    </svg>`,
+    text: '<p>Laura tiene el detalle del plan: un <b>Sistema de Estacionamiento Medido</b> con 3 componentes:</p><ul style="padding-left:20px; margin-top:10px;"><li><b>App móvil</b> para el ciudadano</li><li><b>Aplicación web</b> para el municipio</li><li><b>App para kioscos</b> de carga presencial</li></ul><p style="margin-top:10px;">Es parte de un roadmap de <b>2 años</b> para informatizar todas las áreas de una municipalidad del interior.</p>',
+    key: '💡 Por la complejidad (multi-app + requisitos cambiantes) conviene modelo iterativo e incremental, NO cascada.'
+  },
+  {
+    title: '💰 La decisión estratégica',
+    subtitle: 'Sistema dedicado vs SaaS escalable',
+    svg: `<svg viewBox="0 0 400 260" style="max-width:100%;">
+      <text x="200" y="18" text-anchor="middle" fill="#f1f5f9" font-size="14" font-weight="bold">¿Qué modelo de negocio elegir?</text>
+      <!-- Opción A: Dedicado -->
+      <g transform="translate(20,35)">
+        <rect x="0" y="0" width="160" height="200" rx="12" fill="#374151" stroke="#94a3b8" stroke-width="2"/>
+        <text x="80" y="25" text-anchor="middle" fill="#94a3b8" font-size="14" font-weight="bold">Opción A</text>
+        <text x="80" y="45" text-anchor="middle" fill="white" font-size="13" font-weight="bold">Sistema Dedicado</text>
+        <line x1="20" y1="55" x2="140" y2="55" stroke="#475569"/>
+        <text x="80" y="80" text-anchor="middle" fill="white" font-size="11">1 solo cliente</text>
+        <text x="80" y="100" text-anchor="middle" fill="white" font-size="11">(Este municipio)</text>
+        <text x="80" y="130" text-anchor="middle" fill="#94a3b8" font-size="10">Menor riesgo inicial</text>
+        <text x="80" y="150" text-anchor="middle" fill="#94a3b8" font-size="10">Sin escalabilidad</text>
+        <text x="80" y="180" text-anchor="middle" fill="#f87171" font-size="24" font-weight="bold">$</text>
+      </g>
+      <!-- Opción B: SaaS -->
+      <g transform="translate(220,35)">
+        <rect x="0" y="0" width="160" height="200" rx="12" fill="#059669" stroke="#10b981" stroke-width="2"/>
+        <text x="80" y="25" text-anchor="middle" fill="#a7f3d0" font-size="14" font-weight="bold">Opción B</text>
+        <text x="80" y="45" text-anchor="middle" fill="white" font-size="13" font-weight="bold">SaaS ☁️</text>
+        <line x1="20" y1="55" x2="140" y2="55" stroke="#065f46"/>
+        <text x="80" y="80" text-anchor="middle" fill="white" font-size="11">Software como servicio</text>
+        <text x="80" y="100" text-anchor="middle" fill="white" font-size="11">a MÚLTIPLES municipios</text>
+        <text x="80" y="130" text-anchor="middle" fill="#a7f3d0" font-size="10">Soporte + mantenimiento</text>
+        <text x="80" y="150" text-anchor="middle" fill="#a7f3d0" font-size="10">Crecimiento escalable</text>
+        <text x="80" y="180" text-anchor="middle" fill="#fde68a" font-size="24" font-weight="bold">$$$$</text>
+      </g>
+      <text x="200" y="253" text-anchor="middle" fill="#fbbf24" font-size="11" font-weight="bold">Laura recomienda: Opción B (SaaS)</text>
+    </svg>`,
+    text: '<p>Laura plantea 2 alternativas:</p><ul style="padding-left:20px; margin-top:10px;"><li><b>A) Sistema dedicado</b>: solo para este municipio. Simple pero sin crecimiento.</li><li><b>B) SaaS</b>: <i>Software as a Service</i>. Se ofrece a múltiples municipios con soporte continuo. <b>Escalable.</b></li></ul><p style="margin-top:10px;">Si eligen SaaS, dice Laura: <i>"la plataforma tendrá una posibilidad de crecimiento al ritmo de los clientes que se presenten, por lo que necesitamos definir firmemente un proceso de desarrollo"</i>.</p>',
+    key: '🎯 SaaS + requisitos cambiantes = SCRUM + modelo iterativo + open source combinado con propietario.'
+  },
+  {
+    title: '⚡ El desafío del talento',
+    subtitle: 'Faltan programadores',
+    svg: `<svg viewBox="0 0 400 260" style="max-width:100%;">
+      <text x="200" y="25" text-anchor="middle" fill="#f1f5f9" font-size="15" font-weight="bold">Cada año en Argentina...</text>
+      <!-- Persona con signo de interrogación arriba -->
+      <g transform="translate(80,70)">
+        ${Array.from({length:5},(_,i)=>`
+          <g transform="translate(${i*45},0)">
+            <circle cx="15" cy="15" r="12" fill="${i<3?'#dc2626':'#e6b89c'}"/>
+            <rect x="5" y="27" width="20" height="35" rx="4" fill="${i<3?'#7f1d1d':'#059669'}"/>
+            ${i<3?'<text x="15" y="20" text-anchor="middle" fill="white" font-size="12" font-weight="bold">?</text>':''}
+          </g>
+        `).join('')}
+      </g>
+      <!-- Gran número -->
+      <text x="200" y="180" text-anchor="middle" fill="#fbbf24" font-size="60" font-weight="bold">5.000</text>
+      <text x="200" y="210" text-anchor="middle" fill="#f8fafc" font-size="14" font-weight="bold">puestos VACANTES en tecnología</text>
+      <text x="200" y="230" text-anchor="middle" fill="#94a3b8" font-size="11">Preocupación a nivel academia y país</text>
+      <text x="200" y="250" text-anchor="middle" fill="#f87171" font-size="10">⚠️ Riesgo de PROYECTO (falta de recursos humanos)</text>
+    </svg>`,
+    text: '<p><b>Nicolás</b>, que está en contacto con instituciones educativas, alerta: cada año quedan <b>5.000 puestos vacantes</b> en tecnología en Argentina.</p><p style="margin-top:10px;">Para el nuevo proyecto SaaS, Laura dice que hay que incorporar personas y definir procedimientos que incluyan <b>trabajo freelance</b>.</p><p style="margin-top:10px; padding:10px; background:rgba(239,68,68,.1); border-left:3px solid #ef4444; border-radius:6px;"><b>Riesgo identificado:</b> Ausencia de programadores clave durante el desarrollo.<br>Probabilidad: <b>Alta (5)</b> · Impacto: <b>Alto (4)</b> · Exposición: <b>20 (Crítico)</b></p>',
+    key: '📌 Este riesgo es de PROYECTO (afecta cronograma/recursos), no de producto. Mitigación: convenios con universidades + freelancers.'
+  },
+  {
+    title: '🔍 El pedido de auditoría',
+    subtitle: 'El municipio pide un extra',
+    svg: `<svg viewBox="0 0 400 260" style="max-width:100%;">
+      <text x="200" y="20" text-anchor="middle" fill="#f1f5f9" font-size="14" font-weight="bold">Auditoría Informática Solicitada</text>
+      <!-- Edificio municipal -->
+      <g transform="translate(150,40)">
+        <polygon points="50,0 0,30 100,30" fill="#94a3b8"/>
+        <rect x="0" y="30" width="100" height="70" fill="#cbd5e1"/>
+        <rect x="10" y="45" width="15" height="55" fill="#64748b"/>
+        <rect x="30" y="45" width="15" height="55" fill="#64748b"/>
+        <rect x="55" y="45" width="15" height="55" fill="#64748b"/>
+        <rect x="75" y="45" width="15" height="55" fill="#64748b"/>
+        <text x="50" y="120" text-anchor="middle" fill="#f1f5f9" font-size="10" font-weight="bold">MUNICIPIO</text>
+      </g>
+      <!-- 3 áreas a auditar -->
+      ${['📊 Catastro','💰 Contaduría','🏛️ Servicios Públicos'].map((area,i)=>`
+        <g transform="translate(${20+i*130},175)">
+          <rect x="0" y="0" width="115" height="55" rx="8" fill="#059669" opacity=".85"/>
+          <text x="57" y="22" text-anchor="middle" fill="white" font-size="11" font-weight="bold">${area.split(' ')[0]}</text>
+          <text x="57" y="40" text-anchor="middle" fill="white" font-size="10">${area.substring(area.indexOf(' ')+1)}</text>
+        </g>
+      `).join('')}
+    </svg>`,
+    text: '<p>El municipio también pide un servicio de <b>auditoría informática</b> sobre 3 áreas críticas:</p><ol style="padding-left:20px; margin-top:10px;"><li><b>Catastro</b></li><li><b>Contaduría</b></li><li><b>Servicios Públicos</b></li></ol><p style="margin-top:10px;">Como Laura y su equipo <b>no tienen experiencia</b> en auditoría, plantean contratar personal específico para eso.</p><p style="margin-top:10px; padding:10px; background:rgba(34,211,238,.1); border-left:3px solid #22d3ee; border-radius:6px;"><b>Son contratados como AUDITORES</b> (no como peritos). El perito es en contexto judicial. Aquí es evaluación técnica de sistemas.</p>',
+    key: '⚖️ La diferencia AUDITOR vs PERITO es una pregunta clásica del examen (Enunciado 4).'
+  },
+  {
+    title: '📋 Los 4 enunciados del examen',
+    subtitle: 'Lo que vas a tener que resolver',
+    svg: `<svg viewBox="0 0 400 260" style="max-width:100%;">
+      ${[
+        {n:'1',title:'Ing. de Software',color:'#3b82f6',y:15,q:'Modelo iterativo, ERS, RF/RNF'},
+        {n:'2',title:'Estimación / Cronograma',color:'#f59e0b',y:75,q:'Esfuerzo vs duración, Gantt, hitos'},
+        {n:'3',title:'Análisis de Riesgos',color:'#ef4444',y:135,q:'Prob × Impacto, grado de exposición'},
+        {n:'4',title:'Auditoría Informática',color:'#10b981',y:195,q:'Proceso de auditoría, auditor vs perito'}
+      ].map(e=>`
+        <g transform="translate(20,${e.y})">
+          <rect x="0" y="0" width="360" height="55" rx="10" fill="${e.color}" opacity=".85"/>
+          <circle cx="30" cy="27" r="18" fill="rgba(255,255,255,.25)"/>
+          <text x="30" y="34" text-anchor="middle" fill="white" font-size="20" font-weight="bold">${e.n}</text>
+          <text x="60" y="22" fill="white" font-size="13" font-weight="bold">${e.title}</text>
+          <text x="60" y="40" fill="white" font-size="10" opacity=".9">${e.q}</text>
+        </g>
+      `).join('')}
+    </svg>`,
+    text: '<p>El examen 2025 tuvo estos 4 enunciados. Es probable que en 2026 sean muy similares:</p><ol style="padding-left:20px; margin-top:10px; line-height:1.8;"><li>Modelo de desarrollo (iterativo vs cascada) + Ing. de Requerimientos + RF/RNF</li><li>Métodos de estimación + esfuerzo vs duración + Gantt + hitos</li><li>Análisis de riesgos (proyecto/producto) + grado de exposición</li><li>Proceso de auditoría + diseño + auditor vs perito</li></ol>',
+    key: '📌 Estos son los 4 enunciados a dominar. Practicá con las preguntas del simulador para cada uno.'
+  },
+  {
+    title: '🎯 Recomendación final',
+    subtitle: 'Cómo defender el caso',
+    svg: `<svg viewBox="0 0 400 260" style="max-width:100%;">
+      <text x="200" y="25" text-anchor="middle" fill="#22d3ee" font-size="16" font-weight="bold">Regla de oro del examen</text>
+      <g transform="translate(50,55)">
+        <rect x="0" y="0" width="300" height="180" rx="12" fill="#1e293b" stroke="#22d3ee" stroke-width="2"/>
+        <text x="150" y="30" text-anchor="middle" fill="#fbbf24" font-size="14" font-weight="bold">SIEMPRE aterrizá al caso</text>
+        <line x1="30" y1="45" x2="270" y2="45" stroke="#334155"/>
+        <text x="20" y="70" fill="#94a3b8" font-size="11">✗ NO digas solo:</text>
+        <text x="150" y="90" text-anchor="middle" fill="#f87171" font-size="10" font-style="italic">"Un riesgo es un evento potencial..."</text>
+        <text x="20" y="120" fill="#a7f3d0" font-size="11">✓ SÍ decí:</text>
+        <text x="150" y="140" text-anchor="middle" fill="#a7f3d0" font-size="10" font-style="italic">"Un riesgo es un evento potencial.</text>
+        <text x="150" y="153" text-anchor="middle" fill="#a7f3d0" font-size="10" font-style="italic">Por ejemplo, en SoftFactor21, la falta</text>
+        <text x="150" y="166" text-anchor="middle" fill="#a7f3d0" font-size="10" font-style="italic">de programadores es un riesgo de proyecto"</text>
+      </g>
+    </svg>`,
+    text: '<p>Los profesores valoran mucho conectar la teoría con el caso. Siempre agregá un "por ejemplo" que referencie a SoftFactor21.</p><p style="margin-top:10px;"><b>Ejemplos rápidos:</b></p><ul style="padding-left:20px;"><li>SCRUM → "es lo que recomendaría para SoftFactor21 por sus sprints y adaptabilidad al SaaS"</li><li>Riesgo → "la falta de programadores es un riesgo de proyecto"</li><li>Auditor → "Laura y equipo son auditores, no peritos, porque es contexto profesional"</li></ul><p style="margin-top:15px; text-align:center; padding:12px; background:linear-gradient(135deg,#22d3ee22,#10b98122); border-radius:10px; font-size:15px;"><b>¡Estás listo/a para el examen! 🎓</b></p>',
+    key: '💪 Éxitos en Triunvirato.'
+  }
+];
+
+let currentSlide = 0;
+
+function openStory() {
+  currentSlide = 0;
+  showScreen('story');
+  renderSlide();
+}
+
+function renderSlide() {
+  const slide = STORY_SLIDES[currentSlide];
+  document.getElementById('story-counter').textContent = `${currentSlide + 1} / ${STORY_SLIDES.length}`;
+  document.getElementById('story-slide').innerHTML = `
+    <div style="margin-bottom: 20px;">
+      <div style="font-size: 22px; font-weight: bold; color: var(--accent); margin-bottom: 4px;">${slide.title}</div>
+      <div style="color: var(--text-dim); font-size: 14px;">${slide.subtitle}</div>
+    </div>
+    <div class="q-image" style="padding: 15px;">${slide.svg}</div>
+    <div style="margin-top: 20px; line-height: 1.7; font-size: 15px;">${slide.text}</div>
+    <div style="margin-top: 20px; padding: 12px 15px; background: linear-gradient(135deg, rgba(251,191,36,.15), rgba(245,158,11,.1)); border-left: 4px solid #fbbf24; border-radius: 8px; font-size: 14px; color: var(--text);">
+      ${slide.key}
+    </div>
+  `;
+  // Dots
+  const dotsEl = document.getElementById('story-dots');
+  dotsEl.innerHTML = STORY_SLIDES.map((_, i) =>
+    `<span onclick="goToSlide(${i})" style="width:10px; height:10px; border-radius:50%; background:${i === currentSlide ? 'var(--accent)' : 'var(--bg-3)'}; cursor:pointer; transition:background .2s;"></span>`
+  ).join('');
+  document.getElementById('story-prev').disabled = currentSlide === 0;
+  document.getElementById('story-next').textContent = currentSlide === STORY_SLIDES.length - 1 ? '🎯 Ir a practicar' : 'Siguiente →';
+}
+
+function storyPrev() {
+  if (currentSlide > 0) { currentSlide--; renderSlide(); }
+}
+function storyNext() {
+  if (currentSlide < STORY_SLIDES.length - 1) {
+    currentSlide++;
+    renderSlide();
+  } else {
+    // último slide: ir a practicar preguntas del caso
+    state.mode = 'cs';
+    state.currentIndex = 0;
+    state.wrongInSession = [];
+    state.stats.sessionCorrect = 0;
+    state.stats.sessionWrong = 0;
+    state.currentQueue = shuffle(QUESTIONS.map((q, i) => q.cat === 'cs' ? i : -1).filter(i => i >= 0));
+    state.stats.sessionTotal = state.currentQueue.length;
+    if (state.currentQueue.length > 0) {
+      showScreen('quiz');
+      document.getElementById('banner-review').classList.add('hidden');
+      loadQuestion();
+    }
+  }
+}
+function goToSlide(i) { currentSlide = i; renderSlide(); }
 
 // Inicializar tema al cargar
 applyTheme();
