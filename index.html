@@ -1854,22 +1854,39 @@ const TOPICS = [
     subtitle: 'Cascada, Iterativo, Incremental, Espiral, RUP, V-Model',
     cats: ['is'],
     content: `
-      <p>Un <b>modelo de proceso</b> pone orden en el desarrollo de software. Define fases: análisis, diseño, implementación, pruebas, despliegue, mantenimiento.</p>
-      <h3 style="color:var(--accent); margin-top:16px;">Modelos Tradicionales (rígidos)</h3>
-      <ul style="padding-left:20px;">
-        <li><b>Cascada:</b> fases secuenciales (análisis → diseño → codificación → prueba → mantenimiento). Solo funciona con requisitos estables.</li>
-        <li><b>V-Model:</b> variante de cascada con pruebas asociadas a cada fase.</li>
-        <li><b>Prototipo:</b> se construye un modelo básico para validar antes del sistema real.</li>
-      </ul>
-      <h3 style="color:var(--accent); margin-top:16px;">Modelos Evolutivos (adaptables)</h3>
-      <ul style="padding-left:20px;">
-        <li><b>Iterativo:</b> el sistema es completo pero la funcionalidad es parcial; cada iteración refina.</li>
-        <li><b>Incremental:</b> el sistema se divide en subsistemas; cada versión agrega funcionalidad.</li>
-        <li><b>Espiral (Boehm):</b> el único que contempla <b>análisis de riesgos</b> en cada ciclo.</li>
-        <li><b>RUP (Proceso Unificado Racional):</b> iterativo, centrado en arquitectura, dirigido por casos de uso, usa UML.</li>
-      </ul>
-      <h3 style="color:var(--accent); margin-top:16px;">Modelos Ágiles</h3>
-      <p>Enfatizan desarrollo rápido, poca documentación, equipos pequeños. Ejemplos: <b>SCRUM, Kanban, XP, Crystal</b>.</p>
+      <p style="font-size:16px;">🎂 <b>Imaginate que querés hacer una torta.</b> Podés seguir una receta paso a paso desde el principio hasta el final (cascada), o ir probando y ajustando sobre la marcha (iterativo). Los <b>modelos de proceso</b> son "recetas" para hacer software.</p>
+
+      <div style="background: rgba(59,130,246,.1); padding: 14px; border-radius: 10px; margin: 12px 0;">
+        <b>📋 Modelo CASCADA — "Receta rígida"</b><br>
+        <span style="font-size:13px; color:var(--text-dim);">Hacés paso 1 → 2 → 3 → 4. No podés volver atrás. Perfecto cuando SABÉS exactamente qué querés desde el arranque.</span><br>
+        <b>Ejemplo cotidiano:</b> construir una casa 🏠. Primero planos, después cimientos, después paredes, después techo. No podés cambiar los cimientos cuando ya está el techo.
+      </div>
+
+      <div style="background: rgba(16,185,129,.1); padding: 14px; border-radius: 10px; margin: 12px 0;">
+        <b>🔁 Modelo ITERATIVO — "Voy probando y refinando"</b><br>
+        <span style="font-size:13px; color:var(--text-dim);">Hacés una versión básica de TODO, después la mejorás, después la mejorás más.</span><br>
+        <b>Ejemplo:</b> pintás un cuadro 🎨. Primero el boceto, después le agregás color, después detalles, después sombras.
+      </div>
+
+      <div style="background: rgba(245,158,11,.1); padding: 14px; border-radius: 10px; margin: 12px 0;">
+        <b>➕ Modelo INCREMENTAL — "Voy sumando partes"</b><br>
+        <span style="font-size:13px; color:var(--text-dim);">Hacés pedacitos completos y los vas sumando.</span><br>
+        <b>Ejemplo:</b> armás un LEGO 🧱. Terminás una pieza, después otra, después otra. Cada pieza es funcional por sí sola.
+      </div>
+
+      <div style="background: rgba(168,85,247,.1); padding: 14px; border-radius: 10px; margin: 12px 0;">
+        <b>🌀 Modelo ESPIRAL — "Voy dando vueltas revisando riesgos"</b><br>
+        <span style="font-size:13px; color:var(--text-dim);">En cada vuelta te preguntás "¿qué puede salir mal?" y actuás para prevenirlo.</span><br>
+        <b>Ejemplo:</b> planificar un viaje largo ✈️. Antes de cada etapa revisás el clima, la ruta, el combustible. <b>Es el ÚNICO que analiza riesgos formalmente.</b>
+      </div>
+
+      <div style="background: rgba(236,72,153,.1); padding: 14px; border-radius: 10px; margin: 12px 0;">
+        <b>⚡ Modelos ÁGILES (SCRUM, Kanban, XP) — "A los tiros"</b><br>
+        <span style="font-size:13px; color:var(--text-dim);">Poca documentación, equipos chicos, entregas rápidas, mucha adaptación.</span><br>
+        <b>Ejemplo:</b> una banda de rock que ensaya, prueba una canción en el bar, ve qué gusta al público y ajusta 🎸.
+      </div>
+
+      <p style="background:var(--bg-1); padding:12px; border-radius:8px; margin-top:16px;"><b>🎯 Para el examen recordá:</b> Cascada = rígido y secuencial · Iterativo = mismo sistema refinado · Incremental = subsistemas que se suman · Espiral = el único con análisis de riesgos · Ágil (SCRUM) = flexible y adaptable.</p>
     `,
     svg: 'modelos',
     activity: {
@@ -1907,27 +1924,52 @@ const TOPICS = [
     subtitle: 'Manifiesto Ágil, roles, sprints, artefactos, eventos',
     cats: ['is'],
     content: `
-      <p><b>SCRUM</b> es un marco de trabajo ágil basado en iteraciones cortas (<b>Sprints</b> de 2 a 4 semanas) para desarrollar productos de forma incremental controlando el riesgo.</p>
-      <p>Se sustenta en el <b>Manifiesto Ágil (2001)</b>: colaboración > contratos, respuesta al cambio > planificación rígida, software funcionando > documentación exhaustiva.</p>
-      <h3 style="color:var(--accent); margin-top:16px;">Los 3 roles</h3>
-      <ul style="padding-left:20px;">
-        <li><b>Product Owner (PO):</b> dueño del producto. Gestiona y prioriza el Product Backlog. Es la voz del cliente.</li>
-        <li><b>Scrum Master:</b> ¡NO es el líder! Es un <b>facilitador</b> que remueve impedimentos, hace mentoring y coaching.</li>
-        <li><b>Development Team:</b> equipo multidisciplinario que diseña, construye y prueba el incremento.</li>
-      </ul>
-      <h3 style="color:var(--accent); margin-top:16px;">Los 4 eventos</h3>
-      <ol style="padding-left:20px;">
-        <li><b>Sprint Planning:</b> el equipo elige del Product Backlog qué construir en el Sprint.</li>
-        <li><b>Daily Scrum:</b> reunión diaria de 15 minutos para sincronizar avances.</li>
-        <li><b>Sprint Review:</b> se muestra el incremento al Product Owner y stakeholders.</li>
-        <li><b>Sprint Retrospective:</b> el equipo reflexiona sobre cómo mejorar el proceso.</li>
+      <p style="font-size:16px;">🍕 <b>Imaginate un delivery de pizza.</b> No te hacen las 100 pizzas de todo el mes de una vez. Te hacen la que pediste HOY, la entregan, ven qué te gustó y qué no, y la próxima la ajustan. <b>SCRUM funciona igual con el software.</b></p>
+
+      <p>SCRUM es un marco de trabajo <b>ÁGIL</b>: en vez de hacer un plan gigante que tarde 2 años, hacés pedacitos (llamados <b>Sprints</b>) de 2 a 4 semanas y en cada uno entregás algo real y funcional.</p>
+
+      <div style="background: rgba(236,72,153,.1); padding: 14px; border-radius: 10px; margin: 12px 0;">
+        <b>📜 Nació del Manifiesto Ágil (2001)</b><br>
+        4 reglas simples:<br>
+        ✅ Colaboración > firmar contratos<br>
+        ✅ Responder al cambio > seguir un plan rígido<br>
+        ✅ Software funcionando > documentación gigante<br>
+        ✅ Comunicación directa > procesos burocráticos
+      </div>
+
+      <h3 style="color:var(--accent); margin-top:16px;">👥 Los 3 roles (¡son SOLO 3!)</h3>
+
+      <div style="background: rgba(59,130,246,.1); padding: 14px; border-radius: 10px; margin: 10px 0;">
+        <b>1️⃣ Product Owner (PO)</b> — El "cliente" en el equipo<br>
+        <span style="font-size:13px;">Es quien sabe qué quiere el mercado. Ordena las cosas por prioridad. Es como el director de una película 🎬 que decide qué escenas se filman primero.</span>
+      </div>
+
+      <div style="background: rgba(16,185,129,.1); padding: 14px; border-radius: 10px; margin: 10px 0;">
+        <b>2️⃣ Scrum Master</b> — El "coach"<br>
+        <span style="font-size:13px;"><b>¡NO es el jefe!</b> Es como el entrenador de un equipo de fútbol ⚽. Ayuda al equipo, saca los obstáculos del camino, motiva. Los profes se ponen contentos cuando decís "facilitador", no "líder".</span>
+      </div>
+
+      <div style="background: rgba(245,158,11,.1); padding: 14px; border-radius: 10px; margin: 10px 0;">
+        <b>3️⃣ Development Team</b> — Los que hacen el trabajo<br>
+        <span style="font-size:13px;">Programadores, diseñadores, testers. Son el "equipo de cocina" 🧑‍🍳 que prepara la pizza.</span>
+      </div>
+
+      <h3 style="color:var(--accent); margin-top:16px;">📅 Los 4 eventos (rituales de SCRUM)</h3>
+      <ol style="padding-left:20px; line-height:2;">
+        <li><b>Sprint Planning:</b> reunión al arranque. "¿Qué vamos a hacer estas 2 semanas?"</li>
+        <li><b>Daily Scrum:</b> reunión de 15 min todos los días. "¿Qué hice ayer, qué haré hoy, qué me traba?"</li>
+        <li><b>Sprint Review:</b> al final del Sprint mostrás lo hecho al cliente. Como una demo 🎥.</li>
+        <li><b>Sprint Retrospective:</b> el equipo se pregunta "¿cómo podemos mejorar el proceso?" 🤔</li>
       </ol>
-      <h3 style="color:var(--accent); margin-top:16px;">Artefactos</h3>
-      <ul style="padding-left:20px;">
-        <li><b>Product Backlog:</b> lista priorizada de TODAS las funcionalidades deseadas.</li>
-        <li><b>Sprint Backlog:</b> subconjunto que se compromete a hacer en el Sprint actual.</li>
-        <li><b>Incremento:</b> versión de software funcional al final de cada Sprint.</li>
+
+      <h3 style="color:var(--accent); margin-top:16px;">📦 Los 3 artefactos (documentos clave)</h3>
+      <ul style="padding-left:20px; line-height:1.8;">
+        <li><b>Product Backlog:</b> lista GRANDE con TODO lo que se puede hacer. Como el menú entero de la pizzería 📋.</li>
+        <li><b>Sprint Backlog:</b> lo que se comprometen a hacer ESTE Sprint. Los pedidos de hoy.</li>
+        <li><b>Incremento:</b> el software funcionando al final del Sprint. ¡La pizza terminada! 🍕</li>
       </ul>
+
+      <p style="background:var(--bg-1); padding:12px; border-radius:8px; margin-top:16px;"><b>🎯 Para el examen:</b> 3 roles + 4 eventos + 3 artefactos. Scrum Master NO es líder, es FACILITADOR. Sprints de 2-4 semanas.</p>
     `,
     svg: 'scrum',
     activity: {
@@ -1962,21 +2004,51 @@ const TOPICS = [
     subtitle: '5 fases, IEEE 830, RF vs RNF',
     cats: ['is'],
     content: `
-      <p>La <b>Ingeniería de Requerimientos</b> es la disciplina que identifica, documenta, analiza, valida y gestiona los requisitos del sistema, asegurando que el producto responda a las necesidades del cliente.</p>
-      <h3 style="color:var(--accent); margin-top:16px;">Las 5 fases</h3>
-      <ol style="padding-left:20px;">
-        <li><b>Elicitación:</b> relevar necesidades (entrevistas, encuestas, observación, brainstorming) con los <b>stakeholders</b>.</li>
-        <li><b>Análisis:</b> priorizar y resolver conflictos entre requisitos (ej: técnica MoSCoW).</li>
-        <li><b>Especificación:</b> documentar de forma clara y sin ambigüedades. Se usa el estándar <b>IEEE 830</b> para el ERS (Especificación de Requerimientos de Software).</li>
-        <li><b>Validación:</b> confirmar con el cliente que los requisitos son completos, precisos y viables.</li>
-        <li><b>Gestión:</b> controlar cambios y asegurar su correcta implementación.</li>
-      </ol>
-      <h3 style="color:var(--accent); margin-top:16px;">Tipos de requisitos</h3>
-      <ul style="padding-left:20px;">
-        <li><b>Funcionales (RF):</b> qué hace el sistema. Ej: "El sistema debe permitir dar de alta un usuario".</li>
-        <li><b>No funcionales (RNF):</b> restricciones y calidad. Ej: "El tiempo de respuesta no debe superar 3 segundos" (performance), "El sistema debe usar TLS 1.3" (seguridad).</li>
-      </ul>
-      <p><b>Un requisito es una sentencia completa sobre QUÉ hace el sistema, sin referirse a CÓMO lo hace.</b></p>
+      <p style="font-size:16px;">👕 <b>Imaginate que le pedís a un amigo que te haga una remera personalizada.</b> Si le decís solo "hacéme una remera", te va a hacer cualquier cosa. Tenés que decirle: color, talle, diseño, tela. Con el software es IGUAL. Los <b>requerimientos</b> son las instrucciones exactas de lo que querés.</p>
+
+      <p>La <b>Ingeniería de Requerimientos</b> es el proceso de <b>preguntar bien</b> qué quiere el cliente antes de programar. Si no lo hacés bien, gastás tiempo y plata haciendo algo que el cliente no quería.</p>
+
+      <h3 style="color:var(--accent); margin-top:16px;">🔄 Las 5 fases (secuencia)</h3>
+
+      <div style="background: rgba(59,130,246,.1); padding: 14px; border-radius: 10px; margin: 10px 0;">
+        <b>1️⃣ ELICITACIÓN — "Averiguar qué quiere el cliente"</b><br>
+        <span style="font-size:13px;">Es cuando le hacés preguntas al cliente: entrevistas, encuestas, observás cómo trabaja. Como cuando el sastre te toma medidas 📏.</span>
+      </div>
+
+      <div style="background: rgba(245,158,11,.1); padding: 14px; border-radius: 10px; margin: 10px 0;">
+        <b>2️⃣ ANÁLISIS — "Priorizar lo importante"</b><br>
+        <span style="font-size:13px;">El cliente pide 100 cosas pero no todo se puede hacer. Ordenás qué es <b>Must</b> (obligatorio), <b>Should</b> (importante), <b>Could</b> (lindo), <b>Won't</b> (para después). Esta técnica se llama <b>MoSCoW</b>.</span>
+      </div>
+
+      <div style="background: rgba(16,185,129,.1); padding: 14px; border-radius: 10px; margin: 10px 0;">
+        <b>3️⃣ ESPECIFICACIÓN — "Escribirlo bien claro"</b><br>
+        <span style="font-size:13px;">Escribís todo en un documento SIN ambigüedades. Se usa el estándar <b>IEEE 830</b>. El documento se llama <b>ERS</b> (Especificación de Requerimientos de Software). Es como firmar un contrato: si no está por escrito, no existe 📄.</span>
+      </div>
+
+      <div style="background: rgba(168,85,247,.1); padding: 14px; border-radius: 10px; margin: 10px 0;">
+        <b>4️⃣ VALIDACIÓN — "Que el cliente diga: sí, eso quería"</b><br>
+        <span style="font-size:13px;">Le mostrás el ERS al cliente y confirma. Si no le mostraste antes, sos bo... vas a tener que rehacer todo ✅.</span>
+      </div>
+
+      <div style="background: rgba(239,68,68,.1); padding: 14px; border-radius: 10px; margin: 10px 0;">
+        <b>5️⃣ GESTIÓN — "Cuando pide cambios en el medio"</b><br>
+        <span style="font-size:13px;">El cliente SIEMPRE va a pedir cambios. Tenés que controlar cada cambio: qué cuesta, cuánto tiempo suma, qué se rompe 🔄.</span>
+      </div>
+
+      <h3 style="color:var(--accent); margin-top:16px;">📝 2 tipos de requerimientos</h3>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:10px;">
+        <div style="background:rgba(34,211,238,.1); padding:14px; border-radius:10px;">
+          <b>✅ FUNCIONALES (RF)</b><br>
+          <span style="font-size:13px;"><b>QUÉ HACE</b> el sistema.<br>Ej: "el sistema debe permitir dar de alta un usuario"</span>
+        </div>
+        <div style="background:rgba(245,158,11,.1); padding:14px; border-radius:10px;">
+          <b>⚙️ NO FUNCIONALES (RNF)</b><br>
+          <span style="font-size:13px;"><b>CÓMO</b> tiene que ser (calidad, restricciones).<br>Ej: "el tiempo de respuesta no debe superar 3 segundos"</span>
+        </div>
+      </div>
+
+      <p style="background:var(--bg-1); padding:12px; border-radius:8px; margin-top:16px;"><b>🎯 Regla de oro:</b> Un requisito dice QUÉ hace, NO CÓMO lo hace. "El sistema debe permitir pagar con tarjeta" ✅. "El sistema debe usar la API de Mercado Pago" ❌ (eso es un cómo, va en el diseño).</p>
     `,
     svg: 'reqfases',
     activity: {
@@ -2014,26 +2086,59 @@ const TOPICS = [
     subtitle: 'Triple restricción, stakeholders, PM, equipo (Tuckman)',
     cats: ['gp'],
     content: `
-      <p>Un <b>proyecto</b> es un esfuerzo TEMPORAL orientado a crear un producto, servicio o resultado ÚNICO. Se diferencia de un <b>proceso</b> que es repetitivo.</p>
-      <h3 style="color:var(--accent); margin-top:16px;">Atributos de un proyecto</h3>
-      <ul style="padding-left:20px;">
-        <li>Es un trabajo con objetivo único y singular.</li>
-        <li>Tiene tiempo limitado y presupuesto acotado.</li>
-        <li>Genera <b>entregables</b> (producto, servicio, resultado o combinación).</li>
+      <p style="font-size:16px;">🍖 <b>Imaginate que organizás un asado para 20 personas.</b> Eso es un PROYECTO. Tenés que planificar (qué carne, cuánta), organizar (quién trae qué), controlar tiempos (a qué hora comen), gestionar problemas (se acabó el carbón), y al final termina. Los proyectos de software son iguales.</p>
+
+      <div style="background: rgba(59,130,246,.1); padding: 14px; border-radius: 10px; margin: 12px 0;">
+        <b>💡 Proyecto vs Proceso</b><br>
+        <b>Proyecto:</b> organizar el asado (arrancás, termina, único) 🍖<br>
+        <b>Proceso:</b> el almuerzo diario de tu casa (se repite todos los días) 🍝<br>
+        Un proyecto tiene <b>inicio y fin</b>. Un proceso es <b>continuo</b>.
+      </div>
+
+      <h3 style="color:var(--accent); margin-top:16px;">📐 La TRIPLE RESTRICCIÓN — La regla más importante</h3>
+      <p>Todo proyecto tiene 3 "bordes" que no podés estirar sin sacrificar los otros:</p>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin:12px 0; text-align:center;">
+        <div style="background:rgba(34,211,238,.15); padding:14px; border-radius:10px;">
+          <div style="font-size:28px;">📋</div>
+          <b>ALCANCE</b><br><span style="font-size:12px;">¿Qué se hace?</span>
+        </div>
+        <div style="background:rgba(245,158,11,.15); padding:14px; border-radius:10px;">
+          <div style="font-size:28px;">⏱️</div>
+          <b>TIEMPO</b><br><span style="font-size:12px;">¿Para cuándo?</span>
+        </div>
+        <div style="background:rgba(16,185,129,.15); padding:14px; border-radius:10px;">
+          <div style="font-size:28px;">💰</div>
+          <b>COSTO</b><br><span style="font-size:12px;">¿Con qué recursos?</span>
+        </div>
+      </div>
+
+      <p style="background:rgba(239,68,68,.1); padding:12px; border-radius:8px; font-size:14px;"><b>⚠️ La regla:</b> si tocás uno, afectás los otros. Si el cliente pide MÁS alcance sin subir presupuesto ni plazo → la calidad se pincha 💥.</p>
+
+      <h3 style="color:var(--accent); margin-top:16px;">👥 STAKEHOLDERS — Los interesados</h3>
+      <p>Todos los que están involucrados o afectados por el proyecto. En el asado serían: los que comen, tu vieja que puso plata, el vecino al que le sale humo, el carnicero...</p>
+
+      <h3 style="color:var(--accent); margin-top:16px;">🧑‍💼 El PM (Administrador de Proyecto)</h3>
+      <p>Es como el organizador del asado. Tiene que:</p>
+      <ul style="padding-left:20px; line-height:1.7;">
+        <li>Hacer el <b>plan</b> (compras, tareas, horarios)</li>
+        <li><b>Organizar</b> y supervisar</li>
+        <li>Conseguir <b>recursos</b> (carbón, hielera, sillas)</li>
+        <li>Controlar <b>avances</b> ("¿ya está la ensalada?")</li>
+        <li>Minimizar <b>riesgos</b> ("¿y si llueve?")</li>
       </ul>
-      <h3 style="color:var(--accent); margin-top:16px;">Triple restricción</h3>
-      <p>Todo proyecto está limitado por tres restricciones que se equilibran mutuamente:</p>
-      <ul style="padding-left:20px;">
-        <li><b>Alcance:</b> el trabajo necesario y solo el necesario.</li>
-        <li><b>Tiempo:</b> el plazo o fecha límite.</li>
-        <li><b>Costo:</b> recursos: dinero, RRHH, equipamiento, materiales.</li>
-      </ul>
-      <h3 style="color:var(--accent); margin-top:16px;">Actividades del Administrador de Proyecto</h3>
-      <p>Confecciona el plan, organiza y supervisa el trabajo, asegura recursos, optimiza el uso, evalúa cambios, asegura calidad, <b>minimiza riesgos</b>, controla avances e informa desvíos.</p>
-      <h3 style="color:var(--accent); margin-top:16px;">Ciclo del equipo (Tuckman)</h3>
-      <p>Un equipo pasa por 5 etapas: <b>Formación → Tormenta → Normalización → Alto rendimiento → Despedida.</b></p>
-      <h3 style="color:var(--accent); margin-top:16px;">Stakeholders</h3>
-      <p>Cualquier persona u organización involucrada o afectada por el proyecto. Con ellos el PM negocia recursos, requerimientos, expectativas.</p>
+
+      <h3 style="color:var(--accent); margin-top:16px;">🔄 Ciclo del EQUIPO (Modelo de Tuckman)</h3>
+      <p>Todo equipo humano pasa por 5 etapas (aparece en el examen ✍️):</p>
+      <div style="background:var(--bg-1); padding:12px; border-radius:10px; margin-top:10px; font-size:14px; line-height:1.8;">
+        <b>1. FORMACIÓN 👋</b> — Nos acabamos de conocer, todos amables<br>
+        <b>2. TORMENTA ⚡</b> — Aparecen conflictos ("yo decido esto", "no, yo")<br>
+        <b>3. NORMALIZACIÓN 🤝</b> — Acordamos reglas, roles claros<br>
+        <b>4. ALTO RENDIMIENTO 🚀</b> — Fluye todo, somos una orquesta<br>
+        <b>5. DESPEDIDA 🎓</b> — Terminó el proyecto, chau
+      </div>
+
+      <p style="background:var(--bg-1); padding:12px; border-radius:8px; margin-top:16px;"><b>🎯 Para el examen:</b> Triple restricción = Alcance + Tiempo + Costo. Tuckman = las 5 etapas del equipo. Stakeholder ≠ "gente involucrada", ¡decilo con la palabra técnica!</p>
     `,
     svg: 'triangle',
     activity: {
@@ -2076,33 +2181,59 @@ const TOPICS = [
     subtitle: 'Grado de exposición, estrategias, mitigación vs contingencia',
     cats: ['ri'],
     content: `
-      <p>Un <b>riesgo</b> es un evento o condición incierta que, si ocurre, tendrá un efecto positivo (<b>oportunidad</b>) o negativo (<b>amenaza</b>) sobre los objetivos del proyecto.</p>
-      <p><b>¡A un riesgo no se lo ignora!</b></p>
-      <h3 style="color:var(--accent); margin-top:16px;">Diferencia clave</h3>
-      <ul style="padding-left:20px;">
-        <li><b>Riesgo:</b> problema POTENCIAL, aún no ocurrió.</li>
-        <li><b>Falla/Contingencia:</b> problema REAL, ya ocurrió.</li>
-        <li><b>Riesgo intrínseco:</b> totalmente imprevisto (ej: incendio, terremoto).</li>
-      </ul>
-      <h3 style="color:var(--accent); margin-top:16px;">Grado de exposición</h3>
-      <p style="background:var(--bg-1); padding:12px; border-radius:8px; text-align:center; font-size:18px;">
-        <b>Grado de Exposición = Probabilidad × Impacto</b>
+      <p style="font-size:16px;">☂️ <b>Salís sin paraguas. Puede llover (probabilidad) y si llueve te empapás (impacto).</b> Eso es un RIESGO. Si llueve = ya no es riesgo, es una FALLA (ya ocurrió).</p>
+
+      <div style="background: rgba(59,130,246,.1); padding: 14px; border-radius: 10px; margin: 12px 0;">
+        <b>🎯 Diferencia clave que confunde a todos:</b><br>
+        <b>Riesgo</b> = puede pasar 🟡 (aún no ocurrió)<br>
+        <b>Falla / Contingencia</b> = ya pasó 🔴<br>
+        <b>Riesgo intrínseco</b> = totalmente imprevisto (incendio, terremoto) 🌋
+      </div>
+
+      <h3 style="color:var(--accent); margin-top:16px;">🧮 Grado de Exposición — La fórmula mágica</h3>
+      <p style="background:linear-gradient(135deg,#dc262622,#f9731622); padding:20px; border-radius:10px; text-align:center; font-size:22px; font-weight:bold; color:var(--text); border:2px dashed #ef4444;">
+        Grado de Exposición = 📊 Probabilidad × 💥 Impacto
       </p>
-      <p>Ejemplo: probabilidad alta (5) × impacto alto (5) = 25 → riesgo <b>crítico</b>.</p>
-      <h3 style="color:var(--accent); margin-top:16px;">Estrategias para enfrentar un riesgo</h3>
-      <ul style="padding-left:20px;">
-        <li><b>Anular:</b> eliminar la causa por completo.</li>
-        <li><b>Mitigar:</b> reducir la PROBABILIDAD u ocurrencia.</li>
-        <li><b>Aceptar:</b> asumir consecuencias y proveer contramedidas.</li>
-        <li><b>Transferir:</b> cambiar la responsabilidad (ej: subcontratar, contratar seguro).</li>
+      <p><b>Ejemplo:</b> "Se cae el servidor" → Probabilidad ALTA (5) × Impacto ALTO (5) = <b>25 → CRÍTICO 🚨</b></p>
+      <p style="font-size:13px; color:var(--text-dim);">Se usa escala 1-5. Cuanto más alto el número, más peligroso.</p>
+
+      <h3 style="color:var(--accent); margin-top:16px;">🛡️ 4 estrategias — Qué hacer con un riesgo</h3>
+
+      <div style="background: rgba(220,38,38,.1); padding: 14px; border-radius: 10px; margin: 10px 0;">
+        <b>🚫 ANULAR</b> — Eliminar la CAUSA<br>
+        <span style="font-size:13px;"><b>Ejemplo:</b> tenés riesgo de virus si usás Windows XP. Anulás cambiando a un sistema actualizado.</span>
+      </div>
+
+      <div style="background: rgba(245,158,11,.1); padding: 14px; border-radius: 10px; margin: 10px 0;">
+        <b>📉 MITIGAR</b> — Reducir la PROBABILIDAD o el impacto<br>
+        <span style="font-size:13px;"><b>Ejemplo:</b> no querés que un empleado clave se enferme → armás un backup, documentás el trabajo. Aún puede pasar, pero duele menos.</span>
+      </div>
+
+      <div style="background: rgba(59,130,246,.1); padding: 14px; border-radius: 10px; margin: 10px 0;">
+        <b>🤝 ACEPTAR</b> — Asumir el riesgo y prever qué hacer si pasa<br>
+        <span style="font-size:13px;"><b>Ejemplo:</b> puede llover el día del asado. Lo aceptás y tenés un plan B (comer adentro).</span>
+      </div>
+
+      <div style="background: rgba(16,185,129,.1); padding: 14px; border-radius: 10px; margin: 10px 0;">
+        <b>📤 TRANSFERIR</b> — Que otro se haga cargo<br>
+        <span style="font-size:13px;"><b>Ejemplo:</b> tenés riesgo de incendio → contratás un SEGURO. Le pasás el problema a la aseguradora.</span>
+      </div>
+
+      <h3 style="color:var(--accent); margin-top:16px;">🔀 Mitigación vs Contingencia — ¡La confusión clásica!</h3>
+      <p><b>Ejemplo del asado 🍖:</b></p>
+      <ul style="padding-left:20px; line-height:1.7;">
+        <li><b>MITIGAR</b> la lluvia = revisar el pronóstico y elegir un día soleado (bajás la PROBABILIDAD)</li>
+        <li><b>CONTINGENCIA</b> por lluvia = tener una carpa lista (bajás el IMPACTO cuando ya está lloviendo)</li>
       </ul>
-      <h3 style="color:var(--accent); margin-top:16px;">Mitigación vs Contingencia</h3>
-      <ul style="padding-left:20px;">
-        <li><b>Mitigación:</b> reduce la PROBABILIDAD de que ocurra.</li>
-        <li><b>Contingencia:</b> reduce el IMPACTO si el riesgo se materializa.</li>
+
+      <h3 style="color:var(--accent); margin-top:16px;">🔍 Métodos para IDENTIFICAR riesgos</h3>
+      <ul style="padding-left:20px; line-height:1.7;">
+        <li><b>AMFE</b>: Análisis de Modo de Falla y Efectos (super técnico) 🔧</li>
+        <li><b>FODA</b>: Fortalezas, Oportunidades, Debilidades, Amenazas (mirás para adentro y afuera) 💼</li>
+        <li><b>PESTEL</b>: Político, Económico, Social, Tecnológico, Ecológico, Legal (contexto general) 🌍</li>
       </ul>
-      <h3 style="color:var(--accent); margin-top:16px;">Métodos para identificar riesgos</h3>
-      <p><b>AMFE</b> (Análisis de Modo de Falla y Efectos), <b>FODA</b> (Fortalezas/Oportunidades/Debilidades/Amenazas), <b>PESTEL</b> (Político/Económico/Social/Tecnológico/Ecológico/Legal).</p>
+
+      <p style="background:var(--bg-1); padding:12px; border-radius:8px; margin-top:16px;"><b>🎯 Memorizá:</b> Exposición = Prob × Impacto · 4 estrategias: Anular/Mitigar/Aceptar/Transferir · Mitigación = antes | Contingencia = después.</p>
     `,
     svg: 'riskmatrix',
     activity: {
@@ -2141,30 +2272,59 @@ const TOPICS = [
     subtitle: 'COCOMO, Puntos de Función, AVG, VME',
     cats: ['es', 'gp'],
     content: `
-      <p>Una <b>métrica</b> es una medida cuantitativa del grado en que un sistema o proceso posee un atributo. Sirven para hacer predicciones.</p>
-      <ul style="padding-left:20px;">
-        <li><b>Directas:</b> costo, líneas de código, velocidad.</li>
-        <li><b>Indirectas:</b> funcionalidad, calidad, mantenibilidad.</li>
-      </ul>
-      <h3 style="color:var(--accent); margin-top:16px;">Métodos de Estimación</h3>
-      <ul style="padding-left:20px;">
-        <li><b>Puntos de Función (PF):</b> mide la funcionalidad desde el punto de vista del usuario. Considera entradas, salidas, consultas y archivos.</li>
-        <li><b>Juicio de Expertos:</b> opinión calificada de personas con experiencia.</li>
-        <li><b>Analógica:</b> compara con proyectos similares anteriores (rápida y económica, menos exacta).</li>
-        <li><b>Paramétrica:</b> usa relaciones estadísticas y datos históricos.</li>
-        <li><b>Basada en Proceso:</b> descompone el proyecto en tareas pequeñas.</li>
-        <li><b>Con Casos de Uso / Historias de Usuario:</b> estima por dificultad, complejidad o afinidad.</li>
-        <li><b>COCOMO II:</b> estima costos según tamaño y factores de escala. Submodelos: básico, intermedio, detallado.</li>
-      </ul>
-      <h3 style="color:var(--accent); margin-top:16px;">Análisis del Valor Ganado (AVG)</h3>
-      <p>Técnica cuantitativa para medir progreso comparando planificado vs realizado.</p>
-      <ul style="padding-left:20px;">
-        <li><b>CPTC:</b> Costo Presupuestado del Trabajo Calendarizado (planeado).</li>
-        <li><b>CPTR:</b> Costo Presupuestado del Trabajo Realizado.</li>
-        <li><b>PAC:</b> Presupuesto Al Concluir (suma de todos los CPTC).</li>
-      </ul>
-      <h3 style="color:var(--accent); margin-top:16px;">Valor Monetario Esperado (VME)</h3>
-      <p>Convierte el grado de exposición al riesgo a valor monetario para priorizar y estimar la reserva de contingencia. Se recomienda aplicar tempranamente.</p>
+      <p style="font-size:16px;">🚗 <b>Te preguntan "¿cuánto sale un auto?"</b> Vos decís "depende: modelo, año, marca...". Estimar software es igual. Hay muchas formas de dar un número: por experiencia, por comparación, por fórmulas.</p>
+
+      <h3 style="color:var(--accent); margin-top:16px;">📏 Métricas — ¿Con qué se mide?</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+        <div style="background:rgba(34,211,238,.1); padding:14px; border-radius:10px;">
+          <b>DIRECTAS</b> 📐<br><span style="font-size:12px;">Lo que se ve: líneas de código, costo, velocidad.</span>
+        </div>
+        <div style="background:rgba(168,85,247,.1); padding:14px; border-radius:10px;">
+          <b>INDIRECTAS</b> 🎨<br><span style="font-size:12px;">Lo que se siente: calidad, mantenibilidad, facilidad de uso.</span>
+        </div>
+      </div>
+
+      <h3 style="color:var(--accent); margin-top:16px;">🎲 Métodos de estimación (con analogía)</h3>
+
+      <div style="background: rgba(59,130,246,.08); padding: 12px 14px; border-radius: 10px; margin: 8px 0;">
+        <b>🎯 ORDEN DE MAGNITUD</b> — "Ojímetro"<br>
+        <span style="font-size:13px;">Al arranque, sin info: entre $10.000 y $20.000 (rango amplio, ±50%). Sirve para decidir si conviene arrancar.</span>
+      </div>
+      <div style="background: rgba(16,185,129,.08); padding: 12px 14px; border-radius: 10px; margin: 8px 0;">
+        <b>👨‍🏫 JUICIO DE EXPERTOS</b> — "Un senior sabe"<br>
+        <span style="font-size:13px;">Preguntás a alguien con experiencia. Es rápido pero subjetivo.</span>
+      </div>
+      <div style="background: rgba(245,158,11,.08); padding: 12px 14px; border-radius: 10px; margin: 8px 0;">
+        <b>🔗 ANALÓGICA</b> — "Como el anterior"<br>
+        <span style="font-size:13px;">"El año pasado hicimos algo parecido y costó X, así que este va a costar Y." Rápida, poco precisa.</span>
+      </div>
+      <div style="background: rgba(168,85,247,.08); padding: 12px 14px; border-radius: 10px; margin: 8px 0;">
+        <b>📊 PARAMÉTRICA</b> — "Con fórmulas"<br>
+        <span style="font-size:13px;">Datos históricos + variables = predicción. Precisa pero requiere muchos datos.</span>
+      </div>
+      <div style="background: rgba(236,72,153,.08); padding: 12px 14px; border-radius: 10px; margin: 8px 0;">
+        <b>🧩 PUNTOS DE FUNCIÓN (PF)</b> — "Mido la funcionalidad"<br>
+        <span style="font-size:13px;">Cuento entradas, salidas, consultas, archivos. Cada uno vale X puntos. Total = tamaño del proyecto.</span>
+      </div>
+      <div style="background: rgba(220,38,38,.08); padding: 12px 14px; border-radius: 10px; margin: 8px 0;">
+        <b>🧪 COCOMO II</b> — "El más famoso"<br>
+        <span style="font-size:13px;">Constructive Cost Model. Estima según tamaño (LOC = líneas de código) + factores de escala. 3 submodelos: básico, intermedio, detallado.</span>
+      </div>
+
+      <h3 style="color:var(--accent); margin-top:16px;">📈 Análisis de Valor Ganado (AVG) — Control durante el proyecto</h3>
+      <p>Cuando el proyecto ya arrancó, ¿cómo saber si va bien? Comparás lo planeado vs lo hecho.</p>
+      <div style="background:var(--bg-1); padding:14px; border-radius:10px; line-height:1.8;">
+        <b>CPTC</b> 📋 = Costo Presupuestado del Trabajo <b>Calendarizado</b> (lo que TENÍA que estar hecho)<br>
+        <b>CPTR</b> ✅ = Costo Presupuestado del Trabajo <b>Realizado</b> (lo que REALMENTE se hizo)<br>
+        <b>PAC</b> 💰 = Presupuesto Al Concluir (todo el proyecto)<br><br>
+        <b>Regla simple:</b> Si CPTR &lt; CPTC → vas atrasado ⏳. Si CPTR &gt; CPTC → vas adelantado 🚀.
+      </div>
+
+      <h3 style="color:var(--accent); margin-top:16px;">💰 Valor Monetario Esperado (VME) — Riesgos en $</h3>
+      <p><b>Fórmula:</b> Probabilidad × Impacto en costos = VME</p>
+      <p style="font-size:13px; color:var(--text-dim);"><b>Ejemplo:</b> "20% de que se caiga el servidor y perdamos $100.000" → VME = 0,20 × $100.000 = <b>$20.000</b>. Ese es el "costo esperado" del riesgo.</p>
+
+      <p style="background:var(--bg-1); padding:12px; border-radius:8px; margin-top:16px;"><b>🎯 Para el examen:</b> Métodos = varios (los nombres son clave). AVG = CPTC/CPTR/PAC. VME = Prob × Impacto en $.</p>
     `,
     svg: 'estimacion',
     activity: {
@@ -2205,33 +2365,51 @@ const TOPICS = [
     subtitle: 'Verificación vs validación, tipos de pruebas, ISO 9001, CMM',
     cats: ['ca'],
     content: `
-      <p>El <b>testing</b> es el conjunto de actividades sistemáticas y planificadas para verificar y validar el software.</p>
-      <h3 style="color:var(--accent); margin-top:16px;">Verificación vs Validación</h3>
-      <ul style="padding-left:20px;">
-        <li><b>Verificación:</b> ¿Construimos el producto <b>correctamente</b>? Evalúa sintaxis, diseño, precisión técnica. Se hace en fase inicial.</li>
-        <li><b>Validación:</b> ¿Construimos el <b>producto correcto</b>? Evalúa cumplimiento de requisitos del usuario. Se hace en fase final.</li>
-      </ul>
-      <h3 style="color:var(--accent); margin-top:16px;">Estrategias de Prueba</h3>
-      <ol style="padding-left:20px;">
-        <li><b>Prueba de Unidad:</b> componentes individuales aislados (clases, objetos).</li>
-        <li><b>Prueba de Integración:</b> evalúa arquitectura y entradas/salidas entre componentes.</li>
-        <li><b>Prueba de Validación:</b> confirma cumplimiento de requisitos funcionales, rendimiento y comportamiento.</li>
-        <li><b>Prueba de Sistema:</b> integración con hardware, BBDD, usuarios. Funcionamiento global.</li>
-      </ol>
-      <h3 style="color:var(--accent); margin-top:16px;">Aseguramiento de Calidad (QA)</h3>
-      <p>Define y ejecuta actividades para garantizar que el software cumple sus especificaciones.</p>
-      <h3 style="color:var(--accent); margin-top:16px;">Normas de Calidad</h3>
-      <ul style="padding-left:20px;">
-        <li><b>ISO 9001:</b> estándar genérico de gestión de calidad, aplicable a cualquier organización.</li>
-      </ul>
-      <h3 style="color:var(--accent); margin-top:16px;">CMM - 5 niveles de madurez</h3>
-      <ol style="padding-left:20px;">
-        <li><b>Inicial:</b> proceso inestable, éxito depende del esfuerzo personal.</li>
-        <li><b>Repetible:</b> prácticas de gestión, métricas y aseguramiento de calidad.</li>
-        <li><b>Definido:</b> procedimientos correctos, técnicas detalladas, métricas avanzadas.</li>
-        <li><b>Gestionado:</b> métricas significativas para toma de decisiones. Software de alta calidad.</li>
-        <li><b>Optimizado:</b> mejora continua e innovación.</li>
-      </ol>
+      <p style="font-size:16px;">🚗 <b>Antes de comprar un auto lo probás.</b> Primero mirás si el motor arranca, después manejás por la cuadra, después hacés una autopista. Testear software es lo mismo: se prueba de a poquito.</p>
+
+      <h3 style="color:var(--accent); margin-top:16px;">🤔 Verificación vs Validación — La confusión clásica</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:10px;">
+        <div style="background:rgba(34,211,238,.1); padding:14px; border-radius:10px;">
+          <b>✅ VERIFICACIÓN</b><br>
+          <span style="font-size:13px;">"¿Lo hicimos BIEN?"<br>Chequeás código, sintaxis, diseño. Es interno.</span>
+        </div>
+        <div style="background:rgba(168,85,247,.1); padding:14px; border-radius:10px;">
+          <b>👤 VALIDACIÓN</b><br>
+          <span style="font-size:13px;">"¿Es lo que el cliente QUERÍA?"<br>Le mostrás al usuario y confirma. Es externo.</span>
+        </div>
+      </div>
+      <p style="font-size:13px; margin-top:8px; color:var(--text-dim);"><b>Ejemplo:</b> hacés una torta 🎂. Verificación = probás el sabor tú mismo. Validación = se la das al cliente y te dice "sí, es la que pedí".</p>
+
+      <h3 style="color:var(--accent); margin-top:16px;">🧪 Los 4 tipos de pruebas (en orden, de chico a grande)</h3>
+
+      <div style="background: rgba(16,185,129,.1); padding: 14px; border-radius: 10px; margin: 10px 0;">
+        <b>1️⃣ UNIDAD 🔬</b> — Cada pieza aislada<br>
+        <span style="font-size:13px;">Probás UNA función sola. Ej: la función "sumar(2,3)" devuelve 5. Sin conectar a nada.</span>
+      </div>
+      <div style="background: rgba(245,158,11,.1); padding: 14px; border-radius: 10px; margin: 10px 0;">
+        <b>2️⃣ INTEGRACIÓN 🔌</b> — Piezas conectándose<br>
+        <span style="font-size:13px;">Probás que 2 o más módulos hablen bien entre ellos. Ej: el módulo Login conecta con el módulo Usuarios.</span>
+      </div>
+      <div style="background: rgba(59,130,246,.1); padding: 14px; border-radius: 10px; margin: 10px 0;">
+        <b>3️⃣ VALIDACIÓN ✅</b> — Los requisitos se cumplen<br>
+        <span style="font-size:13px;">¿Funciona todo como el cliente pidió? Ej: "puedo recuperar la contraseña por email".</span>
+      </div>
+      <div style="background: rgba(168,85,247,.1); padding: 14px; border-radius: 10px; margin: 10px 0;">
+        <b>4️⃣ SISTEMA 🌐</b> — Todo integrado, en el mundo real<br>
+        <span style="font-size:13px;">Probás el sistema COMPLETO con hardware, BBDD, red y usuarios reales. Como manejar el auto en la autopista.</span>
+      </div>
+
+      <h3 style="color:var(--accent); margin-top:16px;">⭐ CMM — Nivel de madurez de la empresa</h3>
+      <p>Es como un "ranking" de qué tan profesional es una empresa haciendo software. Tiene 5 niveles:</p>
+      <div style="background:var(--bg-1); padding:14px; border-radius:10px; line-height:1.9;">
+        <b>1️⃣ INICIAL</b> 🌱 — Cada uno hace lo que puede, éxito por héroes<br>
+        <b>2️⃣ REPETIBLE</b> 🔁 — Ya hay prácticas de gestión y calidad<br>
+        <b>3️⃣ DEFINIDO</b> 📋 — Procedimientos claros, métricas avanzadas<br>
+        <b>4️⃣ GESTIONADO</b> 📊 — Métricas para tomar decisiones, alta calidad<br>
+        <b>5️⃣ OPTIMIZADO</b> 🏆 — Mejora continua, innovación
+      </div>
+
+      <p style="background:var(--bg-1); padding:12px; border-radius:8px; margin-top:16px;"><b>🎯 Para el examen:</b> Verificación = ¿bien hecho? · Validación = ¿el correcto? · Pruebas: Unidad → Integración → Validación → Sistema · CMM tiene 5 niveles, el más alto es Optimizado · ISO 9001 = gestión de calidad genérica.</p>
     `,
     svg: 'testing',
     activity: {
@@ -2273,44 +2451,73 @@ const TOPICS = [
     subtitle: '5 fases, tipos, marcos COSO/ISO/COBIT, auditor vs perito',
     cats: ['au'],
     content: `
-      <p>La <b>auditoría informática</b> es un proceso sistemático de revisión y evaluación objetiva sobre las actividades de una organización con el objetivo de verificar el cumplimiento de normas y condiciones preestablecidas. La lleva a cabo un <b>auditor</b>.</p>
-      <h3 style="color:var(--accent); margin-top:16px;">Auditor vs Perito</h3>
-      <ul style="padding-left:20px;">
-        <li><b>Auditor informático:</b> evalúa técnicamente sistemas y procesos. Contexto profesional.</li>
-        <li><b>Perito informático:</b> perito judicial que asesora al juez. Contexto legal.</li>
+      <p style="font-size:16px;">🏪 <b>Imaginate que viene un inspector de la AFIP a tu comercio.</b> Revisa que tengas los libros, las facturas, los papeles en regla. Eso es una AUDITORÍA. La auditoría informática es igual pero mirando los sistemas.</p>
+
+      <h3 style="color:var(--accent); margin-top:16px;">🎯 Auditor vs Perito — La pregunta clásica</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:10px;">
+        <div style="background:rgba(16,185,129,.1); padding:14px; border-radius:10px;">
+          <b>🔍 AUDITOR</b><br>
+          <span style="font-size:13px;">Contexto PROFESIONAL. Una empresa lo contrata para revisar sus sistemas y dar recomendaciones.</span>
+        </div>
+        <div style="background:rgba(168,85,247,.1); padding:14px; border-radius:10px;">
+          <b>⚖️ PERITO</b><br>
+          <span style="font-size:13px;">Contexto JUDICIAL. Un juez lo llama para que ayude a entender un tema técnico en una causa.</span>
+        </div>
+      </div>
+      <p style="font-size:13px; margin-top:8px; color:var(--text-dim);"><b>Regla:</b> si hay causa judicial → perito. Si es empresa → auditor. Siempre pregunta esto el examen.</p>
+
+      <h3 style="color:var(--accent); margin-top:16px;">🏢 Auditoría Interna vs Externa</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+        <div style="background:rgba(59,130,246,.1); padding:12px; border-radius:10px;">
+          <b>🏠 INTERNA</b><br>
+          <span style="font-size:12px;">La hace personal de la propia empresa. <b>PREVENTIVA</b>: busca problemas chicos antes de que se pudran.</span>
+        </div>
+        <div style="background:rgba(245,158,11,.1); padding:12px; border-radius:10px;">
+          <b>🚪 EXTERNA</b><br>
+          <span style="font-size:12px;">La hace una consultora de afuera. <b>CORRECTIVA</b>: mirada objetiva e independiente.</span>
+        </div>
+      </div>
+
+      <h3 style="color:var(--accent); margin-top:16px;">🔄 Las 5 fases del proceso de auditoría</h3>
+      <div style="background:var(--bg-1); padding:14px; border-radius:10px; line-height:2;">
+        <b>1️⃣ PLANIFICACIÓN 📋</b> — Definís qué vas a revisar y cómo<br>
+        <b>2️⃣ RELEVAMIENTO 🔍</b> — Juntás info: entrevistás, revisás manuales<br>
+        <b>3️⃣ EVALUACIÓN ⚖️</b> — Detectás vulnerabilidades, comparás con estándares (ISO)<br>
+        <b>4️⃣ INFORME 📄</b> — Escribís los hallazgos con criticidad y recomendaciones<br>
+        <b>5️⃣ SEGUIMIENTO ✅</b> — (opcional) Verificás si aplicaron tus consejos
+      </div>
+
+      <h3 style="color:var(--accent); margin-top:16px;">⚠️ 3 tipos de riesgo en auditoría</h3>
+      <div style="background:rgba(220,38,38,.08); padding:12px; border-radius:8px; margin:8px 0;">
+        <b>🔸 INHERENTE</b> — Está por naturaleza del área. <b>El auditor NO puede controlarlo.</b>
+      </div>
+      <div style="background:rgba(245,158,11,.08); padding:12px; border-radius:8px; margin:8px 0;">
+        <b>🔸 DE CONTROL</b> — Los controles internos son débiles y no detectan los errores.
+      </div>
+      <div style="background:rgba(59,130,246,.08); padding:12px; border-radius:8px; margin:8px 0;">
+        <b>🔸 DE DETECCIÓN</b> — El auditor aplicó mal los procedimientos y no vio la falla.
+      </div>
+
+      <h3 style="color:var(--accent); margin-top:16px;">📚 Marcos y normas famosas</h3>
+      <div style="background:var(--bg-1); padding:14px; border-radius:10px; line-height:1.8; font-size:14px;">
+        <b>COSO</b> 🏛️ = Control interno (framework)<br>
+        <b>ISO 27001</b> 🔒 = Seguridad de la información<br>
+        <b>ISO 31000</b> ⚠️ = Gestión de riesgos<br>
+        <b>COBIT</b> 💼 = Gobierno de TI<br>
+        <b>ISACA</b> / <b>IIA</b> = Asociaciones que crean estándares
+      </div>
+
+      <h3 style="color:var(--accent); margin-top:16px;">🕵️ Cómo se juntan las EVIDENCIAS</h3>
+      <p>Sin evidencia no hay hallazgo. 5 formas de recolectar:</p>
+      <ul style="padding-left:20px; line-height:1.7; font-size:14px;">
+        <li>👁️ <b>OCULAR</b>: observás y comparás</li>
+        <li>💬 <b>VERBAL</b>: preguntás, entrevistás, testimonios</li>
+        <li>👐 <b>FÍSICA</b>: tocás activos, revisás equipos</li>
+        <li>📄 <b>DOCUMENTAL</b>: revisás papeles, contratos</li>
+        <li>📊 <b>ANALÍTICA</b>: analizás datos y patrones</li>
       </ul>
-      <h3 style="color:var(--accent); margin-top:16px;">Clases de auditoría</h3>
-      <p><b>Financiera</b> (libros, estados contables), <b>Seguridad</b> (vulnerabilidades), <b>Calidad</b> (efectividad), <b>Informática</b> (sistemas y datos), <b>Gestión</b> (objetivos y políticas).</p>
-      <h3 style="color:var(--accent); margin-top:16px;">Interna vs Externa</h3>
-      <ul style="padding-left:20px;">
-        <li><b>Interna:</b> personal propio. Preventiva. Encuentra problemas pequeños antes que se vuelvan graves.</li>
-        <li><b>Externa:</b> organización especializada. Correctiva. Aporta objetividad e independencia.</li>
-      </ul>
-      <h3 style="color:var(--accent); margin-top:16px;">Proceso de Auditoría — 5 fases</h3>
-      <ol style="padding-left:20px;">
-        <li><b>Planificación:</b> diagnóstico preliminar, plan de auditoría, cuestionarios de control.</li>
-        <li><b>Relevamiento:</b> recolectar información (entrevistas, análisis de sistemas).</li>
-        <li><b>Evaluación y análisis:</b> identificar vulnerabilidades, evaluar controles, comparar con buenas prácticas.</li>
-        <li><b>Informe:</b> redactar hallazgos clasificados por criticidad, con recomendaciones y plazos.</li>
-        <li><b>Seguimiento (opcional):</b> verificar aplicación de recomendaciones.</li>
-      </ol>
-      <h3 style="color:var(--accent); margin-top:16px;">Tipos de riesgo en auditoría</h3>
-      <ul style="padding-left:20px;">
-        <li><b>Inherente:</b> por naturaleza del área. <b>Fuera del control del auditor.</b></li>
-        <li><b>De control:</b> errores no prevenidos por debilidad en controles.</li>
-        <li><b>De detección:</b> el auditor no detecta la falla por mal procedimiento.</li>
-      </ul>
-      <h3 style="color:var(--accent); margin-top:16px;">Frameworks y estándares</h3>
-      <ul style="padding-left:20px;">
-        <li><b>COSO:</b> marco integrado de control interno.</li>
-        <li><b>ISO 27001:</b> gestión de seguridad de la información.</li>
-        <li><b>ISO 31000:</b> gestión de riesgos.</li>
-        <li><b>COBIT:</b> gobierno de TI.</li>
-        <li><b>ISACA:</b> desarrolla estándares para auditoría.</li>
-        <li><b>IIA:</b> guías de control interno.</li>
-      </ul>
-      <h3 style="color:var(--accent); margin-top:16px;">Evidencias</h3>
-      <p>Son el soporte de todo hallazgo. Técnicas: <b>Ocular</b> (observación), <b>Verbal</b> (indagación), <b>Física</b> (examinar activos), <b>Documental</b> (revisar registros), <b>Analítica</b> (analizar información).</p>
+
+      <p style="background:var(--bg-1); padding:12px; border-radius:8px; margin-top:16px;"><b>🎯 Para el examen:</b> Auditor ≠ Perito · 5 fases del proceso · Marcos: COSO, ISO 27001, COBIT · 3 tipos de riesgo en auditoría.</p>
     `,
     svg: 'auditphases',
     activity: {
@@ -2350,42 +2557,63 @@ const TOPICS = [
     subtitle: 'CID, firewall, DMZ, seguridad física y lógica',
     cats: ['se'],
     content: `
-      <p>La <b>seguridad informática</b> protege los activos digitales y garantiza la disponibilidad, integridad y confidencialidad de la información.</p>
-      <h3 style="color:var(--accent); margin-top:16px;">Los 3 pilares — CID</h3>
-      <ul style="padding-left:20px;">
-        <li><b>Confidencialidad:</b> solo autorizados acceden a los datos.</li>
-        <li><b>Integridad:</b> los datos no se alteran indebidamente.</li>
-        <li><b>Disponibilidad:</b> acceso a los datos cuando se necesita.</li>
+      <p style="font-size:16px;">🏠 <b>Imaginate tu casa.</b> Tiene rejas y puerta (seguridad física), llaves y códigos (seguridad lógica), y vos decidís a quién le das las llaves (permisos). La seguridad informática es <b>proteger la información como si fuera tu casa</b>.</p>
+
+      <h3 style="color:var(--accent); margin-top:16px;">🏛️ Los 3 pilares — CID (fórmula sagrada)</h3>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-top:12px;">
+        <div style="background:rgba(34,211,238,.15); padding:14px; border-radius:10px; text-align:center;">
+          <div style="font-size:30px;">🔒</div>
+          <b>Confidencialidad</b><br>
+          <span style="font-size:12px;">Solo los autorizados pueden ver</span>
+        </div>
+        <div style="background:rgba(16,185,129,.15); padding:14px; border-radius:10px; text-align:center;">
+          <div style="font-size:30px;">✅</div>
+          <b>Integridad</b><br>
+          <span style="font-size:12px;">Nadie altera los datos</span>
+        </div>
+        <div style="background:rgba(245,158,11,.15); padding:14px; border-radius:10px; text-align:center;">
+          <div style="font-size:30px;">⚡</div>
+          <b>Disponibilidad</b><br>
+          <span style="font-size:12px;">Los datos están cuando los necesitás</span>
+        </div>
+      </div>
+
+      <h3 style="color:var(--accent); margin-top:16px;">🔑 3 formas de autenticarse (¿sos quien decís?)</h3>
+      <ul style="padding-left:20px; line-height:1.8;">
+        <li><b>Algo que SABÉS</b>: contraseña, PIN 🔤</li>
+        <li><b>Algo que TENÉS</b>: token, app OTP en el celu 📱</li>
+        <li><b>Algo que SOS</b>: huella, cara, iris (biométrico) 👆</li>
       </ul>
-      <h3 style="color:var(--accent); margin-top:16px;">Métodos de autenticación</h3>
-      <ol style="padding-left:20px;">
-        <li><b>Código o clave</b> personal y exclusiva (contraseña).</li>
-        <li><b>Criptografía</b> para descifrar mensajes.</li>
-        <li><b>Biométrico:</b> huella, iris, cara, voz.</li>
-      </ol>
-      <h3 style="color:var(--accent); margin-top:16px;">Seguridad Física vs Lógica</h3>
-      <ul style="padding-left:20px;">
-        <li><b>Física:</b> protección de equipos, cableado, acceso al edificio, salidas de emergencia, riesgos de incendio o corte eléctrico.</li>
-        <li><b>Lógica:</b> contraseñas, permisos, perfiles, mecanismos de conexión, firewalls, DMZ.</li>
-      </ul>
-      <h3 style="color:var(--accent); margin-top:16px;">Firewall y DMZ</h3>
-      <ul style="padding-left:20px;">
-        <li><b>Firewall:</b> se ubica entre internet y la red interna. Bloquea accesos no autorizados y filtra tráfico.</li>
-        <li><b>DMZ (Zona Desmilitarizada):</b> red aislada dentro de la organización donde se ubican los servidores expuestos. Las conexiones de la DMZ a la red LOCAL NO están permitidas.</li>
-      </ul>
-      <h3 style="color:var(--accent); margin-top:16px;">Áreas de auditoría</h3>
-      <ul style="padding-left:20px;">
-        <li><b>Auditoría de BBDD:</b> mide accesos a información sensible.</li>
-        <li><b>Auditoría de Aplicaciones Instaladas:</b> verifica que cumplan los objetivos.</li>
-        <li><b>Auditoría de Redes y Telecomunicaciones:</b> modelo OSI y TCP/IP.</li>
-        <li><b>Auditoría Ofimática:</b> control de inventario, licencias, respaldos.</li>
-      </ul>
-      <h3 style="color:var(--accent); margin-top:16px;">Tipos de riesgos</h3>
-      <ul style="padding-left:20px;">
-        <li><b>Operativos:</b> fraude interno o externo, daños en activos.</li>
-        <li><b>Organizacionales:</b> mercado, crédito, cumplimiento.</li>
-        <li><b>Tecnológicos:</b> fuga de información, modificación no autorizada, desastre natural.</li>
-      </ul>
+      <p style="font-size:13px; color:var(--text-dim);"><b>2FA (doble factor)</b> = combinar 2 de estos. Es lo que te pide el banco.</p>
+
+      <h3 style="color:var(--accent); margin-top:16px;">🛡️ Seguridad FÍSICA vs LÓGICA</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+        <div style="background:rgba(220,38,38,.1); padding:12px; border-radius:10px;">
+          <b>FÍSICA 🏢</b><br>
+          <span style="font-size:12px;">Rejas, puertas, cámaras, cableado, salidas de emergencia. Lo que se toca.</span>
+        </div>
+        <div style="background:rgba(59,130,246,.1); padding:12px; border-radius:10px;">
+          <b>LÓGICA 💻</b><br>
+          <span style="font-size:12px;">Contraseñas, permisos, firewall, DMZ. Lo que NO se toca.</span>
+        </div>
+      </div>
+
+      <h3 style="color:var(--accent); margin-top:16px;">🧱 Firewall + DMZ (arquitectura clave)</h3>
+      <div style="background:var(--bg-1); padding:14px; border-radius:10px;">
+        <b>FIREWALL</b> 🚧 = Guardia de seguridad entre Internet y tu red. Bloquea intrusos, filtra el tráfico.<br><br>
+        <b>DMZ (Zona Desmilitarizada)</b> = Sala de espera aislada donde ponés los servidores públicos (web, mail). Si atacan la DMZ, la red interna sigue segura. Las conexiones de DMZ → LAN NO se permiten.
+      </div>
+
+      <h3 style="color:var(--accent); margin-top:16px;">🔍 Áreas específicas de auditoría</h3>
+      <div style="line-height:1.9; font-size:14px;">
+        📦 <b>Auditoría de BBDD</b>: quién accedió a qué datos<br>
+        📱 <b>Auditoría de Aplicaciones</b>: cumplen su función<br>
+        🌐 <b>Auditoría de Redes</b>: modelo OSI, TCP/IP<br>
+        📄 <b>Auditoría Ofimática</b>: licencias, respaldos, virus
+      </div>
+
+      <p style="background:var(--bg-1); padding:12px; border-radius:8px; margin-top:16px;"><b>🎯 Para el examen:</b> CID (Confidencialidad + Integridad + Disponibilidad) · 3 métodos de autenticación · Física ≠ Lógica · DMZ aísla servidores expuestos.</p>
     `,
     svg: 'seguridad',
     activity: {
@@ -2426,38 +2654,51 @@ const TOPICS = [
     subtitle: 'Ley 25.326, hábeas data, ISO 31000',
     cats: ['le'],
     content: `
-      <h3 style="color:var(--accent); margin-top:16px;">Ley 25.326 — Protección de Datos Personales</h3>
-      <p>Regula la protección de los datos personales en Argentina. Se sustenta en el <b>hábeas data</b>, incorporado en la Constitución Nacional.</p>
-      <h3 style="color:var(--accent); margin-top:16px;">Hábeas data</h3>
-      <p>Derecho constitucional que permite a cualquier persona:</p>
-      <ul style="padding-left:20px;">
-        <li>Conocer qué datos suyos están almacenados.</li>
-        <li>Solicitar rectificación de datos incorrectos.</li>
-        <li>Pedir eliminación de datos.</li>
-      </ul>
-      <h3 style="color:var(--accent); margin-top:16px;">Datos sensibles</h3>
-      <p>Aquellos que revelan aspectos íntimos y requieren protección reforzada:</p>
-      <ul style="padding-left:20px;">
-        <li>Religión</li>
-        <li>Pertenencia racial o étnica</li>
-        <li>Ideología política</li>
-        <li>Orientación sexual</li>
-        <li>Datos de salud</li>
-      </ul>
-      <p><b>Ejemplos de violación:</b> recibir correos publicitarios sin haber dado el mail, o promociones telefónicas sin haber cedido el número.</p>
-      <h3 style="color:var(--accent); margin-top:16px;">Delito informático</h3>
-      <p>Acción <b>consciente y voluntaria</b> que provoca perjuicio a una persona mediante actividades informáticas (hacking, robo de datos, fraude electrónico).</p>
-      <h3 style="color:var(--accent); margin-top:16px;">Perito informático</h3>
-      <p>Perito judicial que asesora al juez en temas informáticos, para que puedan ser comprendidos por el tribunal.</p>
-      <h3 style="color:var(--accent); margin-top:16px;">Norma ISO 31000 — Gestión de Riesgos</h3>
-      <ol style="padding-left:20px;">
-        <li>Establecer el contrato.</li>
-        <li>Identificación del riesgo.</li>
-        <li>Análisis del riesgo.</li>
-        <li>Evaluación del riesgo.</li>
-        <li>Tratamiento del riesgo.</li>
-      </ol>
-      <p>Durante toda la gestión hay <b>comunicación constante, monitoreo y revisión</b>.</p>
+      <p style="font-size:16px;">📱 <b>Tus datos son TUYOS.</b> En Argentina existe una ley que dice que nadie puede tener tus datos personales sin tu permiso, ni usarlos para lo que quieras. Cuando te llaman ofreciendo un préstamo y vos nunca les diste tu número → esa empresa violó la ley.</p>
+
+      <h3 style="color:var(--accent); margin-top:16px;">📜 Ley 25.326 — Protección de Datos Personales</h3>
+      <p>Es la ley madre del tema en Argentina. Se apoya en un derecho constitucional llamado <b>HÁBEAS DATA</b>.</p>
+
+      <div style="background:rgba(34,211,238,.1); padding:14px; border-radius:10px; margin-top:10px;">
+        <b>⚖️ HÁBEAS DATA — Tu súper poder legal</b><br>
+        Tenés derecho a:<br>
+        ✅ Saber qué datos tuyos tienen guardados<br>
+        ✅ Pedir que corrijan datos incorrectos<br>
+        ✅ Pedir que ELIMINEN datos<br>
+        <br>
+        <span style="font-size:13px; color:var(--text-dim);"><b>Ejemplo:</b> vas a Veraz, encontrás una deuda que no es tuya → presentás hábeas data → tienen 5 días para rectificar.</span>
+      </div>
+
+      <h3 style="color:var(--accent); margin-top:16px;">⚠️ Datos SENSIBLES — Protección reforzada</h3>
+      <p>Son datos "íntimos" que requieren consentimiento EXPRESO. No cualquier empresa puede tenerlos:</p>
+      <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:10px; margin:10px 0;">
+        <div style="background:rgba(168,85,247,.15); padding:10px; border-radius:8px; text-align:center;">✝️ Religión</div>
+        <div style="background:rgba(239,68,68,.15); padding:10px; border-radius:8px; text-align:center;">🏛️ Ideología política</div>
+        <div style="background:rgba(245,158,11,.15); padding:10px; border-radius:8px; text-align:center;">🌍 Pertenencia racial</div>
+        <div style="background:rgba(236,72,153,.15); padding:10px; border-radius:8px; text-align:center;">🏳️‍🌈 Orientación sexual</div>
+        <div style="background:rgba(16,185,129,.15); padding:10px; border-radius:8px; text-align:center;">⚕️ Datos de salud</div>
+      </div>
+      <p style="font-size:13px; color:var(--text-dim);"><b>Los datos comunes</b> (nombre, DNI, teléfono, dirección) también están protegidos pero NO son sensibles.</p>
+
+      <h3 style="color:var(--accent); margin-top:16px;">🚨 Delito Informático</h3>
+      <p>Es cualquier acción <b>consciente y voluntaria</b> que causa daño usando medios informáticos.</p>
+      <p style="font-size:13px; color:var(--text-dim);"><b>Ejemplos:</b> hackear cuentas 💻, robar bases de datos 🗃️, fraude electrónico 💳, extorsión con datos.</p>
+
+      <h3 style="color:var(--accent); margin-top:16px;">👨‍⚖️ Perito Informático</h3>
+      <p>Es el <b>experto que ayuda al juez</b> a entender temas técnicos en un juicio. NO es el auditor (contexto empresarial).</p>
+      <p style="font-size:13px; color:var(--text-dim);"><b>Ejemplo:</b> un juez tiene una causa por fraude bancario → llama al perito informático para analizar los logs del sistema.</p>
+
+      <h3 style="color:var(--accent); margin-top:16px;">📊 Norma ISO 31000 — Gestión de Riesgos (5 pasos)</h3>
+      <div style="background:var(--bg-1); padding:14px; border-radius:10px; line-height:1.8;">
+        1️⃣ Establecer el contrato<br>
+        2️⃣ Identificar el riesgo<br>
+        3️⃣ Analizar el riesgo<br>
+        4️⃣ Evaluar el riesgo<br>
+        5️⃣ Tratar el riesgo<br><br>
+        <span style="font-size:13px;">➕ En TODO el proceso hay <b>comunicación, monitoreo y revisión</b> constantes.</span>
+      </div>
+
+      <p style="background:var(--bg-1); padding:12px; border-radius:8px; margin-top:16px;"><b>🎯 Para el examen:</b> Ley 25.326 = protección de datos · Hábeas Data = derecho constitucional · Datos sensibles = religión/política/racial/sexual/salud · Perito = judicial (NO es auditor) · ISO 31000 = gestión de riesgos.</p>
     `,
     svg: null,
     activity: {
