@@ -507,6 +507,189 @@ body { overscroll-behavior: contain; }
   .ref-sub { font-size: 13px; }
 }
 
+/* ========= ACTIVIDADES INTERACTIVAS ========= */
+/* Sort — items ordenables */
+.sort-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 15px;
+  background: var(--bg-2);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  margin-bottom: 8px;
+  transition: all .2s;
+}
+.sort-item.correct { border-color: var(--accent-2); background: rgba(16,185,129,.1); }
+.sort-item.wrong { border-color: var(--error); background: rgba(239,68,68,.1); }
+.sort-item .sort-num {
+  min-width: 30px; min-height: 30px;
+  background: var(--bg-3);
+  color: var(--text);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+.sort-item.correct .sort-num { background: var(--accent-2); color: white; }
+.sort-item.wrong .sort-num { background: var(--error); color: white; }
+.sort-item .sort-label { flex: 1; font-size: 14px; font-weight: 500; }
+.sort-arrows { display: flex; flex-direction: column; gap: 2px; }
+.sort-arrow {
+  background: var(--bg-3);
+  color: var(--text);
+  border: none;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background .15s;
+}
+.sort-arrow:hover:not(:disabled) { background: var(--accent); color: var(--bg-1); }
+.sort-arrow:disabled { opacity: .3; cursor: not-allowed; }
+
+/* Match — emparejar */
+.match-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+.match-col-title {
+  font-size: 12px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+  margin-bottom: 8px;
+}
+.match-card {
+  padding: 12px 14px;
+  background: var(--bg-2);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 8px;
+  transition: all .15s;
+  font-size: 13px;
+  line-height: 1.4;
+}
+.match-card:hover:not(.matched):not(.disabled) { border-color: var(--accent); transform: translateY(-2px); }
+.match-card.selected { border-color: var(--accent); background: rgba(34,211,238,.15); }
+.match-card.matched { opacity: .6; cursor: default; }
+.match-card.correct { border-color: var(--accent-2); background: rgba(16,185,129,.15); }
+.match-card.wrong { border-color: var(--error); background: rgba(239,68,68,.15); animation: shake .3s; }
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+/* Reveal — cards para descubrir */
+.reveal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+}
+.reveal-card {
+  position: relative;
+  min-height: 100px;
+  border-radius: 10px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform .3s;
+  perspective: 1000px;
+}
+.reveal-card:hover { transform: translateY(-3px); }
+.reveal-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 100px;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+.reveal-card.flipped .reveal-inner { transform: rotateY(180deg); }
+.reveal-face {
+  position: absolute; inset: 0;
+  backface-visibility: hidden;
+  padding: 14px 10px;
+  border-radius: 10px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  font-size: 13px;
+}
+.reveal-front {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white;
+  font-weight: bold;
+}
+.reveal-front .reveal-emoji { font-size: 30px; margin-bottom: 4px; }
+.reveal-back {
+  background: var(--bg-2);
+  border: 2px solid var(--accent);
+  color: var(--text);
+  transform: rotateY(180deg);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* Classify — clasificar en categorías */
+.classify-items { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; justify-content: center; }
+.classify-item {
+  padding: 8px 14px;
+  background: var(--bg-3);
+  border: 2px solid var(--border);
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all .15s;
+}
+.classify-item.selected { border-color: var(--accent); background: rgba(34,211,238,.2); }
+.classify-item.classified { opacity: 0; height: 0; padding: 0; margin: 0; border: 0; }
+.classify-buckets { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.classify-bucket {
+  min-height: 100px;
+  padding: 12px;
+  border: 2px dashed var(--border);
+  border-radius: 12px;
+  transition: all .15s;
+}
+.classify-bucket:hover { border-color: var(--accent); background: rgba(34,211,238,.05); }
+.classify-bucket-title {
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 8px;
+  padding: 6px;
+  border-radius: 8px;
+  color: white;
+}
+.classify-bucket-items { display: flex; flex-wrap: wrap; gap: 6px; }
+.classify-chip {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  color: white;
+}
+.classify-chip.ok { background: var(--accent-2); }
+.classify-chip.err { background: var(--error); }
+
+/* Botón "Verificar" / "Reiniciar" */
+.activity-btn {
+  padding: 10px 20px;
+  background: #a855f7;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  margin-top: 10px;
+}
+.activity-btn:hover { background: #9333ea; }
+
 /* Estilos para escenarios situacionales */
 .q-scenario {
   background: var(--scenario-bg);
@@ -667,6 +850,14 @@ body { overscroll-behavior: contain; }
 
     <!-- Comparación / infografía -->
     <div id="learn-compare" style="display:none; margin-top: 25px;"></div>
+
+    <!-- 🎮 Actividad interactiva -->
+    <div id="learn-activity" style="display:none; margin-top: 25px; padding: 18px; background: linear-gradient(135deg, rgba(168,85,247,.08), rgba(236,72,153,.08)); border-radius: 12px; border: 2px dashed #a855f7;">
+      <h3 style="color: #a855f7; margin-bottom: 6px;">🎮 Actividad interactiva</h3>
+      <div id="activity-desc" style="color: var(--text-dim); font-size: 13px; margin-bottom: 15px;"></div>
+      <div id="activity-container"></div>
+      <div id="activity-feedback" style="margin-top: 15px; padding: 12px; border-radius: 8px; display: none;"></div>
+    </div>
 
     <!-- Mini-quiz rápido de auto-evaluación -->
     <div id="learn-miniquiz" style="display:none; margin-top: 25px; padding: 18px; background: linear-gradient(135deg, rgba(34,211,238,.05), rgba(16,185,129,.05)); border-radius: 12px; border: 1px dashed var(--accent);">
@@ -1588,6 +1779,18 @@ const TOPICS = [
       <p>Enfatizan desarrollo rápido, poca documentación, equipos pequeños. Ejemplos: <b>SCRUM, Kanban, XP, Crystal</b>.</p>
     `,
     svg: 'modelos',
+    activity: {
+      type: 'match',
+      title: 'Emparejá cada situación con el modelo de proceso más apropiado',
+      desc: 'Hacé click en una tarjeta de la izquierda, después en la de la derecha que le corresponde',
+      pairs: [
+        { left: '🏦 Sistema bancario con regulaciones fijas', right: 'Cascada' },
+        { left: '🚀 Startup con requisitos cambiantes', right: 'SCRUM (Ágil)' },
+        { left: '🛰️ Proyecto aeroespacial con muchos riesgos técnicos', right: 'Espiral' },
+        { left: '📱 App donde cada versión suma funcionalidad completa', right: 'Incremental' },
+        { left: '💼 ERP con funcionalidad parcial refinada por iteración', right: 'Iterativo' }
+      ]
+    },
     youtubeSearch: 'modelos de proceso de software ciclo de vida',
     examples: [
       { icon: '🏗️', title: 'Cascada — Sistema bancario legacy', text: 'Un banco desarrolla un módulo contable donde las regulaciones son fijas y no van a cambiar. Cascada es perfecto: analizás → diseñás → programás → probás → mantenés.' },
@@ -1634,6 +1837,18 @@ const TOPICS = [
       </ul>
     `,
     svg: 'scrum',
+    activity: {
+      type: 'match',
+      title: 'Asigná cada responsabilidad al rol de SCRUM correcto',
+      desc: 'Click en la responsabilidad, después en el rol que la desempeña',
+      pairs: [
+        { left: 'Prioriza el Product Backlog', right: 'Product Owner' },
+        { left: 'Es la voz del cliente en el equipo', right: 'Product Owner' },
+        { left: 'Facilita el proceso y remueve impedimentos', right: 'Scrum Master' },
+        { left: 'Hace mentoring y coaching (NO es líder)', right: 'Scrum Master' },
+        { left: 'Diseña, construye y prueba el incremento', right: 'Development Team' }
+      ]
+    },
     youtubeSearch: 'scrum explicado en 10 minutos español',
     examples: [
       { icon: '🏢', title: 'Netflix', text: 'Usa SCRUM para desarrollar features del reproductor. Sprints de 2 semanas, cada equipo tiene un Product Owner que define prioridades según analíticas de uso.' },
@@ -1671,6 +1886,19 @@ const TOPICS = [
       <p><b>Un requisito es una sentencia completa sobre QUÉ hace el sistema, sin referirse a CÓMO lo hace.</b></p>
     `,
     svg: 'reqfases',
+    activity: {
+      type: 'sort',
+      title: 'Ordená las 5 fases de la Ingeniería de Requerimientos',
+      desc: 'Usá las flechas ↑↓ para reordenar. Cuando esté correcto, todas las tarjetas se ponen verdes.',
+      items: [
+        { id: 'a', label: '📝 Especificación (documentar sin ambigüedades)' },
+        { id: 'b', label: '💬 Elicitación (relevar necesidades)' },
+        { id: 'c', label: '🔄 Gestión (controlar cambios)' },
+        { id: 'd', label: '⚖️ Análisis (priorizar, resolver conflictos)' },
+        { id: 'e', label: '✅ Validación (confirmar con cliente)' }
+      ],
+      correctOrder: ['b','d','a','e','c']
+    },
     youtubeSearch: 'ingeniería de requerimientos software',
     examples: [
       { icon: '💬', title: 'Elicitación — Entrevista al operador administrativo', text: '"Contame cómo hoy actualizás las listas de precios: ¿cuántos proveedores?, ¿en qué formato llegan?, ¿cuánto tiempo tardás?". Objetivo: descubrir necesidades reales.' },
@@ -1715,6 +1943,19 @@ const TOPICS = [
       <p>Cualquier persona u organización involucrada o afectada por el proyecto. Con ellos el PM negocia recursos, requerimientos, expectativas.</p>
     `,
     svg: 'triangle',
+    activity: {
+      type: 'sort',
+      title: 'Ordená las 5 etapas de Tuckman del ciclo del equipo',
+      desc: 'Ordená cronológicamente cómo evoluciona un equipo de trabajo',
+      items: [
+        { id: 'a', label: '🚀 Alto rendimiento (equipo eficiente)' },
+        { id: 'b', label: '👋 Formación (recién nos conocemos)' },
+        { id: 'c', label: '🤝 Normalización (acuerdan reglas)' },
+        { id: 'd', label: '⚡ Tormenta (conflictos por roles)' },
+        { id: 'e', label: '🎓 Despedida (proyecto termina)' }
+      ],
+      correctOrder: ['b','d','c','a','e']
+    },
     extraSvgs: [
       { svg: 'tuckman', caption: 'El ciclo del equipo (Tuckman)' },
       { svg: 'maslow', caption: 'Motivación del equipo — Pirámide de Maslow' },
@@ -1771,6 +2012,18 @@ const TOPICS = [
       <p><b>AMFE</b> (Análisis de Modo de Falla y Efectos), <b>FODA</b> (Fortalezas/Oportunidades/Debilidades/Amenazas), <b>PESTEL</b> (Político/Económico/Social/Tecnológico/Ecológico/Legal).</p>
     `,
     svg: 'riskmatrix',
+    activity: {
+      type: 'match',
+      title: 'Emparejá cada situación con la estrategia de riesgo apropiada',
+      desc: 'Click en la situación, después en la estrategia que aplica',
+      pairs: [
+        { left: 'Contratar un seguro contra incendios', right: 'Transferir' },
+        { left: 'Documentar el código exhaustivamente para no depender del programador clave', right: 'Mitigar' },
+        { left: 'Rediseñar el proceso para eliminar el uso de esa tecnología riesgosa', right: 'Anular' },
+        { left: 'Asumir el impacto porque el costo de prevención es mayor', right: 'Aceptar' },
+        { left: 'Subcontratar la parte compleja a un especialista externo', right: 'Transferir' }
+      ]
+    },
     extraSvgs: [
       { svg: 'estrategias', caption: 'Las 4 estrategias para enfrentar un riesgo' }
     ],
@@ -1821,6 +2074,19 @@ const TOPICS = [
       <p>Convierte el grado de exposición al riesgo a valor monetario para priorizar y estimar la reserva de contingencia. Se recomienda aplicar tempranamente.</p>
     `,
     svg: 'estimacion',
+    activity: {
+      type: 'match',
+      title: 'Emparejá cada contexto con el método de estimación apropiado',
+      desc: 'Click en el contexto, después en el método correcto',
+      pairs: [
+        { left: 'Fase inicial, poca información', right: 'Orden de magnitud' },
+        { left: 'Consultor senior estima por experiencia', right: 'Juicio de Expertos' },
+        { left: 'Comparar con proyecto similar anterior', right: 'Analógica' },
+        { left: 'Descomponer proyecto en tareas pequeñas', right: 'Basada en Proceso' },
+        { left: 'Medir funcionalidad desde el usuario', right: 'Puntos de Función' },
+        { left: 'Estimar según LOC + factores de escala', right: 'COCOMO II' }
+      ]
+    },
     extraSvgs: [
       { svg: 'avg', caption: 'Análisis del Valor Ganado (AVG) — curva CPTC vs CPTR' }
     ],
@@ -1875,6 +2141,18 @@ const TOPICS = [
       </ol>
     `,
     svg: 'testing',
+    activity: {
+      type: 'sort',
+      title: 'Ordená los niveles de prueba en la secuencia correcta',
+      desc: 'De más aislado (unidad) a más global (sistema)',
+      items: [
+        { id: 'a', label: '🔌 Integración (E/S entre módulos)' },
+        { id: 'b', label: '🌐 Sistema (todo integrado + HW/BBDD/usuarios)' },
+        { id: 'c', label: '🧪 Unidad (componente individual aislado)' },
+        { id: 'd', label: '✅ Validación (cumple requisitos del usuario)' }
+      ],
+      correctOrder: ['c','a','d','b']
+    },
     extraSvgs: [
       { svg: 'pruebas', caption: 'Los 4 niveles de pruebas en cadena' },
       { svg: 'cmm', caption: 'CMM — 5 niveles de madurez de la organización' }
@@ -1942,6 +2220,19 @@ const TOPICS = [
       <p>Son el soporte de todo hallazgo. Técnicas: <b>Ocular</b> (observación), <b>Verbal</b> (indagación), <b>Física</b> (examinar activos), <b>Documental</b> (revisar registros), <b>Analítica</b> (analizar información).</p>
     `,
     svg: 'auditphases',
+    activity: {
+      type: 'sort',
+      title: 'Ordená las 5 fases del proceso de auditoría',
+      desc: 'La secuencia correcta desde el inicio hasta el cierre',
+      items: [
+        { id: 'a', label: '📄 Informe (redactar hallazgos)' },
+        { id: 'b', label: '⚖️ Evaluación y análisis (vulnerabilidades)' },
+        { id: 'c', label: '📋 Planificación (diagnóstico preliminar)' },
+        { id: 'd', label: '✅ Seguimiento (verificar aplicación)' },
+        { id: 'e', label: '🔍 Relevamiento (recolectar información)' }
+      ],
+      correctOrder: ['c','e','b','a','d']
+    },
     extraSvgs: [
       { svg: 'auditor_perito', caption: 'Auditor vs Perito — diferencia clave' }
     ],
@@ -2004,6 +2295,19 @@ const TOPICS = [
       </ul>
     `,
     svg: 'seguridad',
+    activity: {
+      type: 'reveal',
+      title: 'Descubrí los 3 pilares CID + métodos de autenticación',
+      desc: 'Hacé click en cada tarjeta para revelar el concepto',
+      cards: [
+        { front: { emoji: '🔒', label: 'Confidencialidad' }, back: 'Solo los usuarios AUTORIZADOS pueden acceder a la información. Se logra con contraseñas, cifrado, permisos por rol.' },
+        { front: { emoji: '✅', label: 'Integridad' }, back: 'Los datos no se alteran indebidamente. Se logra con hashes, checksums, control de versiones, auditoría de cambios.' },
+        { front: { emoji: '⚡', label: 'Disponibilidad' }, back: 'La información está accesible cuando se necesita. Se logra con redundancia, backups, servidores 24/7, DRP.' },
+        { front: { emoji: '🔑', label: 'Algo que SABÉS' }, back: 'Autenticación por contraseña o PIN. Es el método más común pero también el más vulnerable.' },
+        { front: { emoji: '📱', label: 'Algo que TENÉS' }, back: 'Autenticación por token físico, app OTP, tarjeta magnética. Combinado con contraseña = 2FA.' },
+        { front: { emoji: '👆', label: 'Algo que SOS' }, back: 'Autenticación BIOMÉTRICA: huella dactilar, iris, reconocimiento facial, voz. La más difícil de falsificar.' }
+      ]
+    },
     extraSvgs: [
       { svg: 'firewalldmz', caption: 'Arquitectura Firewall + DMZ (doble barrera)' }
     ],
@@ -2063,6 +2367,26 @@ const TOPICS = [
       <p>Durante toda la gestión hay <b>comunicación constante, monitoreo y revisión</b>.</p>
     `,
     svg: null,
+    activity: {
+      type: 'classify',
+      title: 'Clasificá: ¿es un DATO SENSIBLE o un DATO COMÚN?',
+      desc: 'Click en un dato, después en la categoría a la que pertenece',
+      items: [
+        { id: 'a', label: 'Religión' },
+        { id: 'b', label: 'Nombre completo' },
+        { id: 'c', label: 'Orientación sexual' },
+        { id: 'd', label: 'Número de DNI' },
+        { id: 'e', label: 'Historia clínica' },
+        { id: 'f', label: 'Fecha de nacimiento' },
+        { id: 'g', label: 'Ideología política' },
+        { id: 'h', label: 'Dirección postal' },
+        { id: 'i', label: 'Pertenencia racial' }
+      ],
+      buckets: [
+        { id: 'sensible', label: '⚠️ DATO SENSIBLE', color: '#dc2626', items: ['a','c','e','g','i'] },
+        { id: 'comun', label: '📝 DATO COMÚN', color: '#3b82f6', items: ['b','d','f','h'] }
+      ]
+    },
     extraSvgs: [
       { svg: 'datossensibles', caption: 'Datos SENSIBLES según la Ley 25.326' }
     ],
@@ -3533,6 +3857,18 @@ function showTopic(topicId) {
     examplesContainer.style.display = 'none';
   }
 
+  // 🎮 Actividad interactiva
+  const activityEl = document.getElementById('learn-activity');
+  if (currentTopic.activity) {
+    activityEl.style.display = 'block';
+    document.querySelector('#learn-activity h3').textContent = '🎮 ' + currentTopic.activity.title;
+    document.getElementById('activity-desc').textContent = currentTopic.activity.desc || '';
+    document.getElementById('activity-feedback').style.display = 'none';
+    renderActivity(currentTopic.activity);
+  } else {
+    activityEl.style.display = 'none';
+  }
+
   // Mini-quiz de auto-evaluación
   const miniquiz = document.getElementById('learn-miniquiz');
   const feedback = document.getElementById('miniquiz-feedback');
@@ -3592,6 +3928,224 @@ function showTopic(topicId) {
   document.getElementById('btn-practice-topic').innerHTML = `🎯 Practicar ${qCount} preguntas de este tema →`;
 
   showScreen('learn');
+}
+
+// ============================================
+// ACTIVIDADES INTERACTIVAS
+// ============================================
+function renderActivity(act) {
+  const container = document.getElementById('activity-container');
+  if (act.type === 'sort') renderSortActivity(container, act);
+  else if (act.type === 'match') renderMatchActivity(container, act);
+  else if (act.type === 'reveal') renderRevealActivity(container, act);
+  else if (act.type === 'classify') renderClassifyActivity(container, act);
+}
+
+function activityFeedback(html, ok = true) {
+  const fb = document.getElementById('activity-feedback');
+  fb.innerHTML = html;
+  fb.style.background = ok ? 'rgba(16,185,129,.15)' : 'rgba(245,158,11,.15)';
+  fb.style.borderLeft = `4px solid ${ok ? 'var(--accent-2)' : 'var(--warn)'}`;
+  fb.style.display = 'block';
+}
+
+// --------- SORT (ordenar) ---------
+function renderSortActivity(container, act) {
+  // Estado local: items desordenados
+  let currentOrder = shuffle([...act.items]);
+  const render = () => {
+    container.innerHTML = currentOrder.map((item, i) => `
+      <div class="sort-item" data-id="${item.id}">
+        <span class="sort-num">${i+1}</span>
+        <span class="sort-label">${item.label}</span>
+        <span class="sort-arrows">
+          <button class="sort-arrow" onclick="sortMove('up', ${i})" ${i === 0 ? 'disabled' : ''}>↑</button>
+          <button class="sort-arrow" onclick="sortMove('down', ${i})" ${i === currentOrder.length-1 ? 'disabled' : ''}>↓</button>
+        </span>
+      </div>
+    `).join('') + `<button class="activity-btn" onclick="checkSort()">✅ Verificar orden</button>
+      <button class="activity-btn" style="background:var(--bg-3); color:var(--text); margin-left:8px;" onclick="renderActivity(currentTopic.activity)">🔄 Reiniciar</button>`;
+  };
+  window.sortMove = (dir, idx) => {
+    const newIdx = dir === 'up' ? idx - 1 : idx + 1;
+    if (newIdx < 0 || newIdx >= currentOrder.length) return;
+    [currentOrder[idx], currentOrder[newIdx]] = [currentOrder[newIdx], currentOrder[idx]];
+    render();
+  };
+  window.checkSort = () => {
+    const items = container.querySelectorAll('.sort-item');
+    let allOk = true;
+    currentOrder.forEach((item, i) => {
+      const correct = act.correctOrder[i] === item.id;
+      items[i].classList.remove('correct','wrong');
+      items[i].classList.add(correct ? 'correct' : 'wrong');
+      if (!correct) allOk = false;
+    });
+    if (allOk) {
+      activityFeedback('🎉 <b>¡Perfecto!</b> Ordenaste todo correctamente.', true);
+      playCorrect();
+    } else {
+      activityFeedback('🤔 Casi. Los verdes están bien, los rojos hay que moverlos. Volvé a intentar.', false);
+    }
+  };
+  render();
+}
+
+// --------- MATCH (emparejar) ---------
+function renderMatchActivity(container, act) {
+  // Preparamos las dos columnas
+  const lefts = shuffle(act.pairs.map((p, i) => ({ ...p, key: i, side: 'L' })));
+  const rights = shuffle(act.pairs.map((p, i) => ({ ...p, key: i, side: 'R' })));
+  let selected = null;
+  let matched = 0;
+
+  container.innerHTML = `
+    <div class="match-grid">
+      <div>
+        <div class="match-col-title">Situación</div>
+        <div id="match-left"></div>
+      </div>
+      <div>
+        <div class="match-col-title">Concepto</div>
+        <div id="match-right"></div>
+      </div>
+    </div>
+    <button class="activity-btn" style="background:var(--bg-3); color:var(--text);" onclick="renderActivity(currentTopic.activity)">🔄 Reiniciar</button>
+  `;
+
+  const renderCol = (side, list) => {
+    const el = document.getElementById(side === 'L' ? 'match-left' : 'match-right');
+    el.innerHTML = list.map(item => `
+      <div class="match-card" data-side="${side}" data-key="${item.key}" data-right="${item.right}">
+        ${side === 'L' ? item.left : item.right}
+      </div>
+    `).join('');
+    el.querySelectorAll('.match-card').forEach(card => {
+      card.onclick = () => handleClick(card);
+    });
+  };
+
+  const handleClick = (card) => {
+    if (card.classList.contains('matched')) return;
+    if (selected && selected.dataset.side === card.dataset.side) {
+      // Cambio de selección en la misma columna
+      selected.classList.remove('selected');
+      selected = card;
+      card.classList.add('selected');
+      return;
+    }
+    if (!selected) {
+      selected = card;
+      card.classList.add('selected');
+      return;
+    }
+    // Segundo click: intentar match
+    const otherCard = card;
+    const leftCard = selected.dataset.side === 'L' ? selected : otherCard;
+    const rightCard = selected.dataset.side === 'R' ? selected : otherCard;
+
+    const leftPair = act.pairs[leftCard.dataset.key];
+    const rightPair = act.pairs[rightCard.dataset.key];
+
+    if (leftPair.right === rightPair.right) {
+      // Match correcto
+      [leftCard, rightCard].forEach(c => { c.classList.add('correct','matched'); c.classList.remove('selected'); });
+      matched++;
+      playCorrect();
+      if (matched === act.pairs.length) {
+        activityFeedback('🎉 <b>¡Excelente!</b> Emparejaste todo correctamente.', true);
+      }
+    } else {
+      [leftCard, rightCard].forEach(c => c.classList.add('wrong'));
+      setTimeout(() => {
+        [leftCard, rightCard].forEach(c => { c.classList.remove('wrong','selected'); });
+      }, 700);
+    }
+    selected = null;
+  };
+
+  renderCol('L', lefts);
+  renderCol('R', rights);
+}
+
+// --------- REVEAL (voltear cartas) ---------
+function renderRevealActivity(container, act) {
+  container.innerHTML = `
+    <div class="reveal-grid">
+      ${act.cards.map((c,i) => `
+        <div class="reveal-card" onclick="this.classList.toggle('flipped')">
+          <div class="reveal-inner">
+            <div class="reveal-face reveal-front">
+              <div class="reveal-emoji">${c.front.emoji}</div>
+              <div>${c.front.label}</div>
+              <div style="font-size:10px; opacity:.7; margin-top:6px;">Click para descubrir</div>
+            </div>
+            <div class="reveal-face reveal-back">${c.back}</div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+// --------- CLASSIFY (clasificar en categorías) ---------
+function renderClassifyActivity(container, act) {
+  const remaining = [...act.items];
+  let selectedItem = null;
+  const placedIn = {}; // { bucketId: [{id, ok}] }
+  act.buckets.forEach(b => placedIn[b.id] = []);
+
+  const render = () => {
+    container.innerHTML = `
+      <div class="classify-items">
+        ${remaining.map(item => `
+          <button class="classify-item" data-id="${item.id}">${item.label}</button>
+        `).join('') || '<span style="color:var(--text-dim); font-size:13px;">✅ Todos clasificados</span>'}
+      </div>
+      <div class="classify-buckets">
+        ${act.buckets.map(b => `
+          <div class="classify-bucket" data-bucket="${b.id}">
+            <div class="classify-bucket-title" style="background:${b.color};">${b.label}</div>
+            <div class="classify-bucket-items">
+              ${placedIn[b.id].map(p => {
+                const item = act.items.find(i => i.id === p.id);
+                return `<span class="classify-chip ${p.ok ? 'ok' : 'err'}">${p.ok ? '✓' : '✗'} ${item.label}</span>`;
+              }).join('')}
+            </div>
+          </div>
+        `).join('')}
+      </div>
+      <button class="activity-btn" style="background:var(--bg-3); color:var(--text); margin-top:15px;" onclick="renderActivity(currentTopic.activity)">🔄 Reiniciar</button>
+    `;
+    container.querySelectorAll('.classify-item').forEach(btn => {
+      btn.onclick = () => {
+        container.querySelectorAll('.classify-item').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        selectedItem = btn.dataset.id;
+      };
+    });
+    container.querySelectorAll('.classify-bucket').forEach(bucket => {
+      bucket.onclick = () => {
+        if (!selectedItem) return;
+        const bucketId = bucket.dataset.bucket;
+        const b = act.buckets.find(bb => bb.id === bucketId);
+        const ok = b.items.includes(selectedItem);
+        placedIn[bucketId].push({ id: selectedItem, ok });
+        const idx = remaining.findIndex(i => i.id === selectedItem);
+        if (idx >= 0) remaining.splice(idx, 1);
+        selectedItem = null;
+        if (ok) playCorrect();
+        render();
+        if (remaining.length === 0) {
+          // Calcular puntaje
+          const total = act.items.length;
+          const oks = Object.values(placedIn).flat().filter(p => p.ok).length;
+          activityFeedback(`${oks === total ? '🎉' : '💪'} <b>${oks}/${total} correctos.</b> ${oks === total ? '¡Perfecto!' : 'Los rojos son los que fallaste.'}`, oks === total);
+        }
+      };
+    });
+  };
+  render();
 }
 
 function practiceCurrentTopic() {
